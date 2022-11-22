@@ -1,0 +1,1 @@
+hàm js export sử dụng lại nhiều lần
