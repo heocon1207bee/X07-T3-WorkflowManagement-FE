@@ -1,10 +1,11 @@
+import {Routes as Switch, Route} from 'react-router-dom';
+
 function App() {
   return (
-    <div className="App">
-      <>
-        App      
-      </>
-    </div>
+    <Switch>
+      <Route path="/" element={<p>Home</p>}/>
+      <Route path="/about" element={<p>About</p>}/>
+    </Switch>
   );
 }
 
