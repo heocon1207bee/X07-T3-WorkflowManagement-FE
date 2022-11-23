@@ -1,0 +1,17 @@
+@import "../color.scss";
+
+.project-list-page {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: $mainBgGray;
+
+    .invite-list {
+        flex: 25%;
+        min-height: 100vh;
+    }
+
+    .pj-container {
+        flex: 75%;
+    }
+}
