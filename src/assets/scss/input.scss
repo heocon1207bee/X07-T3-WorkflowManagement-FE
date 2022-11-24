@@ -1,0 +1,7 @@
+@import "./color.scss";
+
+@mixin inputStyle() {
+  padding: 7px 10px;
+  border: 1px solid $mainBgGray;
+  border-radius: 10px;
+}

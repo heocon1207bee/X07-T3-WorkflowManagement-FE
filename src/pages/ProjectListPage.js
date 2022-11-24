@@ -8,7 +8,7 @@ const ProjectListPage = () => {
   return (
     <div className='project-list-page'>
       <InviteList/>
-      <div className='pj-container'>
+      <div className='pjs-container'>
         <SearchBar/>
         <ProjectList/>
       </div>

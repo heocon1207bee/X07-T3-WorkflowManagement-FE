@@ -1,17 +1,106 @@
-@import "../color.scss";
+@import "../color";
+@import "../button";
+@import "../input";
 
 .project-list-page {
     display: flex;
     flex-direction: row;
     height: 100%;
-    background-color: $mainBgGray;
+    background-color: $mainBgWhite;
 
-    .invite-list {
+    .invite-container {
         flex: 25%;
+        min-width: 200px;
+        max-width: 400px;
         min-height: 100vh;
+        padding: 0 0.7rem;
+        border: 1px solid $mainBgGray;
+
+        .invite-label {
+            padding: 20px 0;
+            h3 {
+                text-align: center;
+            }
+        }
+
+        .invite-item {
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid $mainBgGray;
+            margin-bottom: 10px;
+
+            h4{
+                padding: 0.5rem;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .ReactCollapse--collapse {
+                transition: height 500ms;
+            }
+
+            .invite-info {
+                margin: 10px 0;
+                padding: 10px 0.5em;
+                border: 1px solid $mainBgGray;
+                font-size: 13px;
+            }
+
+            .invite-reply {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
+
+                .accept-button {
+                    @include acceptButton();
+                    margin-left: 5px;
+                }
+
+                .cancel-button {
+                    @include cancelButton();
+                }
+            }
+        }
     }
 
-    .pj-container {
+    .pjs-container {
         flex: 75%;
+
+        .search-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 20px 30px;
+
+            .search-bar {
+                width: 80%;
+                //text-align: center;
+                input {
+                    @include inputStyle();
+                    margin: 10px;
+                    width: 90%;
+                }
+            }
+
+            .create-pj-button {
+                width: 20%;
+                min-width: 120px;
+                border-left: 1px solid $mainBgGray;
+                text-align: right;
+                button {
+                    @include acceptButton();
+                    margin: 0 10px;
+                    min-width: 100px;
+                }
+            }
+        }
+
+        .project-list-container {
+            padding: 20px 30px;
+            border-top: 1px solid $mainBgGray;
+        }
     }
+
 }
