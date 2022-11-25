@@ -1,0 +1,53 @@
+@import '../../assets/scss/color.scss';
+@import '../../assets/scss/input.scss';
+@import '../../assets/scss/button.scss';
+.h-full {
+    min-height: 100vh;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-image {
+    background: url('../../assets/images/login-bg.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.ant-typography.welcome-text {
+    color: $mainBgWhite;
+    font-size: 4em;
+}
+
+.form-content {
+    width: 100%;
+    padding: 0 5em;
+}
+
+.input {
+    @include inputStyle();
+}
+
+.button {
+    @include acceptButton();
+    width: 100%;
+}
+.ant-divider.divider {
+    background-color: $buttonBlack;
+}
+.text-center {
+    text-align: center;
+}
+.btn-register {
+    background-color: $buttonBlack;
+    width: 100%;
+    color: $mainBgWhite;
+    margin: 10px 0;
+    font-size: 16px;
+    height: 40px;
+    padding: 7px 15px;
+    border-radius: 8px;
+    display: block;
+    line-height: 1.5;
+}

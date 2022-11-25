@@ -1,13 +1,17 @@
-import { LockOutlined } from '@ant-design/icons';
+import { LockOutlined, MailFilled, UserOutlined } from '@ant-design/icons';
 import { Col, Form, Input, Row, Typography, Button } from 'antd';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ResiterPage.style.scss';
 
 const { Title, Text } = Typography;
 
 export default function RegisterPage() {
-    const onFinish = (value) => {
-        console.log(value);
+    const [loading, setLoading] = useState(false);
+    const onFinish = (values) => {
+        setLoading(true);
+        console.log('Values:::', values);
+        setTimeout(() => setLoading(false), 3000);
     };
     return (
         <Row className="wrapper">
@@ -17,7 +21,7 @@ export default function RegisterPage() {
                         Đăng ký tài khoản
                     </Title>
                     <Form.Item name="fullname" rules={[{ required: true, message: 'Vui lòng nhập họ tên' }]}>
-                        <Input placeholder="Họ và tên *" className="input" />
+                        <Input placeholder="Họ và tên *" className="input" prefix={<UserOutlined />} />
                     </Form.Item>
                     <Form.Item
                         name="email"
@@ -29,10 +33,20 @@ export default function RegisterPage() {
                             },
                         ]}
                     >
-                        <Input placeholder="Email *" className="input" type="email" />
+                        <Input placeholder="Email *" className="input" type="email" prefix={<MailFilled />} />
                     </Form.Item>
-                    <Form.Item name="password" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]}>
-                        <Input.Password placeholder="Mật khẩu" className="input" prefix={<LockOutlined />} />
+                    <Form.Item
+                        name="password"
+                        rules={[
+                            { required: true, message: 'Vui lòng nhập mật khẩu' },
+                            {
+                                pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,
+                                message:
+                                    'Tối thiểu 8 ký tự, tối thiểu 1 chữ số, 1 ký tự đặc biệt, 1 chữ hoa, 1 chữ thường',
+                            },
+                        ]}
+                    >
+                        <Input.Password placeholder="Mật khẩu*" className="input" prefix={<LockOutlined />} />
                     </Form.Item>
                     <Form.Item
                         name="confirm"
@@ -53,13 +67,13 @@ export default function RegisterPage() {
                             }),
                         ]}
                     >
-                        <Input.Password placeholder="Xác nhận mật khẩu" className="input" />
+                        <Input.Password placeholder="Xác nhận mật khẩu*" className="input" />
                     </Form.Item>
                     <Form.Item className="text-require">
                         <Text className="text-red">(*) Bắt buộc</Text>
                     </Form.Item>
                     <Form.Item>
-                        <Button size="large" htmlType="submit" className="form-button">
+                        <Button size="large" htmlType="submit" className="form-button" loading={loading}>
                             Đăng ký
                         </Button>
                     </Form.Item>
