@@ -40,10 +40,15 @@ export default function LoginPage() {
                                     message: 'Email không đúng định dạng',
                                 },
                             ]}
+                            validateTrigger=""
                         >
                             <Input className="input" placeholder="Email*" prefix={<MailFilled />} />
                         </Form.Item>
-                        <Form.Item name="password" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]}>
+                        <Form.Item
+                            name="password"
+                            rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]}
+                            validateTrigger=""
+                        >
                             <Input.Password placeholder="Mật khẩu*" prefix={<LockOutlined />} />
                         </Form.Item>
                         <Form.Item>

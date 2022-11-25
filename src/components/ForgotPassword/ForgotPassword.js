@@ -45,6 +45,7 @@ export default function ForgotPassword({ isShowModal, handleOk, handleCancel }) 
                             message: 'Email không đúng định dạng',
                         },
                     ]}
+                    validateTrigger=""
                 >
                     <Input className="input" placeholder="Email*" />
                 </Form.Item>
