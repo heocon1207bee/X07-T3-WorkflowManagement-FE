@@ -3,6 +3,7 @@ import { Row, Col, Typography, Form, Input, Button, Divider } from 'antd';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
 import './LoginPage.style.scss';
 
 export default function LoginPage() {
@@ -11,6 +12,16 @@ export default function LoginPage() {
         setLoading(true);
         console.log(values);
         setTimeout(() => setLoading(false), 3000);
+    };
+    const [isShowModal, setIsShowModal] = useState(false);
+    const onForgotPassword = () => {
+        setIsShowModal(true);
+    };
+    const handleOk = () => {
+        setIsShowModal(false);
+    };
+    const handleCancel = () => {
+        setIsShowModal(false);
     };
     return (
         <Row className="h-full">
@@ -41,6 +52,10 @@ export default function LoginPage() {
                             </Button>
                         </Form.Item>
                     </Form>
+                    <p className="text-center forgot-password" onClick={onForgotPassword}>
+                        Quên mật khẩu?
+                    </p>
+                    <ForgotPassword handleOk={handleOk} handleCancel={handleCancel} isShowModal={isShowModal} />
                     <Divider className="divider" />
                     <p className="text-center">hoặc</p>
                     <Link component={Typography.Link} to="/register" size="large" className="btn-register text-center">
