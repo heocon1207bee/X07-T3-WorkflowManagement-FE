@@ -39,14 +39,14 @@ export default function ForgotPassword({ isShowModal, handleOk, handleCancel }) 
                 <Form.Item
                     name="forgotPassword"
                     rules={[
-                        { required: true, message: 'Vui lòng nhập email' },
+                        { required: true, message: 'Vui lòng nhập Email' },
                         {
                             type: 'email',
                             message: 'Email không đúng định dạng',
                         },
                     ]}
                 >
-                    <Input className="input" placeholder="Email" />
+                    <Input className="input" placeholder="Email*" />
                 </Form.Item>
                 <p className="text-require">Bắt buộc(*)</p>
             </Modal>
