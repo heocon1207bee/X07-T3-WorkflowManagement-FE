@@ -22,7 +22,18 @@ export default function RegisterPage() {
                     </Title>
                     <Form.Item
                         name="fullname"
-                        rules={[{ required: true, message: 'Vui lòng nhập họ tên' }]}
+                        rules={[
+                            { required: true, message: 'Vui lòng nhập họ tên' },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('fullname').trim().length !== 0) {
+                                        return Promise.resolve();
+                                    }
+
+                                    return Promise.reject(new Error('Vui lòng nhập đúng tên'));
+                                },
+                            }),
+                        ]}
                         validateTrigger=""
                     >
                         <Input placeholder="Họ và tên *" className="input" prefix={<UserOutlined />} />
