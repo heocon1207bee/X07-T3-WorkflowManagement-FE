@@ -24,11 +24,11 @@ export default function LoginPage() {
         setIsShowModal(false);
     };
     return (
-        <Row className="h-full">
-            <Col span={16} className="flex-center bg-image">
+        <Row className="h-full login-wrap">
+            <Col span={24} lg={{ span: 16 }} md={{ span: 12 }} className="flex-center bg-image">
                 <Typography.Title className="welcome-text">Chào mừng đến với X07</Typography.Title>
             </Col>
-            <Col span={8} className="flex-center">
+            <Col span={24} lg={{ span: 8 }} md={{ span: 12 }} className="flex-center">
                 <div className="form-content">
                     <Form name="login" initialValues={{ remember: true }} onFinish={onFinish}>
                         <Form.Item
@@ -40,14 +40,14 @@ export default function LoginPage() {
                                     message: 'Email không đúng định dạng',
                                 },
                             ]}
-                            validateTrigger=""
+                            validateTrigger={false}
                         >
                             <Input className="input" placeholder="Email*" prefix={<MailFilled />} />
                         </Form.Item>
                         <Form.Item
                             name="password"
                             rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]}
-                            validateTrigger=""
+                            validateTrigger={false}
                         >
                             <Input.Password placeholder="Mật khẩu*" prefix={<LockOutlined />} />
                         </Form.Item>

@@ -22,8 +22,19 @@ export default function RegisterPage() {
                     </Title>
                     <Form.Item
                         name="fullname"
-                        rules={[{ required: true, message: 'Vui lòng nhập họ tên' }]}
-                        validateTrigger=""
+                        rules={[
+                            { required: true, message: 'Vui lòng nhập họ tên' },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('fullname').trim().length !== 0) {
+                                        return Promise.resolve();
+                                    }
+
+                                    return Promise.reject(new Error('Vui lòng nhập đúng tên'));
+                                },
+                            }),
+                        ]}
+                        validateTrigger={false}
                     >
                         <Input placeholder="Họ và tên *" className="input" prefix={<UserOutlined />} />
                     </Form.Item>
@@ -36,7 +47,7 @@ export default function RegisterPage() {
                                 message: 'Email không đúng định dạng',
                             },
                         ]}
-                        validateTrigger=""
+                        validateTrigger={false}
                     >
                         <Input placeholder="Email *" className="input" type="email" prefix={<MailFilled />} />
                     </Form.Item>
@@ -50,7 +61,7 @@ export default function RegisterPage() {
                                     'Tối thiểu 8 ký tự, tối thiểu 1 chữ số, 1 ký tự đặc biệt, 1 chữ hoa, 1 chữ thường',
                             },
                         ]}
-                        validateTrigger=""
+                        validateTrigger={false}
                     >
                         <Input.Password placeholder="Mật khẩu*" className="input" prefix={<LockOutlined />} />
                     </Form.Item>
@@ -72,7 +83,7 @@ export default function RegisterPage() {
                                 },
                             }),
                         ]}
-                        validateTrigger=""
+                        validateTrigger={false}
                     >
                         <Input.Password placeholder="Xác nhận mật khẩu*" className="input" />
                     </Form.Item>
