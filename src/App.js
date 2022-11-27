@@ -1,8 +1,15 @@
-import useAppRoute from './hooks/useAppRoute';
+import './App.css';
+import { Routes as Switch, Route } from 'react-router-dom';
+import { UserInfroPage } from './pages/UserInfroPage';
+
+
 
 function App() {
-    const routes = useAppRoute();
-    return <>{routes}</>;
+  return (
+    <Switch>
+        <Route path='/' element={<UserInfroPage/>}/>
+    </Switch>
+  );
 }
 
 export default App;
