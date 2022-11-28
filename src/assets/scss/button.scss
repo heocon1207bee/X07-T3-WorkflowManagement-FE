@@ -2,7 +2,7 @@
 
 @mixin acceptButton() {
   background-color: $mainGreen;
-  border: 1px solid $mainBgGray;
+  border: none;
   color: $mainBgWhite;
   padding: 7px 15px;
   border-radius: 10px;
@@ -16,7 +16,7 @@
 
 @mixin cancelButton() {
   background-color: $buttonRed;
-  border: 1px solid $mainBgGray;
+  border: none;
   color: $mainBgWhite;
   padding: 7px 10px;
   border-radius: 10px;
