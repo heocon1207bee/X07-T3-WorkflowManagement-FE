@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+<<<<<<< HEAD
 import searchValueReducer from '../reducers/searchValueReducer';
 
 const store = configureStore({
@@ -8,3 +9,13 @@ const store = configureStore({
 })
 
 export default store
+=======
+
+import authenReducer from './reducers/Auth/authenSlice';
+
+export const store = configureStore({
+    reducer: {
+        authen: authenReducer,
+    },
+});
+>>>>>>> main

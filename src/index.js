@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+<<<<<<< HEAD
 import store from './stores/store';
 import { Provider } from 'react-redux';
 
@@ -16,6 +17,20 @@ const render = () => root.render(
           </Router>
       </Provider>
   </React.StrictMode>
+=======
+import { Provider } from 'react-redux';
+import { store } from './stores/store';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <Router>
+                <App />
+            </Router>
+        </Provider>
+    </React.StrictMode>,
+>>>>>>> main
 );
 
 render()

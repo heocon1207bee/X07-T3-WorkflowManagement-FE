@@ -1,17 +1,35 @@
 import { LockOutlined, MailFilled } from '@ant-design/icons';
-import { Row, Col, Typography, Form, Input, Button, Divider } from 'antd';
+import { Row, Col, Typography, Form, Input, Button, Divider, Alert } from 'antd';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
+import authenServices from '../../services/Authen/authenServices';
+import { setAuthentication } from '../../stores/reducers/Auth/authenSlice';
+
 import './LoginPage.style.scss';
 
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);
-    const onFinish = (values) => {
-        setLoading(true);
-        console.log(values);
-        setTimeout(() => setLoading(false), 3000);
+    const dispatch = useDispatch();
+    const [error, setError] = useState();
+
+    const onFinish = async (values) => {
+        try {
+            setLoading(true);
+            const authenResponse = await authenServices.login(values);
+            if (authenResponse) dispatch(setAuthentication(authenResponse.data));
+        } catch (err) {
+            if (Array.isArray(err.response.data)) {
+                const firstError = err.response.data[0];
+                setError(firstError.message);
+            } else {
+                setError(err.response.data.msg);
+            }
+        } finally {
+            setLoading(false);
+        }
     };
     const [isShowModal, setIsShowModal] = useState(false);
     const onForgotPassword = () => {
@@ -51,6 +69,9 @@ export default function LoginPage() {
                         >
                             <Input.Password placeholder="Mật khẩu*" prefix={<LockOutlined />} />
                         </Form.Item>
+                        {error && (
+                            <Alert className="alert" message="Lỗi" showIcon description={error} type="error" closable />
+                        )}
                         <Form.Item>
                             <Button size="large" htmlType="submit" className="button" loading={loading}>
                                 Đăng nhập
