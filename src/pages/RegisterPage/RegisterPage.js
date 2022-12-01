@@ -56,7 +56,8 @@ export default function RegisterPage() {
                         rules={[
                             { required: true, message: 'Vui lòng nhập mật khẩu' },
                             {
-                                pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,
+                                pattern:
+                                    /(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/,
                                 message:
                                     'Tối thiểu 8 ký tự, tối thiểu 1 chữ số, 1 ký tự đặc biệt, 1 chữ hoa, 1 chữ thường',
                             },
