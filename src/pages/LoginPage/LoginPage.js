@@ -1,16 +1,21 @@
 import { LockOutlined, MailFilled } from '@ant-design/icons';
 import { Row, Col, Typography, Form, Input, Button, Divider } from 'antd';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
+import { setAuthentication } from '../../stores/reducers/Auth/authenSlice';
 import './LoginPage.style.scss';
 
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);
+    const authenStore = useSelector((state) => state.authen);
+    const dispatch = useDispatch();
+
     const onFinish = (values) => {
         setLoading(true);
-        console.log(values);
+        dispatch(setAuthentication(values));
         setTimeout(() => setLoading(false), 3000);
     };
     const [isShowModal, setIsShowModal] = useState(false);
