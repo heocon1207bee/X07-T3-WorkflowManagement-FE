@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Collapse } from 'react-collapse'
+import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 const InviteItem = () => {
     const [collapsed, setCollapsed] = useState(false)
@@ -8,7 +9,14 @@ const InviteItem = () => {
     }
     return (
         <div className='invite-item'>
-            <h4 onClick={handleCollapse} style={{cursor:'pointer'}}>Tên dự án được mời</h4>
+            <div className='invite-name' onClick={handleCollapse}>
+                <h4 style={{cursor:'pointer'}}>Tên dự án được mời</h4>
+                <div className='collapse-icon'>
+                    {
+                        collapsed?<CaretUpOutlined />:<CaretDownOutlined />
+                    }
+                </div>
+            </div>
             <Collapse isOpened={collapsed}>
                 <div className='invite-info'>
                     <p>Người mời: Tên Người Mời</p>
