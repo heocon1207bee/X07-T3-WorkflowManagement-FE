@@ -1,6 +1,8 @@
 import { createSlice, current } from '@reduxjs/toolkit';
+import { getDataInLocal, saveToLocal } from '../../../utils/storeUser';
 
-const authenStore = localStorage.getItem('wf_user');
+const STORE_KEY = process.env.REACT_APP_STORE_KEY;
+const authenStore = getDataInLocal(STORE_KEY);
 
 const initialState = Object.assign(
     {
@@ -17,9 +19,12 @@ export const authenSlice = createSlice({
     initialState,
     reducers: {
         setAuthentication: (state, action) => {
-            state.user = action.payload;
+            state.user = action.payload.data;
             state.isAuthenticated = true;
-            console.log(current(state));
+            state.token = action.payload.token;
+            state.session_token = action.payload.session_token;
+            const { msg, ...rest } = action.payload;
+            saveToLocal(STORE_KEY, rest);
         },
     },
 });
