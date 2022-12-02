@@ -24,6 +24,7 @@ export default function RegisterPage() {
                         name="fullname"
                         rules={[
                             { required: true, message: 'Vui lòng nhập họ tên' },
+                            { max: 100, message: 'Tối đa 100 ký tự' },
                             ({ getFieldValue }) => ({
                                 validator(_, value) {
                                     if (!value || getFieldValue('fullname').trim().length !== 0) {
