@@ -1,18 +1,38 @@
 import { LockOutlined, MailFilled, UserOutlined } from '@ant-design/icons';
-import { Col, Form, Input, Row, Typography, Button } from 'antd';
-import { useState } from 'react';
+import { Col, Form, Input, Row, Typography, Button, Alert } from 'antd';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ResiterPage.style.scss';
 
+import userServices from '../../services/User/userServices';
 const { Title, Text } = Typography;
 
 export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
-    const onFinish = (values) => {
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+
+    const onFinish = async (values) => {
+        const { confirm, ...data } = values;
         setLoading(true);
-        console.log('Values:::', values);
-        setTimeout(() => setLoading(false), 3000);
+        try {
+            setError(null);
+            setSuccess(null);
+            const registerReponse = await userServices.register(data);
+            setSuccess(registerReponse.data.msg);
+        } catch (err) {
+            if (Array.isArray(err.response.data)) {
+                const errorResponse = err.response.data;
+                const errorValue = errorResponse.map((e) => e.message);
+                setError(errorValue);
+            } else {
+                setError(err.response.data.msg);
+            }
+        } finally {
+            setLoading(false);
+        }
     };
+
     return (
         <Row className="wrapper">
             <Col span={20} className="text-center" md={{ span: 6 }}>
@@ -85,13 +105,19 @@ export default function RegisterPage() {
                                 },
                             }),
                         ]}
-                        validateTrigger={false}
                     >
                         <Input.Password placeholder="Xác nhận mật khẩu*" className="input" />
                     </Form.Item>
                     <Form.Item className="text-require">
                         <Text className="text-red">(*) Bắt buộc</Text>
                     </Form.Item>
+                    {success && (
+                        <Text>
+                            <Alert className="success" showIcon description={success} type="success" />
+                            <Link to="/login">Đến trang đăng nhập</Link>
+                        </Text>
+                    )}
+                    {error && <Alert className="alert" showIcon description={error} type="error" />}
                     <Form.Item>
                         <Button size="large" htmlType="submit" className="form-button" loading={loading}>
                             Đăng ký
