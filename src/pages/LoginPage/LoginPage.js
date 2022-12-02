@@ -18,7 +18,9 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const { isTokenValid } = useTokenVerifier();
 
-    if (isTokenValid) navigate('/');
+    useEffect(() => {
+        if (isTokenValid) navigate('/');
+    }, [isTokenValid]);
 
     const onFinish = async (values) => {
         try {

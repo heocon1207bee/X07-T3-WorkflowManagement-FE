@@ -20,7 +20,7 @@ export const authenSlice = createSlice({
     reducers: {
         setAuthentication: (state, action) => {
             state.user = action.payload.data;
-            state.isAuthenticated = true;
+            state.isAuthenticated = action.payload.isAuthenticated;
             state.token = action.payload.token;
             state.session_token = action.payload.session_token;
             const { msg, ...rest } = action.payload;

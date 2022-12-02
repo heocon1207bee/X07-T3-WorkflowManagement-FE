@@ -1,15 +1,30 @@
+import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
+import useTokenVerifier from '../../hooks/useTokenVerifier';
+import authenServices from '../../services/Authen/authenServices';
+import { updateToken } from '../../utils/storeUser';
 
-const { useSelector } = require('react-redux');
+const STORE_KEY = process.env.REACT_APP_STORE_KEY;
 
 const PrivateRoute = ({ component: Component }) => {
-    const authenStore = useSelector((state) => state.authen);
-    const { isAuthenticated } = authenStore;
-    if (isAuthenticated) {
+    const { isTokenValid, isResetToken } = useTokenVerifier();
+    console.log(isTokenValid);
+
+    useEffect(() => {
+        if (isResetToken)
+            authenServices
+                .renewToken()
+                .then((res) => {
+                    updateToken(STORE_KEY, res.data.token);
+                })
+                .catch((err) => console.log(err.response));
+    }, []);
+
+    if (isTokenValid) {
         return <Component />;
     }
 
-    return <Navigate to="/login" />;
+    // return <Navigate to="/login" />;
 };
 
 export default PrivateRoute;
