@@ -1,10 +1,11 @@
 import { LockOutlined, MailFilled } from '@ant-design/icons';
 import { Row, Col, Typography, Form, Input, Button, Divider, Alert } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
+import useTokenVerifier from '../../hooks/useTokenVerifier';
 import authenServices from '../../services/Authen/authenServices';
 import { setAuthentication } from '../../stores/reducers/Auth/authenSlice';
 
@@ -15,6 +16,9 @@ export default function LoginPage() {
     const dispatch = useDispatch();
     const [error, setError] = useState();
     const navigate = useNavigate();
+    const { isTokenValid } = useTokenVerifier();
+
+    if (isTokenValid) navigate('/');
 
     const onFinish = async (values) => {
         try {
@@ -44,6 +48,7 @@ export default function LoginPage() {
     const handleCancel = () => {
         setIsShowModal(false);
     };
+
     return (
         <Row className="h-full login-wrap">
             <Col span={24} lg={{ span: 16 }} md={{ span: 12 }} className="flex-center bg-image">
