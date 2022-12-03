@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
-import useTokenVerifier from '../../hooks/useTokenVerifier';
 import authenServices from '../../services/Authen/authenServices';
 import { setAuthentication } from '../../stores/reducers/Auth/authenSlice';
 
@@ -16,11 +15,6 @@ export default function LoginPage() {
     const dispatch = useDispatch();
     const [error, setError] = useState();
     const navigate = useNavigate();
-    const { isTokenValid } = useTokenVerifier();
-
-    useEffect(() => {
-        if (isTokenValid) navigate('/');
-    }, [isTokenValid]);
 
     const onFinish = async (values) => {
         try {
