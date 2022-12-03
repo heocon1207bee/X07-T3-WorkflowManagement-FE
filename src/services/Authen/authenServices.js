@@ -1,8 +1,7 @@
 import { getDataInLocal } from '../../utils/storeUser';
 import axiosInstance from '../Axios/axiosInstance';
 import { AUTH_TOKEN, AUTH_LOGIN } from '../Axios/urlServerConfigure';
-
-const STORE_KEY = process.env.REACT_APP_STORE_KEY;
+import { STORE_KEY } from '../../configs/env';
 
 export default {
     login: (data) => {

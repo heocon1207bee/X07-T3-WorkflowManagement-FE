@@ -1,10 +1,7 @@
 import axios from 'axios';
 import { getDataInLocal, saveToLocal } from '../../utils/storeUser';
 import { AUTH_TOKEN, URL_NEED_TOKEN } from './urlServerConfigure';
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-const STORE_KEY = process.env.REACT_APP_STORE_KEY;
-const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN;
+import { STORE_KEY, BASE_URL, ACCESS_TOKEN } from '../../configs/env';
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,

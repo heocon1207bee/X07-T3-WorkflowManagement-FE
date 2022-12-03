@@ -13,3 +13,8 @@ export const getDataInLocal = (key) => {
 export const updateToken = (key, token) => {
     saveToLocal(key, { token });
 };
+
+export const getToken = (key) => {
+    const { token } = getDataInLocal(key);
+    return token;
+};

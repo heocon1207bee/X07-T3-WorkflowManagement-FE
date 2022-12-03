@@ -1,7 +1,7 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { getDataInLocal, saveToLocal } from '../../../utils/storeUser';
+import { STORE_KEY } from '../../../configs/env';
 
-const STORE_KEY = process.env.REACT_APP_STORE_KEY;
 const authenStore = getDataInLocal(STORE_KEY);
 
 const initialState = Object.assign(
