@@ -8,9 +8,9 @@ const STORE_KEY = process.env.REACT_APP_STORE_KEY;
 
 const PrivateRoute = ({ component: Component }) => {
     const { isTokenValid, isResetToken } = useTokenVerifier();
-    console.log(isTokenValid);
+    console.log('is Token valid:::', isTokenValid);
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (isResetToken)
             authenServices
                 .renewToken()
@@ -18,12 +18,13 @@ const PrivateRoute = ({ component: Component }) => {
                     updateToken(STORE_KEY, res.data.token);
                 })
                 .catch((err) => console.log(err.response));
-    }, []);
+    }, [isResetToken]); */
 
     if (isTokenValid) {
         return <Component />;
     }
 
+    return <div>Loading...</div>;
     // return <Navigate to="/login" />;
 };
 

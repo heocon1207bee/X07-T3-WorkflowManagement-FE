@@ -23,7 +23,8 @@ const useTokenVerifier = () => {
                 if (error.response.status === 400 && error.response.data.msg === 'jwt expired') {
                     setIsResetToken(true);
                 }
-                console.log(error.reponse);
+
+                console.log(error.response.data.msg);
             });
     }, []);
 
