@@ -35,7 +35,7 @@ export default function RegisterPage() {
 
     return (
         <Row className="wrapper">
-            <Col span={20} className="text-center" md={{ span: 6 }}>
+            <Col span={20} className="text-center" md={{ span: 14 }} lg={{ span: 10 }}>
                 <Form name="register" className="form-wrapper" initialValues={{ remember: false }} onFinish={onFinish}>
                     <Title level={2} style={{ fontWeight: 400 }}>
                         Đăng ký tài khoản
