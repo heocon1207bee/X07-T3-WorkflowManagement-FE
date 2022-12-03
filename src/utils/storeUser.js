@@ -7,7 +7,7 @@ export const saveToLocal = (key, data = {}) => {
 
 export const getDataInLocal = (key) => {
     const data = localStorage.getItem(key);
-    return JSON.parse(data);
+    return data ? JSON.parse(data) : false;
 };
 
 export const updateToken = (key, token) => {
@@ -16,5 +16,5 @@ export const updateToken = (key, token) => {
 
 export const getToken = (key) => {
     const { token } = getDataInLocal(key);
-    return token;
+    return token ?? false;
 };

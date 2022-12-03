@@ -1,12 +1,12 @@
 import { LockOutlined, MailFilled } from '@ant-design/icons';
 import { Row, Col, Typography, Form, Input, Button, Divider, Alert } from 'antd';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
 import authenServices from '../../services/Authen/authenServices';
-import { setAuthentication } from '../../stores/reducers/Auth/authenSlice';
+import { setUserStore } from '../../stores/reducers/Auth/authenSlice';
 
 import './LoginPage.style.scss';
 
@@ -15,12 +15,16 @@ export default function LoginPage() {
     const dispatch = useDispatch();
     const [error, setError] = useState();
     const navigate = useNavigate();
+    const authenStore = useSelector((state) => state.authen);
+    const [isShowModal, setIsShowModal] = useState(false);
+
+    if (authenStore.isAuthenticated) return <Navigate to="/" />;
 
     const onFinish = async (values) => {
         try {
             setLoading(true);
             const authenResponse = await authenServices.login(values);
-            if (authenResponse) dispatch(setAuthentication(authenResponse.data));
+            if (authenResponse) dispatch(setUserStore(authenResponse.data));
             navigate('/');
         } catch (err) {
             if (Array.isArray(err.response.data)) {
@@ -34,7 +38,6 @@ export default function LoginPage() {
             setLoading(false);
         }
     };
-    const [isShowModal, setIsShowModal] = useState(false);
     const onForgotPassword = () => {
         setIsShowModal(true);
     };

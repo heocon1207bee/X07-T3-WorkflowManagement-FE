@@ -29,10 +29,10 @@ const onReponseError = async (error) => {
     if (error.response) {
         if (error.response.status === 401 && error.response.data.msg === 'jwt expired') {
             const localStore = getDataInLocal(STORE_KEY);
-            const { session_token } = localStore;
+            const { session_token, user } = localStore;
 
             try {
-                const rs = await axios.post(`$BASE_URL${AUTH_TOKEN}`, { session_token });
+                const rs = await axios.post(`${BASE_URL}${AUTH_TOKEN}`, { user_id: user._id, session_token });
                 const { token } = rs.data;
                 saveToLocal(STORE_KEY, { token });
 

@@ -18,7 +18,7 @@ export const authenSlice = createSlice({
     name: 'authen',
     initialState,
     reducers: {
-        setAuthentication: (state, action) => {
+        setUserStore: (state, action) => {
             state.user = action.payload.data;
             state.isAuthenticated = action.payload.isAuthenticated;
             state.token = action.payload.token;
@@ -26,8 +26,11 @@ export const authenSlice = createSlice({
             const { msg, ...rest } = action.payload;
             saveToLocal(STORE_KEY, rest);
         },
+        setAuthentication: (state, action) => {
+            state.isAuthenticated = action.payload;
+        },
     },
 });
 
-export const { setAuthentication } = authenSlice.actions;
+export const { setUserStore, setAuthentication } = authenSlice.actions;
 export default authenSlice.reducer;
