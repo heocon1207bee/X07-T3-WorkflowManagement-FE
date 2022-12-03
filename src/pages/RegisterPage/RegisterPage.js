@@ -1,6 +1,6 @@
 import { LockOutlined, MailFilled, UserOutlined } from '@ant-design/icons';
 import { Col, Form, Input, Row, Typography, Button, Alert } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ResiterPage.style.scss';
 
@@ -70,7 +70,7 @@ export default function RegisterPage() {
                         ]}
                         validateTrigger={false}
                     >
-                        <Input placeholder="Email *" className="input" type="email" prefix={<MailFilled />} />
+                        <Input placeholder="Email *" className="input" prefix={<MailFilled />} />
                     </Form.Item>
                     <Form.Item
                         name="password"
