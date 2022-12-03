@@ -6,8 +6,8 @@ import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 export default [
     {
         path: '/',
-        element: <ProjectListPage />,
-        // element: <PrivateRoute component={ProjectListPage} />,
+        // element: <ProjectListPage />,
+        element: <PrivateRoute component={ProjectListPage} />,
     },
     {
         path: '/register',
