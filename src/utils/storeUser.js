@@ -1,5 +1,8 @@
 export const saveToLocal = (key, data = {}) => {
-    localStorage.setItem(key, JSON.stringify(data));
+    const currentLocal = getDataInLocal(key);
+    if (!currentLocal) localStorage.setItem(key, JSON.stringify(data));
+    const update = { ...currentLocal, ...data };
+    localStorage.setItem(key, JSON.stringify(update));
 };
 
 export const getDataInLocal = (key) => {
@@ -8,7 +11,5 @@ export const getDataInLocal = (key) => {
 };
 
 export const updateToken = (key, token) => {
-    const data = getDataInLocal(key);
-    data.token = token;
-    saveToLocal(key, data);
+    saveToLocal(key, { token });
 };
