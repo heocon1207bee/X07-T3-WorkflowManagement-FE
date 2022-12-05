@@ -7,8 +7,8 @@ import RolePage from '../pages/RolePage/RolePage';
 export default [
     {
         path: '/',
-        element: <ProjectListPage />,
-        // element: <PrivateRoute component={ProjectListPage} />,
+        // element: <ProjectListPage />,
+        element: <PrivateRoute component={ProjectListPage} />,
     },
     {
         path: '/register',

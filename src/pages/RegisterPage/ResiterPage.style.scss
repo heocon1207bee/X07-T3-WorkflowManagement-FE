@@ -22,11 +22,13 @@
     background-color: $mainBgWhite;
     padding: 70px 36px;
     border-radius: 7px;
+    min-width: 20rem;
 }
 
 .form-button {
     @include acceptButton();
     width: 80%;
+    margin-top: 10px;
 }
 
 .text-require {
