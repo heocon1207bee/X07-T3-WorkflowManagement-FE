@@ -1,21 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-<<<<<<< HEAD
+
 import searchValueReducer from '../reducers/searchValueReducer';
+import authenReducer from './reducers/Auth/authenSlice';
 
 const store = configureStore({
     reducer: {
-        "searchValue": searchValueReducer
+        "searchValue": searchValueReducer,
+        authen: authenReducer,
     }
 })
 
 export default store
-=======
-
-import authenReducer from './reducers/Auth/authenSlice';
-
-export const store = configureStore({
-    reducer: {
-        authen: authenReducer,
-    },
-});
->>>>>>> main

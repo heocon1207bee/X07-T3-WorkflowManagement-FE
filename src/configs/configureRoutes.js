@@ -2,6 +2,7 @@ import LoginPage from '../pages/LoginPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import ProjectListPage from '../pages/ProjectListPage';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
+import RolePage from '../pages/RolePage/RolePage';
 
 export default [
     {
@@ -17,4 +18,8 @@ export default [
         path: '/login',
         element: <LoginPage />,
     },
+    {
+        path: '/role',
+        element: <RolePage />,
+    }
 ];
