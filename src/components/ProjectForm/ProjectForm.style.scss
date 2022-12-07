@@ -1,13 +1,6 @@
 @import '../../assets/scss/button.scss';
 @import '../../assets/scss/input.scss';
 
-.btn-ok {
-    @include acceptButton();
-}
-
-.btn-cancel {
-    @include cancelButton();
-}
 .input {
     @include inputStyle();
 }
