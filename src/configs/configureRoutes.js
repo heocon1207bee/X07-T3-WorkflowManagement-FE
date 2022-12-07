@@ -7,7 +7,6 @@ import RolePage from '../pages/RolePage/RolePage';
 export default [
     {
         path: '/',
-        // element: <ProjectListPage />,
         element: <PrivateRoute component={ProjectListPage} />,
     },
     {
@@ -21,5 +20,5 @@ export default [
     {
         path: '/role',
         element: <RolePage />,
-    }
+    },
 ];
