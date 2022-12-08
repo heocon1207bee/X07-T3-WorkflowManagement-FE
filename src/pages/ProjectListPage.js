@@ -6,7 +6,6 @@ import InviteList from '../components/InviteList/InviteList'
 import ProjectList from '../components/ProjectList/ProjectList'
 import SearchBar from '../components/SearchBar/SearchBar'
 import ProjectServices from '../services/Project/projectServices';
-import InviteList from '../components/InviteList/InviteList';
 import ProjectForm from '../components/ProjectModal/ProjectModal';
 import Overlay from '../components/Overlay/Overlay';
 import RoleForm from '../components/RoleForm/RoleForm';
