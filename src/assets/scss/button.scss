@@ -1,29 +1,29 @@
-@import "./color.scss";
+@import './color.scss';
 
 @mixin acceptButton() {
-  background-color: $mainGreen;
-  border: none;
-  color: $mainBgWhite;
-  padding: 7px 15px;
-  border-radius: 10px;
-  text-shadow: 0 0.5px 0 $mainBgGray;
-  cursor: pointer;
+    background-color: $mainGreen;
+    border: none;
+    color: $mainBgWhite;
+    padding: 7px 15px;
+    border-radius: 10px;
+    text-shadow: 0 0.5px 0 $mainBgGray;
+    cursor: pointer;
 
-  &:hover {
-    background-color: #62d8d7;
-  }
+    &:hover {
+        background-color: #62d8d7;
+    }
 }
 
 @mixin cancelButton() {
-  background-color: $buttonRed;
-  border: none;
-  color: $mainBgWhite;
-  padding: 7px 10px;
-  border-radius: 10px;
-  text-shadow: 0 0.5px 0 $mainBgGray;
-  cursor: pointer;
+    background-color: $buttonRed;
+    border: none;
+    color: $mainBgWhite;
+    padding: 7px 10px;
+    border-radius: 10px;
+    text-shadow: 0 0.5px 0 $mainBgGray;
+    cursor: pointer;
 
-  &:hover {
-    background-color: $buttonRedHover;
-  }
+    &:hover {
+        background-color: $buttonRedHover;
+    }
 }

@@ -5,12 +5,6 @@
     @include acceptButton();
 }
 
-.btn-cancel {
+.btn-cacel {
     @include cancelButton();
-}
-.input {
-    @include inputStyle();
-}
-.text-require {
-    color: $buttonRed;
 }
