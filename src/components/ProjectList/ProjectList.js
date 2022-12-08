@@ -1,16 +1,29 @@
 import React from 'react'
 import ProjectItem from './ProjectItem';
+import { useSelector } from 'react-redux';
+import LazyLoad from 'react-lazyload';
+import ProjectLoading from './ProjectLoading';
+import {Spin} from 'antd'
 
-const ProjectList = () => {
+const ProjectList = (props) => {
+
+    const projectData = useSelector(state => state.projectData)
 
     return (
     <div className='project-list-container'>
         <div className='pjl-label'>
-            <h3>Danh sách dự án</h3>
+            <h3>Danh sách dự án  {props.loading&&<Spin/>}</h3>
         </div>
         <div className='project-list'>
-            {Array(10).fill(1).map((v, i) => { return <ProjectItem key={i}/>})}
+            {
+                projectData.map((data, index) =>
+                    <LazyLoad height={100} offset={[-100, 100]} placeholder={<ProjectLoading/>}>
+                        <ProjectItem key={data._id} title={data.title} dadProps={props}/>
+                    </LazyLoad>
+                )
+            }
         </div>
+
     </div>
   )
 }

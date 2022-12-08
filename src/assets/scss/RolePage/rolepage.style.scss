@@ -1,14 +1,19 @@
 @import "../color";
 @import "../button";
 
-.role-page {
-  max-width: 650px;
-  height:500px;
-  background-color: $mainBgWhite;
-  border-radius: 10px;
+//.role-page {
+  //max-width: 650px;
+  //height:500px;
+  //background-color: $mainBgWhite;
+  //border-radius: 10px;
 
   .role-container {
     padding: 1.5rem;
+    width: 90%;
+    max-width: 650px;
+    height:500px;
+    background-color: $mainBgWhite;
+    border-radius: 10px;
 
     .role-label {
       display: flex;
@@ -39,4 +44,4 @@
     }
   }
 
-}
+//}
