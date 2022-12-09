@@ -9,12 +9,14 @@ import ProjectServices from '../services/Project/projectServices';
 import ProjectForm from '../components/ProjectModal/ProjectModal';
 import Overlay from '../components/Overlay/Overlay';
 import RoleForm from '../components/RoleForm/RoleForm';
+import { FORM_CREATE, FORM_EDIT } from '../configs/FORM_STATUS';
 
 const ProjectListPage = () => {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
     const [overlay, setOverlay] = useState(false);
+    const [error, setError] = useState();
     const [openProject, setOpenProject] = useState(false);
+    const [formType, setFormStyle] = useState(FORM_EDIT);
 
     //const projectData = useSelector(state => state.projectData)
     const dispatch = useDispatch();
@@ -56,7 +58,7 @@ const ProjectListPage = () => {
                 <div className="pjs-container">
                     <SearchBar modal={{ setOpenProject }} />
                     <ProjectList overlay={overlay} handleRoleButton={handleRoleButton} loading={loading} />
-                    <ProjectForm modal={{ openProject, setOpenProject }} />
+                    <ProjectForm modal={{ openProject, setOpenProject }} type={formType} />
                 </div>
             </div>
         </>
