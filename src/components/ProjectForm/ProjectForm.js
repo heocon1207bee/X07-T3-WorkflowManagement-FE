@@ -40,13 +40,17 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
     }, [type]);
 
     const handleSubmit = async (values) => {
-        const deadline = values.deadline.unix();
+        const deadline = values.deadline.format('YYYY-MM-DD');
         const project = { ...values, deadline };
         try {
             const projectResponse = await projectOwnerServices.createProject(project);
             setNotificationWithIcon({ type: 'success', message: projectResponse.data.msg });
         } catch (err) {
-            setNotificationWithIcon({ type: 'error', message: err.response.data.msg });
+            if (Array.isArray(err.response.data)) {
+                setNotificationWithIcon({ type: 'error', message: err.response.data[0].message });
+            } else {
+                setNotificationWithIcon({ type: 'error', message: err.response.data.msg });
+            }
         } finally {
             setCloseModal(false);
         }
