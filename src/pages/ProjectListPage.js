@@ -9,6 +9,9 @@ import ProjectServices from '../services/Project/projectServices';
 import ProjectForm from '../components/ProjectModal/ProjectModal';
 import Overlay from '../components/Overlay/Overlay';
 import RoleForm from '../components/RoleForm/RoleForm';
+import authenServices from '../services/Authen/authenServices';
+import { setUserStore } from '../stores/reducers/Auth/authenSlice';
+import { Animated } from 'react-animated-css'
 
 const ProjectListPage = () => {
     const [loading, setLoading] = useState(false)
@@ -16,8 +19,9 @@ const ProjectListPage = () => {
     const [overlay, setOverlay] = useState(false)
     const [openProject, setOpenProject] = useState(false);
 
-    //const projectData = useSelector(state => state.projectData)
+    const projectData = useSelector(state => state.projectData)
     const dispatch = useDispatch()
+    console.log(projectData)
 
     useEffect(() => {
         getProject()
@@ -27,16 +31,20 @@ const ProjectListPage = () => {
         setLoading(true)
         try {
             const getProjectResponse = await ProjectServices.getProject()
-            dispatch({ 'type':'setData', 'value': [...getProjectResponse.data]})
+            dispatch({ 'type':'setData', 'value': getProjectResponse.data.data})
             setLoading(false)
         } catch (err) {
-            if (Array.isArray(err.response.data)) {
+            if (err.response && Array.isArray(err.response.data)) {
                 const errorResponse = err.response.data;
                 const errorValue = errorResponse.map((e) => e.message);
                 setError(errorValue);
-            } else {
+            } else if(err.response){
                 setError(err.response.data.msg);
+            } else {
+                setError(err.message)
             }
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -46,9 +54,11 @@ const ProjectListPage = () => {
 
   return (
       <>
-          {overlay&&<Overlay overlay={overlay} handleRoleButton={handleRoleButton}>
-              <RoleForm/>
-          </Overlay>}
+          <Animated animationInDuration={200} animationIn='fadeInUp' animationOutDuration={300} animationOut='fadeOutUp' isVisible={overlay}>
+              <Overlay overlay={overlay} handleRoleButton={handleRoleButton}>
+                  <RoleForm/>
+              </Overlay>
+          </Animated>
           <div className='project-list-page'>
               <InviteList/>
               <div className='pjs-container'>

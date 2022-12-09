@@ -3,6 +3,6 @@ export const AUTH_LOGIN = '/auth/login';
 export const REGISTER = '/user';
 
 //testing
-export const PROJECT = '/projects';
+export const PROJECT = 'user/projects';
 
 export const URL_NEED_TOKEN = [AUTH_TOKEN];

@@ -2,9 +2,10 @@ import axios from 'axios';
 import { AUTH_TOKEN, PROJECT, URL_NEED_TOKEN } from '../Axios/urlServerConfigure';
 import { ACCESS_TOKEN, BASE_URL, STORE_KEY } from '../../configs/env';
 import { getDataInLocal, saveToLocal } from '../../utils/storeUser';
+import authenServices from '../Authen/authenServices';
 
 const axiosInstance = axios.create({
-    baseURL: "https://63855b3a875ca3273d3b0c7b.mockapi.io/api/v1",
+    baseURL: "http://54.199.238.34:3001/api/v1",
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -50,7 +51,11 @@ axiosInstance.interceptors.request.use(onRequest, onRequestError);
 axiosInstance.interceptors.response.use(onReponse, onReponseError);
 
 export default {
-    getProject: () => {
-        return axiosInstance.get(PROJECT);
-    },
+    getProject: async () => {
+        const token = await JSON.parse(localStorage.getItem('worlflow_store')).token
+        const config = {
+            headers: { access_token: token }
+        };
+        return await axiosInstance.get(PROJECT, config);
+    }
 };

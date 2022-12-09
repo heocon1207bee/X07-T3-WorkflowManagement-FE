@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Tooltip } from 'antd';
 import {
     UsergroupAddOutlined,
@@ -13,13 +13,8 @@ import b5 from '../../assets/images/pj-background/pj_background_5.png'
 
 const ProjectItem = ({title='Không có tiêu đề', createMember='Không có dữ liệu', dadProps}) => {
 
-    const getRandomImage = () => {
-        const arr = [b1, b2, b3, b4, b5]
-        return arr[Number.parseInt(Math.random() * arr.length)]
-    }
-
     return (
-        <div className='project-item' style={{backgroundImage: `url(${getRandomImage()})`}}>
+        <div className='project-item' draggable>
             <h4>{title}</h4>
             <p>Người tạo: {createMember}</p>
             <div className='project-option-button'>
