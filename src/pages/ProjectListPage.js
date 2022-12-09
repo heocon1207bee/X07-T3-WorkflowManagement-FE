@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import '../assets/scss/ProjectListPage/main.scss';
 import InviteList from '../components/InviteList/InviteList';
 import ProjectList from '../components/ProjectList/ProjectList';
@@ -9,14 +9,14 @@ import ProjectServices from '../services/Project/projectServices';
 import ProjectForm from '../components/ProjectModal/ProjectModal';
 import Overlay from '../components/Overlay/Overlay';
 import RoleForm from '../components/RoleForm/RoleForm';
-import { FORM_CREATE, FORM_EDIT } from '../configs/FORM_STATUS';
+import { FORM_CREATE } from '../configs/FORM_STATUS';
 
 const ProjectListPage = () => {
     const [loading, setLoading] = useState(false);
     const [overlay, setOverlay] = useState(false);
     const [error, setError] = useState();
     const [openProject, setOpenProject] = useState(false);
-    const [formType, setFormStyle] = useState(FORM_EDIT);
+    const [formType, setFormStyle] = useState(FORM_CREATE);
 
     //const projectData = useSelector(state => state.projectData)
     const dispatch = useDispatch();

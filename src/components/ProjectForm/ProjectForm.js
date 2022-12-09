@@ -3,26 +3,27 @@ import { Form, Input, DatePicker, Select } from 'antd';
 import { FcSynchronize, FcCheckmark, FcCancel } from 'react-icons/fc';
 import TextArea from 'antd/es/input/TextArea';
 import { useEffect, useState } from 'react';
-import { FORM_EDIT, FORM_CREATE } from '../../configs/FORM_STATUS';
+import { FORM_EDIT } from '../../configs/FORM_STATUS';
+import { PROJECT_IN_PROGRESS, PROJECT_DONE, PROJECT_CANCEL } from '../../configs/PROJECT_STATUS';
 const { Option } = Select;
 
 const ProjectForm = ({ form, setCloseModal, type }) => {
     const [status, setStatus] = useState([
         {
             label: 'Đang thực hiện',
-            value: 'in_process',
+            value: PROJECT_IN_PROGRESS,
             icon: <FcSynchronize />,
             disable: false,
         },
         {
             label: 'Hoàn thành',
-            value: 'done',
+            value: PROJECT_DONE,
             icon: <FcCheckmark />,
             disable: true,
         },
         {
             label: 'Đã hủy',
-            value: 'cancel',
+            value: PROJECT_CANCEL,
             icon: <FcCancel />,
             disable: true,
         },
