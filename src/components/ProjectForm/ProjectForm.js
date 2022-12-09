@@ -1,13 +1,17 @@
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Form, Input, DatePicker, Select } from 'antd';
 import { FcSynchronize, FcCheckmark, FcCancel } from 'react-icons/fc';
 import TextArea from 'antd/es/input/TextArea';
-import { useEffect, useState } from 'react';
+
+import projectOwnerServices from '../../services/Project/ProjectOwnerServices';
+import useNotification from '../../hooks/Notification/useNotification';
 import { FORM_EDIT } from '../../configs/FORM_STATUS';
 import { PROJECT_IN_PROGRESS, PROJECT_DONE, PROJECT_CANCEL } from '../../configs/PROJECT_STATUS';
 const { Option } = Select;
 
 const ProjectForm = ({ form, setCloseModal, type }) => {
+    const { contextHolder, setNotificationWithIcon } = useNotification();
     const [status, setStatus] = useState([
         {
             label: 'Đang thực hiện',
@@ -35,11 +39,20 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
         }
     }, [type]);
 
-    const handleSubmit = (values) => {
-        setCloseModal(false);
-        console.log(values);
+    const handleSubmit = async (values) => {
+        const deadline = values.deadline.unix();
+        const project = { ...values, deadline };
+        try {
+            const projectResponse = await projectOwnerServices.createProject(project);
+            setNotificationWithIcon({ type: 'success', message: projectResponse.data.msg });
+        } catch (err) {
+            setNotificationWithIcon({ type: 'error', message: err.response.data.msg });
+        } finally {
+            setCloseModal(false);
+        }
+
+        form.resetFields();
     };
-    const handleFinishFailed = () => {};
 
     return (
         <Form
@@ -47,11 +60,11 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 20 }}
             onFinish={handleSubmit}
-            onFinishFailed={handleFinishFailed}
             initialValues={{
                 status: status[0].value,
             }}
         >
+            {contextHolder}
             <Form.Item
                 label="Tiêu đề dự án"
                 name="title"
