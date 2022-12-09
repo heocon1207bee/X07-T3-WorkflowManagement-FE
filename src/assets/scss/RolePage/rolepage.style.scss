@@ -15,6 +15,10 @@
     background-color: $mainBgWhite;
     border-radius: 10px;
 
+    .animated {
+      width: 100%;
+    }
+
     .role-label {
       display: flex;
       flex-direction: row;

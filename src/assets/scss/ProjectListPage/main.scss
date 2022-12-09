@@ -18,7 +18,7 @@
         min-height: 100vh;
         padding: 0 0.7rem;
         border: 1px solid $mainBgGray;
-        background-color: #d6d6d6aa;
+        //background-color: #d6d6d6aa;
 
         .invite-label {
             padding: 20px 0;
@@ -30,13 +30,15 @@
         .invite-item {
             padding: 1rem;
             border-radius: 10px;
-            border: 1px solid $mainBgGray;
+            border: 1px solid #6d6d6d;
             margin-bottom: 10px;
-            position: relative;
             background-color: #ffffff;
 
             .invite-name {
                 cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
 
                 &:hover {
                     color: #6d6d6d;
@@ -44,10 +46,11 @@
 
                 h4{
                     padding: 0.5rem;
+                    overflow: hidden;
                 }
 
                 .collapse-icon {
-                    position: absolute;
+
                     right: 15px;
                     top: 22px;
                 }
@@ -87,7 +90,7 @@
     .pjs-container {
         flex: 75%;
         min-height: 100vh;
-        background-color: #d6d6d6aa;
+        //background-color: #d6d6d6aa;
 
         .search-container {
             display: flex;
@@ -137,7 +140,7 @@
                 grid-auto-rows: minmax(150px, 1fr);
 
                 .project-item {
-                    background-color: $mainBgGray;
+                    background-color: #ffffff;
                     border: 1px solid $mainBgGray;
                     padding: 1rem;
                     display: flex;
@@ -148,7 +151,7 @@
                     height: 100%;
 
                     &:hover {
-                        background-color: $mainBgGrayHover;
+                        background-color: #ededed;
                     }
 
                     h4:hover {

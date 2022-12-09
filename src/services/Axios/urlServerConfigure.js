@@ -3,7 +3,7 @@ export const AUTH_LOGIN = '/auth/login';
 export const REGISTER = '/user';
 
 //testing
-export const PROJECT = '/projects';
+export const PROJECT = 'user/projects';
 
 //user/project
 export const API_USER = '/user';
