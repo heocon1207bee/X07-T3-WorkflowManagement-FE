@@ -8,25 +8,26 @@ import projectOwnerServices from '../../services/Project/ProjectOwnerServices';
 import useNotification from '../../hooks/Notification/useNotification';
 import { FORM_EDIT } from '../../configs/FORM_STATUS';
 import { PROJECT_IN_PROGRESS, PROJECT_DONE, PROJECT_CANCEL } from '../../configs/PROJECT_STATUS';
+import { PROJECT_CANCEL_VN, PROJECT_DONE_VN, PROJECT_IN_PROGRESS_VN } from '../../configs/i18n/VietNamese';
 const { Option } = Select;
 
 const ProjectForm = ({ form, setCloseModal, type }) => {
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const [status, setStatus] = useState([
         {
-            label: 'Đang thực hiện',
+            label: PROJECT_IN_PROGRESS_VN,
             value: PROJECT_IN_PROGRESS,
             icon: <FcSynchronize />,
             disable: false,
         },
         {
-            label: 'Hoàn thành',
+            label: PROJECT_DONE_VN,
             value: PROJECT_DONE,
             icon: <FcCheckmark />,
             disable: true,
         },
         {
-            label: 'Đã hủy',
+            label: PROJECT_CANCEL_VN,
             value: PROJECT_CANCEL,
             icon: <FcCancel />,
             disable: true,
