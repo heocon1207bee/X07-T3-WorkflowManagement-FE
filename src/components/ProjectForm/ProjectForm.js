@@ -77,6 +77,16 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
                         required: true,
                         message: 'Vui lòng nhập Tiêu đề dự án',
                     },
+
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || getFieldValue('title').trim().length !== 0) {
+                                return Promise.resolve();
+                            }
+
+                            return Promise.reject(new Error('Vui lòng nhập Tiêu đề dự án'));
+                        },
+                    }),
                 ]}
                 validateTrigger={false}
             >
@@ -90,6 +100,16 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
                         required: true,
                         message: 'Vui lòng nhập Mục tiêu',
                     },
+
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || getFieldValue('target').trim().length !== 0) {
+                                return Promise.resolve();
+                            }
+
+                            return Promise.reject(new Error('Vui lòng nhập Mục tiêu'));
+                        },
+                    }),
                 ]}
             >
                 <TextArea />
