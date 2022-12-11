@@ -1,6 +1,7 @@
 import React from 'react';
 import RoleItem from './RoleItem';
 import {PlusOutlined} from '@ant-design/icons'
+import CreateNewRole from './CreateNewRole'
 
 const RoleForm = () => {
 
@@ -8,7 +9,7 @@ const RoleForm = () => {
         <div className='role-container'>
             <div className='role-label'>
                 <h4>Vai trò trong dự án</h4>
-                <button>Thêm vai trò mới <PlusOutlined /></button>
+                <CreateNewRole/>
             </div>
             <div className='role-list'>
                 <RoleItem/>
