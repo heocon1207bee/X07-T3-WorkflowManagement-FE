@@ -1,0 +1,8 @@
+export const CREATE_CARD = 'CREATE_CARD';
+export const DELETE_CARD = 'DELETE_CARD';
+export const MANAGE_MEMBER = 'MANAGE_MEMBER';
+export const MANAGE_ROLE = 'MANAGE_ROLE';
+export const UPDATE_ASSIGNEE = 'UPDATE_ASSIGNEE';
+export const UPDATE_CARD_STATUS = 'UPDATE_CARD_STATUS';
+export const UPDATE_CARD = 'UPDATE_CARD';
+export const UPDATE_PROJECT = 'UPDATE_PROJECT';
