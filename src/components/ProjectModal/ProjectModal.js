@@ -1,5 +1,4 @@
-import { Button, Modal } from 'antd';
-import { Form } from 'antd';
+import { Button, Modal, Form } from 'antd';
 
 import ProjectForm from '../ProjectForm/ProjectForm';
 
