@@ -18,7 +18,7 @@ import {
     PRIORITY_LOW,
     PRIORITY_LOWEST,
     PRIORITY_MEDIUM,
-} from '../../configs/PRIORITY';
+} from '../../configs/PRIORITIES';
 import TextArea from 'antd/es/input/TextArea';
 
 const { Option } = Select;
