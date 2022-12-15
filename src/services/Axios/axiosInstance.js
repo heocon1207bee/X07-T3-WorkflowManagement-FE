@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getDataInLocal, saveToLocal } from '../../utils/storeUser';
-import { AUTH_TOKEN, URL_NEED_TOKEN } from './urlServerConfigure';
+import { AUTH_TOKEN } from './urlServerConfigure';
 import { STORE_KEY, BASE_URL, ACCESS_TOKEN } from '../../configs/env';
 
 const axiosInstance = axios.create({
@@ -14,9 +14,9 @@ const axiosInstance = axios.create({
 });
 
 const onRequest = (config) => {
-    if (!URL_NEED_TOKEN.includes(config.url)) return config;
     const localStore = getDataInLocal(STORE_KEY);
     const { token } = localStore;
+    if (!token) return config;
     config.headers[ACCESS_TOKEN] = token;
     return config;
 };
