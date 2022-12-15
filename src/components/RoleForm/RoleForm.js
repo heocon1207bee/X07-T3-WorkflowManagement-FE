@@ -5,7 +5,7 @@ import {PlusOutlined} from '@ant-design/icons'
 const RoleForm = () => {
 
     return (
-        <div className='role-container'>
+        <div className='role-container' onClick={e => e.stopPropagation()}>
             <div className='role-label'>
                 <h4>Vai trò trong dự án</h4>
                 <button>Thêm vai trò mới <PlusOutlined /></button>

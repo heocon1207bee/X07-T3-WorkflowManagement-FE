@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_TOKEN, PROJECT, URL_NEED_TOKEN } from '../Axios/urlServerConfigure';
+import { API_USER_PROJECTS, AUTH_TOKEN, URL_NEED_TOKEN } from '../Axios/urlServerConfigure';
 import { ACCESS_TOKEN, BASE_URL, STORE_KEY } from '../../configs/env';
 import { getDataInLocal, saveToLocal } from '../../utils/storeUser';
 import authenServices from '../Authen/authenServices';
@@ -56,6 +56,6 @@ export default {
         const config = {
             headers: { access_token: token }
         };
-        return await axiosInstance.get(PROJECT, config);
+        return await axiosInstance.get(API_USER_PROJECTS, config);
     }
 };

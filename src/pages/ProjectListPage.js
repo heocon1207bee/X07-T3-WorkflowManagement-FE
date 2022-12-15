@@ -25,8 +25,8 @@ const ProjectListPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getProject();
-    }, []);
+        openProject === false && getProject();
+    }, [openProject]);
 
     const getProject = async () => {
         setLoading(true);
@@ -49,7 +49,7 @@ const ProjectListPage = () => {
         }
     };
 
-    const handleRoleButton = () => {
+    const handleRoleButton = (e) => {
         setOverlay(!overlay);
     };
 

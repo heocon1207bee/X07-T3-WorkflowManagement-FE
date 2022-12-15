@@ -1,0 +1,36 @@
+@import "../../assets/scss/color";
+@import "../../assets/scss/button";
+
+.project-task-page {
+  padding: 10px;
+}
+
+.project--nav {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-name--nav {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: $mainGreen;
+}
+
+.task-option--nav {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  button {
+    @include acceptButton;
+  }
+}
