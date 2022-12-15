@@ -7,11 +7,13 @@ const CardModal = ({ modal, type }) => {
     const handleOk = () => {
         form.submit();
     };
-    const handleCancel = () => {};
+    const handleCancel = () => {
+        modal.setOpenModal(false);
+    };
 
     return (
         <Modal
-            open={true}
+            open={modal.openModal}
             title="Tạo mới công việc"
             footer={[
                 <Button key="back" onClick={handleCancel} className="btn-cancel">
