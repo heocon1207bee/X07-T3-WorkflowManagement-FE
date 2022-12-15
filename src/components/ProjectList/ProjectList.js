@@ -18,7 +18,7 @@ const ProjectList = (props) => {
                     <LazyLoad key={data.project_id} height={100} offset={[-100, 100]} placeholder={<ProjectLoading />}>
                         <ProjectItem key={data.project_id} title={data.project.title} dadProps={props} />
                     </LazyLoad>
-                )}
+                ))}
             </div>
         </div>
     );
