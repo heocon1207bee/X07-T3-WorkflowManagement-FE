@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { AUTH_TOKEN, PROJECT, URL_NEED_TOKEN } from '../Axios/urlServerConfigure';
+import { AUTH_TOKEN, PROJECT } from '../Axios/urlServerConfigure';
 import { ACCESS_TOKEN, BASE_URL, STORE_KEY } from '../../configs/env';
 import { getDataInLocal, saveToLocal } from '../../utils/storeUser';
-import authenServices from '../Authen/authenServices';
 
 const axiosInstance = axios.create({
-    baseURL: "http://54.199.238.34:3001/api/v1",
+    baseURL: 'http://54.199.238.34:3001/api/v1',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -15,9 +14,9 @@ const axiosInstance = axios.create({
 });
 
 const onRequest = (config) => {
-    if (!URL_NEED_TOKEN.includes(config.url)) return config;
     const localStore = getDataInLocal(STORE_KEY);
     const { token } = localStore;
+    if (!token) return config;
     config.headers[ACCESS_TOKEN] = token;
     return config;
 };
@@ -52,10 +51,10 @@ axiosInstance.interceptors.response.use(onReponse, onReponseError);
 
 export default {
     getProject: async () => {
-        const token = await JSON.parse(localStorage.getItem('worlflow_store')).token
+        const token = await JSON.parse(localStorage.getItem('worlflow_store')).token;
         const config = {
-            headers: { access_token: token }
+            headers: { access_token: token },
         };
         return await axiosInstance.get(PROJECT, config);
-    }
+    },
 };

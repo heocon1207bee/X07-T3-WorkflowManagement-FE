@@ -20,6 +20,7 @@ import {
     PRIORITY_MEDIUM,
 } from '../../configs/PRIORITIES';
 import TextArea from 'antd/es/input/TextArea';
+import { useSelector } from 'react-redux';
 
 const { Option } = Select;
 
@@ -72,6 +73,10 @@ const CardForm = ({ form }) => {
         },
     ]);
 
+    const handleFinish = (values) => {
+        console.log(values);
+    };
+
     return (
         <Form
             form={form}
@@ -81,6 +86,7 @@ const CardForm = ({ form }) => {
                 type: CARD_TASK,
                 priority: PRIORITY_LOW,
             }}
+            onFinish={handleFinish}
         >
             <Form.Item
                 label="Tiêu đề"
