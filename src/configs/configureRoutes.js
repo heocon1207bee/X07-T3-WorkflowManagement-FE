@@ -3,7 +3,7 @@ import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import ProjectListPage from '../pages/ProjectListPage';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import RolePage from '../pages/RolePage/RolePage';
-import CardModal from '../components/Card/CardModal';
+import ProjectDetail from '../pages/ProjectDetail/ProjectDetail';
 
 export default [
     {
@@ -23,7 +23,7 @@ export default [
         element: <RolePage />,
     },
     {
-        path: '/user/project/card',
-        element: <PrivateRoute component={CardModal} />,
+        path: '/user/project/:projectId',
+        element: <PrivateRoute component={ProjectDetail} />,
     },
 ];

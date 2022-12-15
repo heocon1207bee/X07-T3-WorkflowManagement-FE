@@ -2,10 +2,15 @@ import axiosInstance from '../Axios/axiosInstance';
 
 import { API_USER_PROJECTS } from '../Axios/urlServerConfigure';
 
-const createProject = (projects) => {
+const create = (projects) => {
     return axiosInstance.post(API_USER_PROJECTS, projects);
 };
 
+const getDetail = (projectId) => {
+    return axiosInstance.get(`${API_USER_PROJECTS}/${projectId}`);
+};
+
 export default {
-    createProject,
+    create,
+    getDetail,
 };

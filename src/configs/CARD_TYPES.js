@@ -1,2 +1,2 @@
-export const CARD_TASK = 'CARD_TASK';
-export const CARD_ISSUE = 'CARD_ISSUE';
+export const CARD_TASK = 'TASK';
+export const CARD_ISSUE = 'ISSUE';

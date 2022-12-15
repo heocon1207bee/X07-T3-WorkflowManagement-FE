@@ -44,7 +44,7 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
         const deadline = values.deadline.format('YYYY-MM-DD');
         const project = { ...values, deadline };
         try {
-            const projectResponse = await projectOwnerServices.createProject(project);
+            const projectResponse = await projectOwnerServices.create(project);
             setNotificationWithIcon({ type: 'success', message: projectResponse.data.msg });
         } catch (err) {
             if (Array.isArray(err.response.data)) {
