@@ -1,6 +1,7 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import moment from 'moment';
+import TextArea from 'antd/es/input/TextArea';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
 import { CARD_ISSUE, CARD_TASK } from '../../configs/CARD_TYPES';
 import {
@@ -19,11 +20,21 @@ import {
     PRIORITY_LOWEST,
     PRIORITY_MEDIUM,
 } from '../../configs/PRIORITIES';
-import TextArea from 'antd/es/input/TextArea';
+import { ACCEPTED } from '../../configs/MEMBER_STATUS';
+import useNotification from '../../hooks/Notification/useNotification';
+import CardServices from '../../services/Project/Card/CardServices';
+import { useParams } from 'react-router-dom';
 
 const { Option } = Select;
 
-const CardForm = ({ form }) => {
+const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
+    const { loading, setLoading } = loadingAnimate;
+    const { contextHolder, setNotificationWithIcon } = useNotification();
+    const { projectId } = useParams();
+    const assignee = members.reduce((assignee, item) => {
+        if (item.status === ACCEPTED) assignee.push(item.member);
+        return assignee;
+    }, []);
     const [priority] = useState([
         {
             label: PRIORITY_HIGHEST_VN,
@@ -65,15 +76,25 @@ const CardForm = ({ form }) => {
         },
     ]);
 
-    const [assignee] = useState([
-        {
-            name: 'Nguyen Van A',
-            user_id: '1234567890',
-        },
-    ]);
+    const handleFinish = async (values) => {
+        const deadline = values.deadline.format('YYYY-MM-DD');
+        const card = { ...values, deadline };
+        try {
+            setLoading(true);
+            const cardCreated = await CardServices.create(projectId, card);
+            setNotificationWithIcon({ type: 'success', message: cardCreated.data.msg });
+        } catch (err) {
+            if (Array.isArray(err.response.data)) {
+                setNotificationWithIcon({ type: 'error', message: err.response.data[0].message });
+            } else {
+                setNotificationWithIcon({ type: 'error', message: err.response.data.msg });
+            }
+        } finally {
+            setLoading(false);
+            setCloseModal();
+        }
 
-    const handleFinish = (values) => {
-        console.log(values);
+        form.resetFields();
     };
 
     return (
@@ -142,11 +163,12 @@ const CardForm = ({ form }) => {
                 validateTrigger={false}
             >
                 <Select>
-                    {assignee.map((item) => (
-                        <Option key={`${item.user_id}`} value={item.user_id}>
-                            {item.name}
-                        </Option>
-                    ))}
+                    {assignee &&
+                        assignee.map((item) => (
+                            <Option key={`${item._id}`} value={item._id}>
+                                {item.fullname}
+                            </Option>
+                        ))}
                 </Select>
             </Form.Item>
             <Form.Item
@@ -181,6 +203,7 @@ const CardForm = ({ form }) => {
             >
                 <TextArea></TextArea>
             </Form.Item>
+            {contextHolder}
         </Form>
     );
 };

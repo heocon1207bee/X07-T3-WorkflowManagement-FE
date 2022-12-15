@@ -1,8 +1,10 @@
 import { Button, Modal, Form } from 'antd';
+import { useState } from 'react';
 import CardForm from './CardForm';
 
-const CardModal = ({ modal, type }) => {
+const CardModal = ({ modal, members }) => {
     const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
     const handleOk = () => {
         form.submit();
@@ -19,12 +21,17 @@ const CardModal = ({ modal, type }) => {
                 <Button key="back" onClick={handleCancel} className="btn-cancel">
                     Hủy bỏ
                 </Button>,
-                <Button key="submit" onClick={handleOk} className="btn-ok">
+                <Button key="submit" onClick={handleOk} className="btn-ok" loading={loading}>
                     Đồng ý
                 </Button>,
             ]}
         >
-            <CardForm form={form} />
+            <CardForm
+                form={form}
+                members={members}
+                setCloseModal={() => modal.setOpenModal(false)}
+                loadingAnimate={{ loading, setLoading }}
+            />
         </Modal>
     );
 };
