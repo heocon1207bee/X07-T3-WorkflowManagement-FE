@@ -154,6 +154,11 @@
                         background-color: #ededed;
                     }
 
+                    a {
+                        text-decoration: none;
+                        color: $buttonBlack
+                    }
+
                     h4:hover {
                         text-decoration: underline;
                     }

@@ -5,6 +5,7 @@ import {
     UserSwitchOutlined,
     EditOutlined
 } from '@ant-design/icons'
+import {Link} from 'react-router-dom'
 import b1 from '../../assets/images/pj-background/pj-background_1.png'
 import b2 from '../../assets/images/pj-background/pj-background_2.png'
 import b3 from '../../assets/images/pj-background/pj-background_3.png'
@@ -15,7 +16,9 @@ const ProjectItem = ({title='Không có tiêu đề', createMember='Không có d
 
     return (
         <div className='project-item' draggable>
-            <h4>{title}</h4>
+            <Link to='/task'>
+                <h4>{title}</h4>
+            </Link>
             <p>Người tạo: {createMember}</p>
             <div className='project-option-button'>
                 <Tooltip title='Thành viên' placement='bottom'>

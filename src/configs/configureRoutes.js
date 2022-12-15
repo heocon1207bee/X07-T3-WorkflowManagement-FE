@@ -3,6 +3,7 @@ import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import ProjectListPage from '../pages/ProjectListPage';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import RolePage from '../pages/RolePage/RolePage';
+import ProjectTaskPage from '../pages/ProjectTaskPage/ProjectTaskPage';
 import ProjectDetail from '../pages/ProjectDetail/ProjectDetail';
 
 export default [
@@ -19,8 +20,8 @@ export default [
         element: <LoginPage />,
     },
     {
-        path: '/role',
-        element: <RolePage />,
+        path: '/task',
+        element: <ProjectTaskPage />,
     },
     {
         path: '/user/project/:projectId',
