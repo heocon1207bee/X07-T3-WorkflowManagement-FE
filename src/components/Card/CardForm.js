@@ -20,7 +20,6 @@ import {
     PRIORITY_MEDIUM,
 } from '../../configs/PRIORITIES';
 import TextArea from 'antd/es/input/TextArea';
-import { useSelector } from 'react-redux';
 
 const { Option } = Select;
 
