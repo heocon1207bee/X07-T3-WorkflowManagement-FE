@@ -9,18 +9,19 @@
 
 .task-list-child {
   height: 80vh;
-  border: 1px solid $mainBgGray;
+  border: 1px solid $Border01;
   border-radius: 10px;
-  box-shadow: 1px 4px $mainBgGray;
+  box-shadow: 1px 4px rgb(18, 18, 18);
+  background-color: $BackgroundLayer02;
 }
 
 .status-label {
   height: 5%;
   padding: 10px;
-  background-color: $mainGreen;
+  background-color: $BackgroundButton01;
   border-radius: 10px;
-  box-shadow: 1px 1px  $mainBgGray;
-  color: $mainBgWhite;
+  box-shadow: 1px 1px  $BackgroundLayer03;
+  color: $Text01;
   font-weight: 500;
   text-align: center;
 }
@@ -33,15 +34,20 @@
   grid-template-columns: 1fr;
   grid-auto-rows: 150px;
   border-radius: 10px;
-
 }
 
 .task-item {
   margin-top: 10px;
   padding: 10px;
-  border: 1px solid gray;
+  border: 1px solid $Border01;
   border-radius: 10px;
-  background-color: $taskBgColor;
+  background-color: $BackgroundLayer03;
+  color: $Text01;
+
+
+  &:hover {
+    background-color: $BackgroundLayer03_hover;
+  }
 }
 
 ::-webkit-scrollbar {

@@ -21,7 +21,6 @@ const ProjectListPage = () => {
     const [openProject, setOpenProject] = useState(false);
     const [formType, setFormStyle] = useState(FORM_CREATE);
 
-    //const projectData = useSelector(state => state.projectData)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,7 +31,7 @@ const ProjectListPage = () => {
         setLoading(true);
         try {
             const getProjectResponse = await ProjectServices.getProject()
-            dispatch({ 'type':'setData', 'value': getProjectResponse.data.data})
+            dispatch({ 'type':'setData', 'value': getProjectResponse.data.data.reverse()});
             setLoading(false)
         } catch (err) {
             if (err.response && Array.isArray(err.response.data)) {
@@ -55,16 +54,14 @@ const ProjectListPage = () => {
 
   return (
       <>
-          <Animated animationInDuration={200} animationIn='fadeInUp' animationOutDuration={300} animationOut='fadeOutUp' isVisible={overlay}>
-              <Overlay overlay={overlay} handleRoleButton={handleRoleButton}>
+              <Overlay overlay={overlay} handleOverlay={handleRoleButton}>
                   <RoleForm/>
               </Overlay>
-          </Animated>
           <div className='project-list-page'>
               <InviteList/>
               <div className='pjs-container'>
                   <SearchBar modal={{ setOpenProject }}/>
-                  <ProjectList  overlay={overlay} handleRoleButton={handleRoleButton} loading={loading}/>
+                  <ProjectList  overlay={overlay} handleRoleButton={handleRoleButton} loading={loading} lazy={true}/>
                   <ProjectForm modal={{ openProject, setOpenProject }} type={formType} />
               </div>
           </div>

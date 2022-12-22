@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazyload';
 import ProjectLoading from './ProjectLoading';
 import { Spin } from 'antd';
 
-const ProjectList = (props) => {
+const ProjectList = (props, { lazy=false }) => {
     const projectData = useSelector((state) => state.projectData);
 
     return (
@@ -15,9 +15,9 @@ const ProjectList = (props) => {
             </div>
             <div className="project-list">
                 {projectData.map((data, index) => (
-                    <LazyLoad key={data.project_id} height={100} offset={[-100, 100]} placeholder={<ProjectLoading />}>
-                        <ProjectItem key={data.project_id} title={data.project.title} dadProps={props} />
-                    </LazyLoad>
+                    lazy ? <LazyLoad key={data.project_id} height={100} offset={[-100, 100]} placeholder={<ProjectLoading />}>
+                        <ProjectItem key={data.project_id} projectId={data.project_id} title={data.project.title} owner={data.project.owner.fullname} dadProps={props}/>
+                    </LazyLoad> : <ProjectItem key={data.project_id} projectId={data.project_id} title={data.project.title} owner={data.project.owner.fullname} dadProps={props}/>
                 ))}
             </div>
         </div>
