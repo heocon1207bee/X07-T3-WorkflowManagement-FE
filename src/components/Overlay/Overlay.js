@@ -3,9 +3,11 @@ import './Overlay.style.scss'
 
 const Overlay = (props) => {
     return (
-        <div className='overlay' onClick={props.handleRoleButton}>
-            {props.children}
-        </div>
+        <>
+            <div className='overlay' style={{visibility:`${props.overlay?'visible':'hidden'}`, opacity:`${props.overlay?'1':'0'}`}} onClick={e => props.handleOverlay(e)}>
+                {props.children}
+            </div>
+        </>
     );
 };
 

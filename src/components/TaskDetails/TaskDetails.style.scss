@@ -1,0 +1,112 @@
+@import "../../assets/scss/color";
+@import "../../assets/scss/button";
+@import "../../assets/scss/input";
+
+.task-details {
+  width: 50%;
+  min-width: 600px;
+  max-width: 750px;
+  height: 480px;
+  background-color: $mainBgWhite;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.task-info-container {
+  padding: 20px;
+}
+
+.task-info-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    @include acceptButton();
+  }
+}
+
+.task-info {
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+}
+
+.task-comment-container {
+  border-radius: 10px;
+  display: table;
+  padding: 20px;
+  background-color: #c5c5c5;
+}
+
+.comments-box {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  padding: 10px 0;
+}
+
+.comment {
+  background-color: #9d9d9d;
+  display: grid;
+  grid-template-areas:
+    'item1 item2 item2'
+    'item1 item3 item3';
+  grid-gap: 5px;
+}
+
+.comment-item {
+  padding: 5px;
+}
+
+.author-comment-avatar {
+  grid-area: item1;
+  text-align: center;
+  
+  div {
+    height: 30px;
+    width: 30px;
+    background-color: #000;
+    border-radius: 50%;
+  }
+}
+
+.author-comment-name {
+  grid-area: item2;
+}
+
+.author-comment {
+  grid-area: item3;
+}
+
+.comment-input-box {
+  display: table-footer-group;
+}
+
+.comment-input {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-gap: 5px;
+
+  input {
+    @include inputStyle();
+  }
+
+  button {
+    @include acceptButton();
+    font-size: 15px;
+  }
+}
+
+.current-avatar-comment {
+  p {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #000000
+  }
+}
+

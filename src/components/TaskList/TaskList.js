@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './TaskList.style.scss';
+import { Animated } from 'react-animated-css';
+import Overlay from '../Overlay/Overlay'
+import TaskDetails from '../TaskDetails/TaskDetails';
+import TaskItem from './TaskItem';
 
 const task = [
     {
@@ -31,6 +35,7 @@ const task = [
 
 const TaskList = () => {
     const [isDrag, setIsDrag] = useState('')
+    const [overlay, setOverlay] = useState(false)
 
     const statusFilter = (status) => {
         return task.filter(t => t.status === status)
@@ -80,17 +85,24 @@ const TaskList = () => {
         e.preventDefault();
     }
 
+    const taskClickHandle = () => {
+        setOverlay(!overlay)
+    }
 
     return (
+        <>
+        <Animated animationInDuration={200} animationIn='fadeIn' animationOutDuration={300} animationOut='fadeOut' isVisible={overlay}>
+            <Overlay overlay={overlay} handleOverlay={taskClickHandle}>
+                <TaskDetails/>
+            </Overlay>
+        </Animated>
         <div className='task-list'>
             <div className='open-list task-list-child' onDrop={e => onDrop(e, 0)} onDragOver={e => onDragOver(e, 0)}>
                 <div className='status-label'>Open</div>
                 <div className='task-box'>
                     {
                         statusFilter('open').map(task =>
-                            <div className='task-item' onDragStart={e => onDragStart(e,task.id)} onDragEnd={onDragEnd} key={task.id} draggable>
-                                {task.title} - {task.status}
-                            </div>
+                            <TaskItem key={task.id} task={task} onClick={taskClickHandle} onDragStart={onDragStart} onDragEnd={onDragEnd}/>
                         )
                     }
                 </div>
@@ -100,9 +112,7 @@ const TaskList = () => {
                 <div className='task-box'>
                     {
                         statusFilter('re open').map(task =>
-                            <div className='task-item' onDragStart={e=>onDragStart(e,task.id)} onDragEnd={onDragEnd} key={task.id} draggable>
-                                {task.title} - {task.status}
-                            </div>
+                            <TaskItem key={task.id} task={task} onClick={taskClickHandle} onDragStart={onDragStart} onDragEnd={onDragEnd}/>
                         )
                     }
                 </div>
@@ -112,9 +122,7 @@ const TaskList = () => {
                 <div className='task-box'>
                     {
                         statusFilter('in progress').map(task =>
-                            <div className='task-item' onDragStart={e=>onDragStart(e,task.id)} onDragEnd={onDragEnd} key={task.id} draggable>
-                                {task.title} - {task.status}
-                            </div>
+                            <TaskItem key={task.id} task={task} onClick={taskClickHandle} onDragStart={onDragStart} onDragEnd={onDragEnd}/>
                         )
                     }
                 </div>
@@ -124,9 +132,7 @@ const TaskList = () => {
                 <div className='task-box'>
                     {
                         statusFilter('in review').map(task =>
-                            <div className='task-item' onDragStart={e=>onDragStart(e,task.id)} onDragEnd={onDragEnd} key={task.id} draggable>
-                                {task.title} - {task.status}
-                            </div>
+                            <TaskItem key={task.id} task={task} onClick={taskClickHandle} onDragStart={onDragStart} onDragEnd={onDragEnd}/>
                         )
                     }
                 </div>
@@ -136,14 +142,13 @@ const TaskList = () => {
                 <div className='task-box'>
                     {
                         statusFilter('done').map(task =>
-                            <div className='task-item' onDragStart={e=>onDragStart(e,task.id)} onDragEnd={onDragEnd} key={task.id} draggable>
-                                {task.title} - {task.status}
-                            </div>
+                            <TaskItem key={task.id} task={task} onClick={taskClickHandle} onDragStart={onDragStart} onDragEnd={onDragEnd}/>
                         )
                     }
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

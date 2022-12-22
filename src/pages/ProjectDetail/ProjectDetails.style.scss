@@ -1,0 +1,113 @@
+@import "../../assets/scss/color";
+@import "../../assets/scss/button";
+
+.project-task-page {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  background-color: $BackgroundLayer01;
+}
+
+.project-list-container {
+  padding: 10px 5px;
+  background-color: $BackgroundLayer02;
+  border-right: 1px solid $Border01;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+
+  .pjl-label {
+    background-color: rgba(27, 27, 28, 0.5);
+    color: #fefefe;
+    position: sticky;
+    top: 0;
+  }
+}
+
+.project-list {
+  padding: 10px 5px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  grid-auto-rows: 150px;
+}
+
+.project-item {
+  background-color: $BackgroundLayer02;
+  border: 1px solid $Border01;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 100%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgb(61, 61, 62);
+  }
+
+  a {
+    text-decoration: none;
+    color: #fefefe;
+  }
+
+  h4:hover {
+    text-decoration: underline;
+  }
+
+  p {
+    font-size: 12px;
+    color: #c5c5c5;
+  }
+
+  .project-option-button {
+    display: grid;
+    grid-template-columns: 40px 40px 40px;
+    grid-auto-rows: 40px;
+    grid-gap: 5px;
+
+    button {
+      background-color: rgb(245, 152, 31);
+      color: #fefefe;
+      border-radius: 50%;
+      border: none;
+      font-size: 17px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+
+      &:hover {
+        background-color: rgb(239, 169, 82);
+      }
+    }
+  }
+}
+
+.project--nav {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-name--nav {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: $BackgroundButton01;
+}
+
+.task-option--nav {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  button {
+    @include acceptButton;
+  }
+}
