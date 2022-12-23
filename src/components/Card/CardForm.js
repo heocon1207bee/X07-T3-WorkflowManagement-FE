@@ -1,8 +1,10 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import moment from 'moment';
 import TextArea from 'antd/es/input/TextArea';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
+import JoditEditor from 'jodit-react';
+
 import { CARD_ISSUE, CARD_TASK } from '../../configs/CARD_TYPES';
 import {
     CARD_ISSUE_VN,
@@ -28,6 +30,13 @@ import { useParams } from 'react-router-dom';
 const { Option } = Select;
 
 const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
+    const editor = useRef(null);
+    const [content, setContent] = useState('');
+
+    const config = {
+        placeholder: 'Viết gì đó...'
+    }
+
     const { loading, setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
@@ -201,7 +210,12 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                     },
                 ]}
             >
-                <TextArea></TextArea>
+                <JoditEditor
+                    ref={editor}
+                    value={content}
+                    config={config}
+                    onBlur={newContent => setContent(newContent)}
+                />
             </Form.Item>
             {contextHolder}
         </Form>
