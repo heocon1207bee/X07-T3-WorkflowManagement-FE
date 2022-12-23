@@ -4,6 +4,7 @@ import ProjectListPage from '../pages/ProjectListPage';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import RolePage from '../pages/RolePage/RolePage';
 import ProjectDetail from '../pages/ProjectDetail/ProjectDetail';
+import InfoPage from '../pages/InfoPage/InfoPage';
 
 export default [
     {
@@ -25,5 +26,9 @@ export default [
     {
         path: '/role',
         element: <RolePage/>,
+    },
+    {
+        path:'/info',
+        element:<InfoPage/>
     }
 ];
