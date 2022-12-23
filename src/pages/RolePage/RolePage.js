@@ -1,12 +1,11 @@
 import React from 'react';
 import '../../assets/scss/RolePage/rolepage.style.scss'
-import RoleForm from '../../components/RoleForm/RoleForm';
-import TaskList from '../../components/TaskList/TaskList';
+import TaskDetails from '../../components/TaskDetails/TaskDetails';
 
 const RolePage = () => {
     return (
         <div className='role-page'>
-            <TaskList/>
+            <TaskDetails/>
         </div>
     );
 };
