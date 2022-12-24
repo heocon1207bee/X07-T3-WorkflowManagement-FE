@@ -109,7 +109,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     return (
         <Form
             form={form}
-            labelCol={{ span: 8 }}
+            labelCol={{ span: 4 }}
             wrapperCol={{ span: 20 }}
             initialValues={{
                 type: CARD_TASK,
