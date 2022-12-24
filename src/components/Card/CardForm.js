@@ -1,7 +1,6 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useRef, useState, useMemo } from 'react';
+import { useRef, useState } from 'react';
 import moment from 'moment';
-import TextArea from 'antd/es/input/TextArea';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
 import JoditEditor from 'jodit-react';
 
@@ -34,10 +33,10 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const [content, setContent] = useState('');
 
     const config = {
-        placeholder: 'Viết gì đó...'
+        placeholder: 'Viết gì đó...',
     }
 
-    const { loading, setLoading } = loadingAnimate;
+    const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
     const assignee = members.reduce((assignee, item) => {
@@ -88,6 +87,8 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const handleFinish = async (values) => {
         const deadline = values.deadline.format('YYYY-MM-DD');
         const card = { ...values, deadline };
+        console.log(values)
+        return
         try {
             setLoading(true);
             const cardCreated = await CardServices.create(projectId, card);
@@ -204,10 +205,17 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 label="Mô tả công việc"
                 name="description"
                 rules={[
-                    {
-                        required: true,
-                        message: 'Vui lòng nhập mô tả công việc',
-                    },
+                    ({ getFieldValue }) => ({
+
+
+                        validator(_, value) {
+                            if (getFieldValue('description').includes('<p><br></p>') == false) {
+                                return Promise.resolve();
+                            }
+
+                            return Promise.reject(new Error('Vui lòng nhập Mô tả công việc'));
+                        },
+                    }),
                 ]}
             >
                 <JoditEditor
@@ -218,7 +226,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 />
             </Form.Item>
             {contextHolder}
-        </Form>
+        </Form >
     );
 };
 
