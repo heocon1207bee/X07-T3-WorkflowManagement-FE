@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import {PlusOutlined} from '@ant-design/icons'
 import { Button, Input, Modal, Radio, Space } from 'antd';
 import Checkbox from 'antd/es/checkbox/Checkbox';
 
-export default function CreateNewRole() {
+export default function CreateNewRole(props) {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const showModal = () => {
@@ -26,20 +25,24 @@ export default function CreateNewRole() {
     }
     return (
       <>
-        <button type="primary" onClick={showModal}>
-            Tạo mới vai trò <PlusOutlined/>
-        </button>
+        {/*<button type="primary" onClick={showModal}>*/}
+        {/*    Tạo mới vai trò <PlusOutlined/>*/}
+        {/*</button>*/}
         
         <Modal
-          open={open}
+          open={props.open}
           title="Thêm vai trò mới/chỉnh sửa"
           onOk={handleOk}
-          onCancel={handleCancel}
+          onCancel={e => {
+              handleCancel();
+              props.close();
+            }
+          }
           footer={[
-            <Button key="back" onClick={handleCancel} style={{width:'120px', backgroundColor:'#ff6464', color:'white'}}>
+            <Button key="back" onClick={e=>{handleCancel(); props.close()}} style={{width:'120px', backgroundColor:'#ff6464', color:'white'}}>
                 Hủy
             </Button>,
-            <Button key="submit" type="primary" loading={loading} onClick={handleOk} style={{width:'120px', backgroundColor:'#62d8d7', color:'white'}}>
+            <Button key="submit" type="primary" loading={loading} onClick={e=>{handleOk(); props.close()}} style={{width:'120px', backgroundColor:'#62d8d7', color:'white'}}>
               Tạo
             </Button>,
           ]}

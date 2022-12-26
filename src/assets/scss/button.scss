@@ -15,12 +15,11 @@
 
 @mixin acceptButton() {
     @include generalButton();
-    //background-color: rgb(28, 91, 217);
-    background-color: rgb(245, 152, 31);
+    background-color: $BackgroundButton01;
     color: white;
     &:hover {
-        //background-color: rgb(53, 107, 216);
-        background-color: rgb(239, 169, 82);
+        background-color: $BackgroundButton01_hover;
+        color: $TextButton01_hover;
     }
 }
 

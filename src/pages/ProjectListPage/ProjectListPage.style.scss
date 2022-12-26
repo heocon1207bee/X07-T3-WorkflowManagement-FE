@@ -1,13 +1,13 @@
-@import "../color";
-@import "../button";
-@import "../input";
+@import "../../assets/scss/color";
+@import "../../assets/scss/button";
+@import "../../assets/scss/input";
 
 .project-list-page {
     display: flex;
     z-index: 1;
     flex-direction: row;
     height: 100%;
-    background-color: rgb(19, 19, 20);
+    background-color: $BackgroundLayer01;
     background-size: 100%;
 
     .invite-container {
@@ -16,12 +16,12 @@
         max-width: 400px;
         min-height: calc(100vh - 60px);
         padding: 0 0.7rem;
-        border: 1px solid rgb(42, 43, 44);
-        background-color: rgb(27, 27, 28);
+        border: 1px solid $Border01;
+        background-color: $BackgroundLayer02;
 
         .invite-label {
             padding: 20px 0;
-            color: #fefefe;
+            color: $Text01;
             h3 {
                 text-align: center;
             }
@@ -30,16 +30,16 @@
         .invite-item {
             padding: 1rem;
             border-radius: 10px;
-            border: 1px solid rgb(42, 43, 44);
+            border: 1px solid $Border01;
             margin-bottom: 10px;
-            background-color: rgb(44, 45, 45);
+            background-color: $BackgroundLayer03;
 
             .invite-name {
                 cursor: pointer;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                color: #fefefe;
+                color: $Text01;
 
                 &:hover {
                     text-decoration: underline;
@@ -51,7 +51,6 @@
                 }
 
                 .collapse-icon {
-
                     right: 15px;
                     top: 22px;
                 }
@@ -62,15 +61,15 @@
             }
 
             .invite-info {
-                color: #fefefe;
+                color: $Text01;
                 margin: 10px 0;
                 padding: 10px 0.5em;
-                border: 1px solid rgb(42, 43, 44);
+                border: 1px solid $Border01;
                 font-size: 13px;
                 transition: all 0.2s ease;
 
                 &:hover {
-                    background-color: rgb(61, 61, 62);
+                    background-color: $BackgroundButton02_hover;
                 }
             }
 
@@ -134,8 +133,10 @@
             padding: 20px 30px;
             border-top: 1px solid rgb(42, 43, 44);
             min-height: 90%;
+            background-color: $BackgroundLayer01;
 
             .pjl-label {
+                background-color: $BackgroundLayer01;
                 color: #fefefe;
                 margin-bottom: 20px;
                 font-size: 20px;
@@ -185,18 +186,13 @@
                         grid-gap: 5px;
 
                         button {
-                            //background-color: rgb(28, 91, 217);
-                            background-color: rgb(245, 152, 31);
-                            color: #fefefe;
+                            @include acceptButton();
                             border-radius: 50%;
                             border: none;
                             font-size: 17px;
-                            cursor: pointer;
-                            transition: all 0.1s ease;
 
                             &:hover {
-                                //background-color: rgb(53, 107, 216);
-                                background-color: rgb(239, 169, 82);
+                                color: $Text01;
                             }
                         }
                     }

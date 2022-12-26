@@ -16,6 +16,8 @@ const CardModal = ({ modal, members }) => {
     return (
         <Modal
             open={modal.openModal}
+            onCancel={()=>modal.setOpenModal(false)}
+            onOk={handleOk}
             title="Tạo mới công việc"
             footer={[
                 <Button key="back" onClick={handleCancel} className="btn-cancel">
