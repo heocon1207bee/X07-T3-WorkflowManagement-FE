@@ -205,11 +205,10 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 label="Mô tả công việc"
                 name="description"
                 rules={[
+                    { required: true },
                     ({ getFieldValue }) => ({
-
-
                         validator(_, value) {
-                            if (getFieldValue('description').includes('<p><br></p>') == false) {
+                            if (value.includes('<p><br></p>') == false) {
                                 return Promise.resolve();
                             }
 
@@ -217,6 +216,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                         },
                     }),
                 ]}
+                validateTrigger={false}
             >
                 <JoditEditor
                     ref={editor}

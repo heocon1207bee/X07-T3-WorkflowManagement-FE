@@ -91,7 +91,7 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
                 ]}
                 validateTrigger={false}
             >
-                <Input />
+                <Input className="input" />
             </Form.Item>
             <Form.Item
                 label="Mục tiêu"
