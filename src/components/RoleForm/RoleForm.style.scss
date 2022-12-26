@@ -1,0 +1,85 @@
+@import "../../assets/scss/color";
+@import "../../assets/scss/button";
+
+//.role-page {
+//max-width: 650px;
+//height:500px;
+//background-color: $mainBgWhite;
+//border-radius: 10px;
+
+//.role-container {
+//  //padding: 1.5rem;
+//  //width: 90%;
+//  //max-width: 650px;
+//  //height:500px;
+//  //border-radius: 10px;
+//  //background-color: $BackgroundLayer02;
+//}
+
+.role-container {
+  color: $Text01;
+
+  .ant-modal-content {
+    background-color: $BackgroundLayer02;
+    border: 1px solid $Border01;
+
+    .ant-modal-close {
+      color: $Text01;
+    }
+  }
+
+  .ant-modal-header {
+    background-color: $BackgroundLayer02;
+
+    .ant-modal-title {
+      color: $Text01;
+    }
+  }
+
+  .ant-modal-footer {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    button {
+      @include acceptButton();
+    }
+  }
+}
+
+.animated {
+  width: 100%;
+}
+
+.role-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+
+  button {
+    @include acceptButton();
+  }
+}
+
+.role-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid $Border01;
+  border-radius: 10px;
+  padding: 1rem 0.5rem;
+  margin-bottom: 10px;
+
+  button {
+    @include acceptButton();
+  }
+}
+
+.role-list {
+  height: 300px;
+}
+
+//}

@@ -2,3 +2,11 @@
 .text-require {
     color: $buttonRed;
 }
+
+.ant-modal-content {
+    .ant-modal-footer {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+}

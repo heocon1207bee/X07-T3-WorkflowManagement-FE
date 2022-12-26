@@ -1,6 +1,6 @@
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
-import ProjectListPage from '../pages/ProjectListPage';
+import ProjectListPage from '../pages/ProjectListPage/ProjectListPage';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import RolePage from '../pages/RolePage/RolePage';
 import ProjectDetail from '../pages/ProjectDetail/ProjectDetail';

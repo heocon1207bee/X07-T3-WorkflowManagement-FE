@@ -5,28 +5,27 @@ import {
     UserSwitchOutlined,
     EditOutlined
 } from '@ant-design/icons'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 const ProjectItem = ({projectId = '', title='Không có tiêu đề', owner='Không có thông tin', dadProps}) => {
-
     return (
-        <Link to={`/user/project/${projectId}`} style={{textDecoration: 'none', color: '#fefefe'}}>
+        <NavLink to={`/user/project/${projectId}`} className={({isActive}) => isActive?'project-nav-active':'project-nav-unactive'}>
         <div className='project-item'>
             <h4>{title}</h4>
             <p>Người tạo: {owner}</p>
-            <div className='project-option-button' onClick={e=>e.preventDefault()}>
+            <div className='project-option-button'>
                 <Tooltip title='Thành viên' placement='bottom'>
-                    <button><UsergroupAddOutlined /></button>
+                    <button onClick={e=>e.preventDefault()}><UsergroupAddOutlined /></button>
                 </Tooltip>
                 <Tooltip title='Vai trò' placement='bottom'>
-                    <button onClick={dadProps.handleRoleButton}><UserSwitchOutlined /></button>
+                    <button onClick={e=>{e.preventDefault(); dadProps.handleRoleButton()}}><UserSwitchOutlined /></button>
                 </Tooltip>
                 <Tooltip title='Cập nhật' placement='bottom'>
-                    <button><EditOutlined /></button>
+                    <button onClick={e=>e.preventDefault()}><EditOutlined /></button>
                 </Tooltip>
             </div>
         </div>
-        </Link>
+        </NavLink>
     );
 };
 

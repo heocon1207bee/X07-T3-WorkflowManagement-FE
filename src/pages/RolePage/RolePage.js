@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../assets/scss/RolePage/rolepage.style.scss'
+import '../../components/RoleForm/RoleForm.style.scss'
 import TaskDetails from '../../components/TaskDetails/TaskDetails';
 
 const RolePage = () => {
