@@ -65,23 +65,17 @@ const ProjectDetail = () => {
                     </div>
                     <div className='task-option--nav'>
                         <button>Lọc <BiFilterAlt/></button>
-                        <button>Tạo công việc <BiAddToQueue/></button>
+                        <button
+                            onClick={handleAdd}
+                        >Tạo công việc <BiAddToQueue/></button>
                     </div>
                 </div>
                 <div className='project-task-container'>
                     <TaskList/>
                 </div>
             </div>
+               {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
         </div>
-        // <Row justify={'center'} style={{ padding: '5em' }}>
-        //     <Col span={15}>
-        //         <Button onClick={handleAdd}>
-        //             <FcPlus />
-        //             Tạo việc
-        //         </Button>
-        //         {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
-        //     </Col>
-        // </Row>
     );
 };
 

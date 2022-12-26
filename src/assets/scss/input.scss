@@ -1,16 +1,16 @@
-@import "./color.scss";
+@import './color.scss';
 
 @mixin inputStyle() {
-  padding: 7px 10px;
-  border: 1px solid rgb(42, 43, 44);
-  border-radius: 10px;
-  box-sizing: border-box;
-  background-color: rgb(44, 45, 45);
-  color: #fefefe;
-  transition: all 0.2s;
+    padding: 7px 10px;
+    border: 1px solid rgb(42, 43, 44);
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: rgb(44, 45, 45);
+    color: #fefefe;
+    transition: all 0.2s;
 
-  &:hover {
-    border-color: #4096ff;
-    border-inline-end-width: 1px;
-  }
+    &:hover {
+        border-color: #4096ff;
+        border-inline-end-width: 1px;
+    }
 }
