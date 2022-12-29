@@ -2,7 +2,7 @@ import { DatePicker, Form, Input, Select } from 'antd';
 import { useRef, useState } from 'react';
 import moment from 'moment';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
-import JoditEditor from 'jodit-react';
+import JoditEditor from '../JoditEditor/JoditEditor';
 
 import { CARD_ISSUE, CARD_TASK } from '../../configs/CARD_TYPES';
 import {
@@ -29,16 +29,7 @@ import { useParams } from 'react-router-dom';
 const { Option } = Select;
 
 const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
-    const editor = useRef(null);
     const [content, setContent] = useState('');
-
-    const config = {
-        placeholder: '',
-        uploader: {
-            insertImageAsBase64URI: true,
-        },
-    };
-
     const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
@@ -221,12 +212,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 ]}
                 validateTrigger={false}
             >
-                <JoditEditor
-                    ref={editor}
-                    value={content}
-                    config={config}
-                    onBlur={(newContent) => setContent(newContent)}
-                />
+                <JoditEditor value={content} onChange={setContent} />
             </Form.Item>
             {contextHolder}
         </Form>
