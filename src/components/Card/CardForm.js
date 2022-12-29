@@ -1,6 +1,7 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
 import JoditEditor from '../JoditEditor/JoditEditor';
 
@@ -24,7 +25,6 @@ import {
 import { ACCEPTED } from '../../configs/MEMBER_STATUS';
 import useNotification from '../../hooks/Notification/useNotification';
 import CardServices from '../../services/Project/Card/CardServices';
-import { useParams } from 'react-router-dom';
 
 const { Option } = Select;
 
@@ -33,6 +33,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
+
     const assignee = members.reduce((assignee, item) => {
         if (item.status === ACCEPTED) assignee.push(item.member);
         return assignee;
