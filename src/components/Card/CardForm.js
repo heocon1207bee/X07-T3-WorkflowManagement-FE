@@ -82,8 +82,6 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const handleFinish = async (values) => {
         const deadline = values.deadline.format('YYYY-MM-DD');
         const card = { ...values, deadline };
-        console.log(values);
-        return;
         try {
             setLoading(true);
             const cardCreated = await CardServices.create(projectId, card);
