@@ -33,8 +33,11 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const [content, setContent] = useState('');
 
     const config = {
-        placeholder: 'Viết gì đó...',
-    }
+        placeholder: '',
+        uploader: {
+            insertImageAsBase64URI: true,
+        },
+    };
 
     const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
@@ -87,8 +90,8 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const handleFinish = async (values) => {
         const deadline = values.deadline.format('YYYY-MM-DD');
         const card = { ...values, deadline };
-        console.log(values)
-        return
+        console.log(values);
+        return;
         try {
             setLoading(true);
             const cardCreated = await CardServices.create(projectId, card);
@@ -206,9 +209,9 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 name="description"
                 rules={[
                     { required: true },
-                    ({ getFieldValue }) => ({
+                    () => ({
                         validator(_, value) {
-                            if (value.includes('<p><br></p>') == false) {
+                            if (value.includes('<p><br></p>') === false) {
                                 return Promise.resolve();
                             }
 
@@ -222,11 +225,11 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                     ref={editor}
                     value={content}
                     config={config}
-                    onBlur={newContent => setContent(newContent)}
+                    onBlur={(newContent) => setContent(newContent)}
                 />
             </Form.Item>
             {contextHolder}
-        </Form >
+        </Form>
     );
 };
 

@@ -4,9 +4,9 @@ import ProjectListPage from '../pages/ProjectListPage/ProjectListPage';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import RolePage from '../pages/RolePage/RolePage';
 import ProjectDetail from '../pages/ProjectDetail/ProjectDetail';
-import InfoPage from '../pages/InfoPage/InfoPage';
+// import InfoPage from '../pages/InfoPage/InfoPage';
 
-export default [
+const routes = [
     {
         path: '/',
         element: <PrivateRoute component={ProjectListPage} />,
@@ -25,10 +25,12 @@ export default [
     },
     {
         path: '/role',
-        element: <RolePage/>,
+        element: <RolePage />,
     },
-    {
-        path:'/info',
-        element:<InfoPage/>
-    }
+    // {
+    //     path: '/info',
+    //     element: <InfoPage />,
+    // },
 ];
+
+export default routes;
