@@ -203,7 +203,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                     { required: true },
                     () => ({
                         validator(_, value) {
-                            if (value.includes('<p><br></p>') === false) {
+                            if (value !== '<p><br></p>') {
                                 return Promise.resolve();
                             }
 
