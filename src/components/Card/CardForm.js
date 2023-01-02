@@ -1,5 +1,5 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
@@ -29,7 +29,6 @@ import CardServices from '../../services/Project/Card/CardServices';
 const { Option } = Select;
 
 const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
-    const [content, setContent] = useState('');
     const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
@@ -103,7 +102,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     return (
         <Form
             form={form}
-            labelCol={{ span: 4 }}
+            labelCol={{ span: 6 }}
             wrapperCol={{ span: 20 }}
             initialValues={{
                 type: CARD_TASK,
@@ -198,10 +197,10 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 label="Mô tả công việc"
                 name="description"
                 rules={[
-                    { required: true },
+                    { required: true, message: 'Vui lòng nhập Mô tả công việc' },
                     () => ({
                         validator(_, value) {
-                            if (value !== '<p><br></p>') {
+                            if (!value || value !== '<p><br></p>') {
                                 return Promise.resolve();
                             }
 
@@ -211,7 +210,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 ]}
                 validateTrigger={false}
             >
-                <JoditEditor value={content} onChange={setContent} />
+                <JoditEditor />
             </Form.Item>
             {contextHolder}
         </Form>

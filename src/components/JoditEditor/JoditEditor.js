@@ -1,7 +1,5 @@
-import React, { useRef } from 'react';
 import Jodit from 'jodit-react';
-import axios from 'axios';
-import { Buffer } from 'buffer';
+import { useRef, useState } from 'react';
 
 const config = {
     cloud_name: process.env.REACT_APP_CLOUD_NAME,
@@ -11,53 +9,42 @@ const config = {
     folder: process.env.REACT_APP_CLOUD_FOLDER,
 };
 
-const JoditEditor = ({ value, onChange }) => {
+const JoditEditor = () => {
+    const [content, setContent] = useState('');
     const editor = useRef(null);
-
-    const handleImageUpload = (image) => {
-        if (image.tagName === 'IMG' && image.src.startsWith('data:')) {
-            const base64String = image.src.split(',')[1];
-            const buffer = Buffer.from(base64String, 'base64');
-            const formData = new FormData();
-
-            const mimeType = base64String.split(';')[0].split(':')[1];
-            const fileExtension = base64String.split('/')[1].split(';')[0];
-
-            const fileName = `image.${fileExtension}`;
-            const fileType = mimeType;
-
-            const file = new File([buffer], fileName, { type: fileType });
-            formData.append('file', file);
-            formData.append('folder', config.folder);
-            axios
-                .post(`https://api.cloudinary.com/v1_1/${config.cloud_name}/image/upload/`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                    params: {
-                        api_key: `${config.api_key}`,
-                        api_secret: `${config.api_secret}`,
-                        upload_preset: `${config.upload_preset}`,
-                    },
-                })
-                .then(function (response) {
-                    image.src = response.data.secure_url;
-                });
-        }
-    };
 
     return (
         <Jodit
-            editorRef={editor}
-            value={value}
-            onChange={onChange}
+            ref={editor}
+            value={content}
+            useInput={true}
+            tabIndex={-1}
+            onChange={setContent}
             config={{
                 placeholder: '',
                 uploader: {
-                    insertImageAsBase64URI: true,
-                },
-                events: {
-                    afterInsertImage: handleImageUpload,
+                    insertImageAsBase64URI: false,
+                    provider: 'url',
+                    url: `https://api.cloudinary.com/v1_1/${config.cloud_name}/upload`,
+                    prepareData: (formData) => {
+                        const file = formData.get('files[0]');
+                        formData.append('file', file);
+                        formData.append('upload_preset', config.upload_preset);
+                        formData.append('folder', config.folder);
+                        return formData;
+                    },
+                    getMessage: (type, def) => {
+                        if (type === 'isSuccess') {
+                            return 'File was successfully uploaded';
+                        }
+                        if (type === 'isError') {
+                            return 'An error occurred while uploading the file';
+                        }
+                        return def;
+                    },
+                    isSuccess: (response) => {
+                        editor.current.component.selection.insertImage(response.secure_url, response.public_id);
+                    },
                 },
             }}
         />

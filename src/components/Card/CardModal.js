@@ -2,7 +2,7 @@ import { Button, Modal, Form } from 'antd';
 import { useState } from 'react';
 import CardForm from './CardForm';
 
-import './Card.style.scss'
+import './Card.style.scss';
 
 const CardModal = ({ modal, members }) => {
     const [form] = Form.useForm();
@@ -11,6 +11,7 @@ const CardModal = ({ modal, members }) => {
     const handleOk = () => {
         form.submit();
     };
+
     const handleCancel = () => {
         modal.setOpenModal(false);
     };
@@ -18,7 +19,7 @@ const CardModal = ({ modal, members }) => {
     return (
         <Modal
             open={modal.openModal}
-            onCancel={()=>modal.setOpenModal(false)}
+            onCancel={() => modal.setOpenModal(false)}
             onOk={handleOk}
             title="Tạo mới công việc"
             footer={[
@@ -30,8 +31,8 @@ const CardModal = ({ modal, members }) => {
                 </Button>,
             ]}
             closable={false}
-            className='modal-card'
-            width={"50%"}
+            className="modal-card"
+            width={'50%'}
         >
             <CardForm
                 form={form}
