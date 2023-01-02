@@ -79,25 +79,18 @@ const ProjectDetail = () => {
                         }}><LeftOutlined />Tên của dự án</Link>
                     </div>
                     <div className='task-option--nav'>
-                        <button>Lọc <BiFilterAlt /></button>
-                        <button onClick={handleModal}>Tạo công việc <BiAddToQueue /></button>
-                        <CardModal modal={{ openModal, setOpenModal }} members={members} />
+                        <button>Lọc <BiFilterAlt/></button>
+                        <button
+                            onClick={handleAdd}
+                        >Tạo công việc <BiAddToQueue/></button>
                     </div>
                 </div>
                 <div className='project-task-container'>
                     <TaskList reRender={openModal} />
                 </div>
             </div>
+               {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
         </div>
-        // <Row justify={'center'} style={{ padding: '5em' }}>
-        //     <Col span={15}>
-        //         <Button onClick={handleAdd}>
-        //             <FcPlus />
-        //             Tạo việc
-        //         </Button>
-        //         {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
-        //     </Col>
-        // </Row>
     );
 };
 

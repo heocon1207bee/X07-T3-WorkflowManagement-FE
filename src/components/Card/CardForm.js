@@ -1,8 +1,9 @@
 import { DatePicker, Form, Input, Select } from 'antd';
 import { useRef, useState } from 'react';
 import moment from 'moment';
-import TextArea from 'antd/es/input/TextArea';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
+import JoditEditor from 'jodit-react';
+
 import { CARD_ISSUE, CARD_TASK } from '../../configs/CARD_TYPES';
 import {
     CARD_ISSUE_VN,
@@ -28,7 +29,14 @@ import { useParams } from 'react-router-dom';
 const { Option } = Select;
 
 const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
-    const { loading, setLoading } = loadingAnimate;
+    const editor = useRef(null);
+    const [content, setContent] = useState('');
+
+    const config = {
+        placeholder: 'Viết gì đó...',
+    }
+
+    const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
     const assignee = members.reduce((assignee, item) => {
@@ -79,6 +87,8 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const handleFinish = async (values) => {
         const deadline = values.deadline.format('YYYY-MM-DD');
         const card = { ...values, deadline };
+        console.log(values)
+        return
         try {
             setLoading(true);
             const cardCreated = await CardServices.create(projectId, card);
@@ -100,7 +110,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     return (
         <Form
             form={form}
-            labelCol={{ span: 8 }}
+            labelCol={{ span: 4 }}
             wrapperCol={{ span: 20 }}
             initialValues={{
                 type: CARD_TASK,
@@ -195,16 +205,28 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 label="Mô tả công việc"
                 name="description"
                 rules={[
-                    {
-                        required: true,
-                        message: 'Vui lòng nhập mô tả công việc',
-                    },
+                    { required: true },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (value.includes('<p><br></p>') == false) {
+                                return Promise.resolve();
+                            }
+
+                            return Promise.reject(new Error('Vui lòng nhập Mô tả công việc'));
+                        },
+                    }),
                 ]}
+                validateTrigger={false}
             >
-                <TextArea></TextArea>
+                <JoditEditor
+                    ref={editor}
+                    value={content}
+                    config={config}
+                    onBlur={newContent => setContent(newContent)}
+                />
             </Form.Item>
             {contextHolder}
-        </Form>
+        </Form >
     );
 };
 

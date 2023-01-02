@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserInfoPage = () => {
+const InfoPage = () => {
     return (
         <div className='user-info-page'>
 
@@ -8,4 +8,4 @@ const UserInfoPage = () => {
     );
 };
 
-export default UserInfoPage;
+export default InfoPage;

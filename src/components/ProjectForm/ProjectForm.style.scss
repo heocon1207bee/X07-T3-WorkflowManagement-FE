@@ -1,9 +1,4 @@
 @import '../../assets/scss/button.scss';
-@import '../../assets/scss/input.scss';
-
-.input {
-    @include inputStyle();
-}
 .text-require {
     color: $buttonRed;
 }
