@@ -1,67 +1,92 @@
 import React, { useState } from 'react';
-import { Button, Input, Modal, Radio, Space } from 'antd';
-import Checkbox from 'antd/es/checkbox/Checkbox';
+import { Button, Input, Modal, Space, Checkbox, Row, Col } from 'antd';
+//import Checkbox from 'antd/es/checkbox/Checkbox';
+import type {CheckboxValueType} from 'antd/es/checkbox/Group'
+import './CreateNewRole.style.scss'
+import roleForm from './RoleForm';
+import ProjectServices from '../../services/Project/projectServices';
+import projectList from '../ProjectList/ProjectList';
+import {Spin} from 'antd';
 
 export default function CreateNewRole(props) {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
-    const showModal = () => {
-      setOpen(true);
+    const [checkboxValue, setCheckboxValue] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+    const [error, setError] = useState()
+
+    // const showModal = () => {
+    //   setOpen(true);
+    // };
+    const handleOk = (e) => {
+        setLoading(true);
+        const promise = new Promise(()=>{
+            postRole(props.projectId, inputValue, checkboxValue);
+        }).then(
+            props.submit()
+        ).finally(()=>{
+            setLoading(false);
+        })
     };
-    const handleOk = () => {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        setOpen(false);
-      }, 3000);
-    };
-    const handleCancel = () => {
-      setOpen(false);
-    };
-    const [value, setValue] = useState(1);
-    const onChange = (e) => {
-      console.log('radio checked', e.target.value);
-      setValue(e.target.value);
+    // const handleCancel = () => {
+    //   setOpen(false);
+    // };
+
+    const postRole = async (projectId, roleName, capabilities) => {
+        try {
+            const postRoleResponse = await ProjectServices.addRole(projectId, roleName, capabilities);
+        } catch (err) {
+            if (err.response && Array.isArray(err.response.data)) {
+                const errorResponse = err.response.data;
+                const errorValue = errorResponse.map((e) => e.message);
+                setError(errorValue);
+            } else if (err.response) {
+                setError(err.response.data.msg);
+            } else {
+                setError(err.message);
+            }
+        } finally {
+            console.log('end role post')
+        }
+    }
+
+    const onChange = (checkedValues: CheckboxValueType[]) => {
+        console.log('radio checked', checkedValues);
+        setCheckboxValue([...checkedValues]);
     }
     return (
       <>
-        {/*<button type="primary" onClick={showModal}>*/}
-        {/*    Tạo mới vai trò <PlusOutlined/>*/}
-        {/*</button>*/}
-        
         <Modal
           open={props.open}
           title="Thêm vai trò mới/chỉnh sửa"
           onOk={handleOk}
           onCancel={e => {
-              handleCancel();
               props.close();
             }
           }
+          className='role-modal'
           footer={[
-            <Button key="back" onClick={e=>{handleCancel(); props.close()}} style={{width:'120px', backgroundColor:'#ff6464', color:'white'}}>
+            <Button className='close-role-btn' key="back" onClick={e=>{ props.close()}} >
                 Hủy
             </Button>,
-            <Button key="submit" type="primary" loading={loading} onClick={e=>{handleOk(); props.close()}} style={{width:'120px', backgroundColor:'#62d8d7', color:'white'}}>
+            <Button className='submit-role-btn' key="submit" type="primary" loading={loading} onClick={e=>{handleOk(e)}}>
               Tạo
             </Button>,
           ]}
         >
-         <Input placeholder='Tên Vai Trò Mới'></Input> 
-         <Radio.Group onChange={onChange} value={value}>
-            <Space direction="vertical">
-                <Checkbox value={1}>Quyền P1</Checkbox>
-                <Checkbox value={2}>Quyền P2</Checkbox>
-                <Checkbox value={3}>Quyền P3</Checkbox>
-                <Checkbox value={4}>Quyền P4</Checkbox>
-                <Checkbox value={5}>Quyền P5</Checkbox>
-                <Checkbox value={6}>Quyền P6</Checkbox>
-                <Checkbox value={7}>Quyền P7</Checkbox>
-                <Checkbox value={8}>Quyền P8</Checkbox>
-                <Checkbox value={9}>Quyền P9</Checkbox>
-                
+         <Input placeholder='Tên Vai Trò Mới' value={inputValue} onChange={e=>{e.preventDefault(); setInputValue(e.target.value)}}></Input>
+         <Checkbox.Group onChange={onChange} >
+            <Space direction="vertical" style={{marginTop:'10px'}}>
+                <Checkbox value={'6396f45d5ddd6db8260440c9'}>Quyền P1: Cập nhật dự án</Checkbox>
+                <Checkbox value={'6396f45d5ddd6db8260440c4'}>Quyền P2: Quản lý thành viên</Checkbox>
+                <Checkbox value={'6396f45d5ddd6db8260440c2'}>Quyền P3: Tạo mới công việc</Checkbox>
+                <Checkbox value={'6396f45d5ddd6db8260440c7'}>Quyền P4: Cập nhật thông tin chung công việc</Checkbox>
+                <Checkbox value={'6396f45d5ddd6db8260440c8'}>Quyền P5: Cập nhật trạng thái công việc</Checkbox>
+                <Checkbox value={'6396f45d5ddd6db8260440c6'}>Quyền P6: Cập nhật người thực hiện công việc</Checkbox>
+                <Checkbox value={'6396f45d5ddd6db8260440c3'}>Quyền P7: Hủy bỏ công việc</Checkbox>
+                <Checkbox value={'6396f45d5ddd6db8260440c5'}>Quyền P8: Quản lý vai trò</Checkbox>
             </Space>
-         </Radio.Group>
+         </Checkbox.Group>
         </Modal>
       </>
     );

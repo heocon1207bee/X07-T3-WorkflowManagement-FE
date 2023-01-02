@@ -26,9 +26,12 @@
   .pjl-label {
     background-color: rgba(27, 27, 28, 0.5);
     color: #fefefe;
-    position: sticky;
-    top: 0;
   }
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
 }
 
 .project-list {

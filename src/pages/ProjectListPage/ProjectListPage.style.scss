@@ -106,11 +106,21 @@
 
             .search-bar {
                 width: 80%;
-                //text-align: center;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
                 input {
                     @include inputStyle();
                     margin: 10px;
-                    width: 90%;
+                    width: 80%;
+                    padding: 10px;
+                }
+
+                button {
+                    @include cancelButton();
+                    width: 10%;
+                    height: 38px;
+                    font-size: 17px;
                 }
             }
 
@@ -123,8 +133,10 @@
                 text-align: right;
                 button {
                     @include acceptButton();
+                    padding: 10px 20px;
                     margin: 0 10px;
                     min-width: 100px;
+                    height: 38px;
                 }
             }
         }
@@ -132,7 +144,7 @@
         .project-list-container {
             padding: 20px 30px;
             border-top: 1px solid rgb(42, 43, 44);
-            min-height: 90%;
+            //min-height: 90%;
             background-color: $BackgroundLayer01;
 
             .pjl-label {
@@ -153,16 +165,17 @@
                     background-color: rgb(44, 45, 45);
                     border: 1px solid rgb(42, 43, 44);
                     padding: 1rem;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-around;
+                    display: grid;
+                    grid-template-rows: 1fr 1fr 1fr;
                     border-radius: 10px;
                     cursor: pointer;
                     height: 100%;
-                    transition: all 0.2s ease;
+                    transition: all 0.3s ease-out;
 
                     &:hover {
                         background-color: rgb(61, 61, 62);
+                        border: 1px solid $BackgroundButton01;
+                        scale: 107%;
                     }
 
                     a {
