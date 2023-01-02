@@ -5,7 +5,7 @@ import ProjectForm from '../ProjectForm/ProjectForm';
 import './ProjectModal.style.scss';
 
 const ProjectModal = ({ modal, type }) => {
-    const { openProject, setOpenProject } = modal;
+    const { openProject, setOpenProject, currentProject } = modal;
     const [form] = Form.useForm();
 
     const handleOk = () => {
@@ -29,7 +29,7 @@ const ProjectModal = ({ modal, type }) => {
                 </Button>,
             ]}
         >
-            <ProjectForm form={form} setCloseModal={setOpenProject} type={type} />
+            <ProjectForm form={form} setCloseModal={setOpenProject} type={type} currentProject={currentProject} />
         </Modal>
     );
 };

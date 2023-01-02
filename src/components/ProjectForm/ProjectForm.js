@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import './ProjectForm.style.scss'
+import './ProjectForm.style.scss';
 import { Form, Input, DatePicker, Select } from 'antd';
 import { FcSynchronize, FcCheckmark, FcCancel } from 'react-icons/fc';
 import TextArea from 'antd/es/input/TextArea';
@@ -12,7 +12,7 @@ import { PROJECT_IN_PROGRESS, PROJECT_DONE, PROJECT_CANCEL } from '../../configs
 import { PROJECT_CANCEL_VN, PROJECT_DONE_VN, PROJECT_IN_PROGRESS_VN } from '../../configs/i18n/VietNamese';
 const { Option } = Select;
 
-const ProjectForm = ({ form, setCloseModal, type }) => {
+const ProjectForm = ({ form, setCloseModal, type, currentProject }) => {
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const [status, setStatus] = useState([
         {
@@ -68,6 +68,7 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
             onFinish={handleSubmit}
             initialValues={{
                 status: status[0].value,
+                title: currentProject.title,
             }}
         >
             {contextHolder}
@@ -92,7 +93,7 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
                 ]}
                 validateTrigger={false}
             >
-                <Input className="input" />
+                <Input />
             </Form.Item>
             <Form.Item
                 label="Mục tiêu"

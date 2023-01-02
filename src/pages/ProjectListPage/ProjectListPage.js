@@ -19,7 +19,8 @@ const ProjectListPage = () => {
     const [overlay, setOverlay] = useState(false);
     const [error, setError] = useState();
     const [openProject, setOpenProject] = useState(false);
-    const [formType, setFormStyle] = useState(FORM_CREATE);
+    const [formType, setFormType] = useState(FORM_CREATE);
+    const [currentProject, setCurrentProject] = useState(null);
 
     const dispatch = useDispatch();
 
@@ -31,7 +32,7 @@ const ProjectListPage = () => {
         setLoading(true);
         try {
             const getProjectResponse = await ProjectServices.getProject();
-            dispatch({ 'type': 'setData', 'value': getProjectResponse.data.data.reverse() });
+            dispatch({ type: 'setData', value: getProjectResponse.data.data.reverse() });
             setLoading(false);
         } catch (err) {
             if (err.response && Array.isArray(err.response.data)) {
@@ -57,12 +58,18 @@ const ProjectListPage = () => {
             {/*<Overlay overlay={overlay} handleOverlay={handleRoleButton}>*/}
             {/*<RoleForm opening={overlay} handleOpen={handleRoleButton} />*/}
             {/*</Overlay>*/}
-            <div className='project-list-page'>
+            <div className="project-list-page">
                 <InviteList />
-                <div className='pjs-container'>
+                <div className="pjs-container">
                     <SearchBar modal={{ setOpenProject }} />
-                    <ProjectList overlay={overlay} handleRoleButton={handleRoleButton} loading={loading} lazy={true} />
-                    <ProjectForm modal={{ openProject, setOpenProject }} type={formType} />
+                    <ProjectList
+                        overlay={overlay}
+                        handleRoleButton={handleRoleButton}
+                        loading={loading}
+                        lazy={true}
+                        modal={{ setOpenProject, setFormType, setCurrentProject }}
+                    />
+                    <ProjectForm modal={{ openProject, setOpenProject, currentProject }} type={formType} />
                 </div>
             </div>
         </>

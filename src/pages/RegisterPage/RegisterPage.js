@@ -57,7 +57,7 @@ export default function RegisterPage() {
                         ]}
                         validateTrigger={false}
                     >
-                        <Input placeholder="Họ và tên *" className="input" prefix={<UserOutlined />} />
+                        <Input placeholder="Họ và tên *" prefix={<UserOutlined />} />
                     </Form.Item>
                     <Form.Item
                         name="email"
@@ -70,7 +70,7 @@ export default function RegisterPage() {
                         ]}
                         validateTrigger={false}
                     >
-                        <Input placeholder="Email *" className="input" prefix={<MailFilled />} />
+                        <Input placeholder="Email *" prefix={<MailFilled />} />
                     </Form.Item>
                     <Form.Item
                         name="password"
@@ -85,7 +85,7 @@ export default function RegisterPage() {
                         ]}
                         validateTrigger={false}
                     >
-                        <Input.Password placeholder="Mật khẩu*" className="input" prefix={<LockOutlined />} />
+                        <Input.Password placeholder="Mật khẩu*" prefix={<LockOutlined />} />
                     </Form.Item>
                     <Form.Item
                         name="confirm"
@@ -106,7 +106,7 @@ export default function RegisterPage() {
                             }),
                         ]}
                     >
-                        <Input.Password placeholder="Xác nhận mật khẩu*" className="input" />
+                        <Input.Password placeholder="Xác nhận mật khẩu*" />
                     </Form.Item>
                     <Form.Item className="text-require">
                         <Text className="text-red">(*) Bắt buộc</Text>
