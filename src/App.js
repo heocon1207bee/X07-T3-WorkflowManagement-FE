@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import useAppRoute from './hooks/useAppRoute';
 import useVerifyToken from './hooks/useVerifyToken';
-import Layout from './hooks/WebsiteLayout/Layout';
+import Layout from './Layout/Layout';
 
 function App() {
     const routes = useAppRoute();

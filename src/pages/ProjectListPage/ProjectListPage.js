@@ -55,7 +55,7 @@ const ProjectListPage = () => {
     return (
         <>
             {/*<Overlay overlay={overlay} handleOverlay={handleRoleButton}>*/}
-            <RoleForm opening={overlay} handleOpen={handleRoleButton} />
+            {/*<RoleForm opening={overlay} handleOpen={handleRoleButton} />*/}
             {/*</Overlay>*/}
             <div className='project-list-page'>
                 <InviteList />
