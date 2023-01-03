@@ -1,5 +1,5 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
@@ -32,6 +32,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
+    const [content, setContent] = useState('');
 
     const assignee = members.reduce((assignee, item) => {
         if (item.status === ACCEPTED) assignee.push(item.member);
@@ -200,7 +201,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                     { required: true, message: 'Vui lòng nhập Mô tả công việc' },
                     () => ({
                         validator(_, value) {
-                            if (!value || value !== '<p><br></p>') {
+                            if (value !== '<p><br></p>') {
                                 return Promise.resolve();
                             }
 
@@ -210,7 +211,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 ]}
                 validateTrigger={false}
             >
-                <JoditEditor />
+                <JoditEditor value={content} onChange={setContent} />
             </Form.Item>
             {contextHolder}
         </Form>
