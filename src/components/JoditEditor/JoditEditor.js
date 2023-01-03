@@ -1,5 +1,5 @@
 import Jodit from 'jodit-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const config = {
     cloud_name: process.env.REACT_APP_CLOUD_NAME,
@@ -12,6 +12,9 @@ const config = {
 const JoditEditor = () => {
     const [content, setContent] = useState('');
     const editor = useRef(null);
+    useEffect(() => {
+        editor.current.focus();
+    }, [editor]);
 
     return (
         <Jodit
