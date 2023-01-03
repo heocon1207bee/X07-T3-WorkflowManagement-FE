@@ -29,10 +29,10 @@ import CardServices from '../../services/Project/Card/CardServices';
 const { Option } = Select;
 
 const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
-    const [content, setContent] = useState('');
     const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
+    const [content, setContent] = useState('');
 
     const assignee = members.reduce((assignee, item) => {
         if (item.status === ACCEPTED) assignee.push(item.member);
@@ -198,10 +198,10 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 label="Mô tả công việc"
                 name="description"
                 rules={[
-                    { required: true },
+                    { required: true, message: 'Vui lòng nhập Mô tả công việc' },
                     () => ({
                         validator(_, value) {
-                            if (value.includes('<p><br></p>') === false) {
+                            if (value !== '<p><br></p>') {
                                 return Promise.resolve();
                             }
 

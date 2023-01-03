@@ -67,7 +67,7 @@ export default function LoginPage() {
                             ]}
                             validateTrigger={false}
                         >
-                            <Input className="input" placeholder="Email*" prefix={<MailFilled />} />
+                            <Input placeholder="Email*" prefix={<MailFilled />} />
                         </Form.Item>
                         <Form.Item
                             name="password"

@@ -1,11 +1,24 @@
 import { Button, Modal, Form } from 'antd';
+import { useState, useCallback } from 'react';
+import { FORM_EDIT } from '../../configs/FORM_STATUS';
 
 import ProjectForm from '../ProjectForm/ProjectForm';
 
 import './ProjectModal.style.scss';
 
 const ProjectModal = ({ modal, type }) => {
-    const { openProject, setOpenProject } = modal;
+    const { openProject, setOpenProject, currentProject } = modal;
+
+    const isUpdate = useCallback(() => {
+        return type === FORM_EDIT;
+    }, [type]);
+
+    const [header, setHeader] = useState(() => {
+        if (isUpdate()) {
+            return 'Tạo mới dự án';
+        }
+    });
+
     const [form] = Form.useForm();
 
     const handleOk = () => {
@@ -14,6 +27,7 @@ const ProjectModal = ({ modal, type }) => {
     const handleCancel = () => {
         setOpenProject(false);
     };
+
     return (
         <Modal
             open={openProject}
@@ -29,7 +43,12 @@ const ProjectModal = ({ modal, type }) => {
                 </Button>,
             ]}
         >
-            <ProjectForm form={form} setCloseModal={setOpenProject} type={type} />
+            <ProjectForm
+                form={form}
+                setCloseModal={setOpenProject}
+                currentProject={currentProject}
+                isUpdate={isUpdate}
+            />
         </Modal>
     );
 };

@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import moment from 'moment';
-import './ProjectForm.style.scss'
+import './ProjectForm.style.scss';
 import { Form, Input, DatePicker, Select } from 'antd';
 import { FcSynchronize, FcCheckmark, FcCancel } from 'react-icons/fc';
 import TextArea from 'antd/es/input/TextArea';
 
 import projectOwnerServices from '../../services/Project/ProjectOwnerServices';
 import useNotification from '../../hooks/Notification/useNotification';
-import { FORM_EDIT } from '../../configs/FORM_STATUS';
 import { PROJECT_IN_PROGRESS, PROJECT_DONE, PROJECT_CANCEL } from '../../configs/PROJECT_STATUS';
 import { PROJECT_CANCEL_VN, PROJECT_DONE_VN, PROJECT_IN_PROGRESS_VN } from '../../configs/i18n/VietNamese';
+import ProjectListPage from '../../pages/ProjectListPage/ProjectListPage';
 const { Option } = Select;
 
-const ProjectForm = ({ form, setCloseModal, type }) => {
+const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate }) => {
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const [status, setStatus] = useState([
         {
@@ -36,17 +36,58 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
     ]);
 
     useEffect(() => {
-        if (type === FORM_EDIT) {
-            setStatus((prev) => prev.map((item) => ({ ...item, disable: false })));
+        if (currentProject) {
+            form.setFieldsValue({
+                title: currentProject.title,
+                target: currentProject.target,
+                deadline: moment(currentProject.deadline, 'DD-MM-YYYY'),
+            });
         }
-    }, [type]);
+    }, [form, currentProject]);
+
+    useEffect(() => {
+        if (isUpdate()) {
+            setStatus((prev) => prev.map((item) => ({ ...item, disable: false })));
+        } else {
+            setStatus([
+                {
+                    label: PROJECT_IN_PROGRESS_VN,
+                    value: PROJECT_IN_PROGRESS,
+                    icon: <FcSynchronize />,
+                    disable: false,
+                },
+                {
+                    label: PROJECT_DONE_VN,
+                    value: PROJECT_DONE,
+                    icon: <FcCheckmark />,
+                    disable: true,
+                },
+                {
+                    label: PROJECT_CANCEL_VN,
+                    value: PROJECT_CANCEL,
+                    icon: <FcCancel />,
+                    disable: true,
+                },
+            ]);
+            form.resetFields();
+        }
+    }, [isUpdate, form]);
 
     const handleSubmit = async (values) => {
         const deadline = values.deadline.format('YYYY-MM-DD');
         const project = { ...values, deadline };
+        const createProject = await projectOwnerServices.create(project);
+        const updateProject = null;
+
         try {
-            const projectResponse = await projectOwnerServices.create(project);
-            setNotificationWithIcon({ type: 'success', message: projectResponse.data.msg });
+            let projectApi;
+            if (isUpdate()) {
+                projectApi = updateProject;
+            } else {
+                projectApi = createProject;
+            }
+
+            setNotificationWithIcon({ type: 'success', message: projectApi.data.msg });
         } catch (err) {
             if (Array.isArray(err.response.data)) {
                 setNotificationWithIcon({ type: 'error', message: err.response.data[0].message });
@@ -92,7 +133,7 @@ const ProjectForm = ({ form, setCloseModal, type }) => {
                 ]}
                 validateTrigger={false}
             >
-                <Input className="input" />
+                <Input />
             </Form.Item>
             <Form.Item
                 label="Mục tiêu"
