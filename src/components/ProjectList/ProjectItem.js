@@ -1,12 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'antd';
 import { UsergroupAddOutlined, UserSwitchOutlined, EditOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import RoleForm from '../RoleForm/RoleForm';
 import { FORM_EDIT } from '../../configs/FORM_STATUS';
 
-const ProjectItem = ({ projectId = '', title = 'Không có tiêu đề', owner = 'Không có thông tin', roles, dadProps }) => {
+const ProjectItem = ({
+    projectId = '',
+    title = 'Không có tiêu đề',
+    owner = 'Không có thông tin',
+    roles,
+    dadProps,
+    project,
+}) => {
     const [openRole, setOpenRole] = useState(false);
+    const { target, deadline } = project;
     const have = (roles, r) => {
         const role = roles.filter((d) => d === r);
         if (role.length > 0) {
@@ -18,6 +26,7 @@ const ProjectItem = ({ projectId = '', title = 'Không có tiêu đề', owner =
     const handleRole = () => {
         setOpenRole(!openRole);
     };
+
     return (
         <NavLink
             to={`/user/project/${projectId}`}
@@ -61,6 +70,8 @@ const ProjectItem = ({ projectId = '', title = 'Không có tiêu đề', owner =
                                     dadProps.modal.setFormType(FORM_EDIT);
                                     dadProps.modal.setCurrentProject({
                                         title,
+                                        target,
+                                        deadline,
                                     });
                                 }}
                             >

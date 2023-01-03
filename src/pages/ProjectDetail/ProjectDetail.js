@@ -1,6 +1,4 @@
-import { Button, Col, Row } from 'antd';
-import { useEffect, useState } from 'react';
-import { FcPlus } from 'react-icons/fc';
+import { useEffect, useState, useCallback } from 'react';
 import CardModal from '../../components/Card/CardModal';
 import useMembers from '../../hooks/Project/useFetchMember';
 import { Link, useParams } from 'react-router-dom';
@@ -10,8 +8,7 @@ import TaskList from '../../components/TaskList/TaskList';
 import './ProjectDetails.style.scss';
 import ProjectList from '../../components/ProjectList/ProjectList';
 import ProjectServices from '../../services/Project/projectServices';
-import { useDispatch, useSelector } from 'react-redux';
-import CardServices from '../../services/Project/Card/CardServices';
+import { useDispatch } from 'react-redux';
 
 const ProjectDetail = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -28,19 +25,11 @@ const ProjectDetail = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        getProject();
-    }, [projectId]);
-
-    useEffect(() => {
-        setProjectId(window.location.pathname.split('/')[3]);
-    });
-
-    const getProject = async () => {
+    const getProject = useCallback(async () => {
         setLoading(true);
         try {
             const getProjectResponse = await ProjectServices.getProject();
-            dispatch({ 'type': 'setData', 'value': getProjectResponse.data.data.reverse() });
+            dispatch({ type: 'setData', value: getProjectResponse.data.data.reverse() });
             setLoading(false);
         } catch (err) {
             if (err.response && Array.isArray(err.response.data)) {
@@ -55,41 +44,53 @@ const ProjectDetail = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [dispatch]);
+
+    useEffect(() => {
+        getProject();
+    }, [projectId, getProject]);
+
+    useEffect(() => {
+        setProjectId(window.location.pathname.split('/')[3]);
+    }, [setProjectId]);
 
     if (error) {
         console.log(error);
     }
 
-    const handleModal = () => {
-        setOpenModal(!openModal);
-    };
-
     return (
-        <div className='project-task-page'>
+        <div className="project-task-page">
             <ProjectList loading={loading} />
             <div>
-                <div className='project--nav'>
-                    <div className='project-name--nav'>
-                        <Link to='/' style={{
-                            color: 'rgb(255, 117, 23)',
-                            fontSize: '23px',
-                            textDecoration: 'none',
-                            fontWeight: '600',
-                        }}><LeftOutlined />Tên của dự án</Link>
+                <div className="project--nav">
+                    <div className="project-name--nav">
+                        <Link
+                            to="/"
+                            style={{
+                                color: 'rgb(255, 117, 23)',
+                                fontSize: '23px',
+                                textDecoration: 'none',
+                                fontWeight: '600',
+                            }}
+                        >
+                            <LeftOutlined />
+                            Tên của dự án
+                        </Link>
                     </div>
-                    <div className='task-option--nav'>
-                        <button>Lọc <BiFilterAlt/></button>
-                        <button
-                            onClick={handleAdd}
-                        >Tạo công việc <BiAddToQueue/></button>
+                    <div className="task-option--nav">
+                        <button>
+                            Lọc <BiFilterAlt />
+                        </button>
+                        <button onClick={handleAdd}>
+                            Tạo công việc <BiAddToQueue />
+                        </button>
                     </div>
                 </div>
-                <div className='project-task-container'>
+                <div className="project-task-container">
                     <TaskList reRender={openModal} />
                 </div>
             </div>
-               {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
+            {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
         </div>
     );
 };

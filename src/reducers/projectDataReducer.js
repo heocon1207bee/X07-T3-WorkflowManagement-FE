@@ -1,16 +1,17 @@
 const initialValue = {
     action: {
         type: '',
-        value: []
-    }
-}
+        value: [],
+    },
+};
 
-const projectDataReducer = (state=[], action = initialValue) => {
+const projectDataReducer = (state = [], action = initialValue) => {
     switch (action.type) {
         case 'setData':
             return action.value;
+        default:
+            return state;
     }
-    return state
-}
+};
 
-export default projectDataReducer
+export default projectDataReducer;

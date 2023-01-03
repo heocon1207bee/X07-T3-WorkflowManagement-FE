@@ -54,7 +54,7 @@ const ProjectListPage = () => {
         <div className="project-list-page">
             <InviteList />
             <div className="pjs-container">
-                <SearchBar modal={{ setOpenProject }} />
+                <SearchBar modal={{ setOpenProject, setFormType }} />
                 <ProjectList
                     overlay={overlay}
                     handleRoleButton={handleRoleButton}
