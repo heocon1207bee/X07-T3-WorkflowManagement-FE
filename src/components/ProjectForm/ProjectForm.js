@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import './ProjectForm.style.scss';
 import { Form, Input, DatePicker, Select } from 'antd';
@@ -9,7 +9,6 @@ import projectOwnerServices from '../../services/Project/ProjectOwnerServices';
 import useNotification from '../../hooks/Notification/useNotification';
 import { PROJECT_IN_PROGRESS, PROJECT_DONE, PROJECT_CANCEL } from '../../configs/PROJECT_STATUS';
 import { PROJECT_CANCEL_VN, PROJECT_DONE_VN, PROJECT_IN_PROGRESS_VN } from '../../configs/i18n/VietNamese';
-import ProjectListPage from '../../pages/ProjectListPage/ProjectListPage';
 const { Option } = Select;
 
 const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate }) => {
