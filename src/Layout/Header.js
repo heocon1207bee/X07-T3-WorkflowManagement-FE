@@ -4,9 +4,12 @@ import logo from '../assets/images/pumanager-logo.png';
 import { Link } from 'react-router-dom';
 
 import ToggleTheme from '../components/ToggleTheme/ToggleTheme';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const [showModal, setShowModal] = useState(false);
+    const themeStore = useSelector((state) => state.theme);
+
     const userName =
         localStorage.getItem('worlflow_store') && JSON.parse(localStorage.getItem('worlflow_store')).user.fullname;
     const handleShowModal = (e) => {
@@ -33,7 +36,7 @@ const Header = () => {
     };
 
     return (
-        <div className="header">
+        <div className={`header ${themeStore.theme}-mode`}>
             <div className="header-logo">
                 <Link to="/">
                     <img src={logo} alt="logo" />
@@ -41,8 +44,11 @@ const Header = () => {
             </div>
             <div className="header-button">
                 <ToggleTheme />
-                <span>
-                    Xin chào, <Link to="/user">{userName}</Link>
+                <span className={`${themeStore.theme}-mode`}>
+                    Xin chào,{' '}
+                    <Link to="/user" className={`${themeStore.theme}-mode`}>
+                        {userName}
+                    </Link>
                 </span>
                 <span
                     className="user-avatar"
