@@ -1,0 +1,76 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/button';
+
+.invite-container {
+    flex: 25%;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: calc(100vh - 60px);
+    padding: 0 0.7rem;
+
+    .invite-label {
+        padding: 20px 0;
+        color: $Text01;
+        h3 {
+            text-align: center;
+        }
+    }
+
+    .invite-item {
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid $Border01;
+        margin-bottom: 10px;
+
+        .invite-name {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            h4 {
+                padding: 0.5rem;
+                overflow: hidden;
+            }
+
+            .collapse-icon {
+                right: 15px;
+                top: 22px;
+            }
+        }
+
+        .ReactCollapse--collapse {
+            transition: height 500ms;
+        }
+
+        .invite-info {
+            margin: 10px 0;
+            padding: 10px 0.5em;
+            border: 1px solid $Border01;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .invite-reply {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+
+            .accept-button {
+                @include acceptButton();
+                margin-left: 5px;
+                border: none;
+            }
+
+            .cancel-button {
+                @include cancelButton();
+                border: none;
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
-@import "../../assets/scss/color";
-@import "../../assets/scss/button";
-@import "../../assets/scss/input";
+@import '../../assets/scss/color';
+@import '../../assets/scss/button';
+@import '../../assets/scss/input';
 
 .project-list-page {
     display: flex;
@@ -9,89 +9,6 @@
     height: 100%;
     background-color: $BackgroundLayer01;
     background-size: 100%;
-
-    .invite-container {
-        flex: 25%;
-        min-width: 200px;
-        max-width: 400px;
-        min-height: calc(100vh - 60px);
-        padding: 0 0.7rem;
-        border: 1px solid $Border01;
-        background-color: $BackgroundLayer02;
-
-        .invite-label {
-            padding: 20px 0;
-            color: $Text01;
-            h3 {
-                text-align: center;
-            }
-        }
-
-        .invite-item {
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid $Border01;
-            margin-bottom: 10px;
-            background-color: $BackgroundLayer03;
-
-            .invite-name {
-                cursor: pointer;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                color: $Text01;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-
-                h4{
-                    padding: 0.5rem;
-                    overflow: hidden;
-                }
-
-                .collapse-icon {
-                    right: 15px;
-                    top: 22px;
-                }
-            }
-
-            .ReactCollapse--collapse {
-                transition: height 500ms;
-            }
-
-            .invite-info {
-                color: $Text01;
-                margin: 10px 0;
-                padding: 10px 0.5em;
-                border: 1px solid $Border01;
-                font-size: 13px;
-                transition: all 0.2s ease;
-
-                &:hover {
-                    background-color: $BackgroundButton02_hover;
-                }
-            }
-
-            .invite-reply {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: flex-end;
-
-                .accept-button {
-                    @include acceptButton();
-                    margin-left: 5px;
-                    border: none;
-                }
-
-                .cancel-button {
-                    @include cancelButton();
-                    border: none;
-                }
-            }
-        }
-    }
 
     .pjs-container {
         flex: 75%;
@@ -213,5 +130,4 @@
             }
         }
     }
-
 }
