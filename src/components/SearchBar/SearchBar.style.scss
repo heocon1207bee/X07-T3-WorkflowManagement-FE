@@ -1,6 +1,7 @@
 @import '../../assets/scss/color';
 @import '../../assets/scss/button';
 @import '../../assets/scss/input';
+@import '../../assets/scss/theme';
 .search-container {
     display: flex;
     flex-direction: row;
@@ -17,6 +18,10 @@
             margin: 10px;
             width: 100%;
             padding: 10px;
+        }
+        .dark-mode {
+            background-color: #f4f5f7;
+            color: $dark-color;
         }
     }
 

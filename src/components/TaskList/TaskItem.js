@@ -1,9 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { formatDate } from '../../utils/DateTimeFormater';
 
 const TaskItem = (props) => {
-    const themeStore = useSelector((state) => state.theme);
     const status = (status) => {
         switch (status) {
             case 'CARD_OPEN':
