@@ -14,50 +14,6 @@
         flex: 75%;
         min-height: calc(100vh - 60px);
 
-        .search-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 20px 30px;
-            background-color: rgb(27, 27, 28);
-
-            .search-bar {
-                width: 80%;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                input {
-                    @include inputStyle();
-                    margin: 10px;
-                    width: 80%;
-                    padding: 10px;
-                }
-
-                button {
-                    @include cancelButton();
-                    width: 10%;
-                    height: 38px;
-                    font-size: 17px;
-                }
-            }
-
-            .create-pj-button {
-                display: flex;
-                justify-content: center;
-                width: 20%;
-                min-width: 120px;
-                border-left: 1px solid rgb(42, 43, 44);
-                text-align: right;
-                button {
-                    @include acceptButton();
-                    padding: 10px 20px;
-                    margin: 0 10px;
-                    min-width: 100px;
-                    height: 38px;
-                }
-            }
-        }
-
         .project-list-container {
             padding: 20px 30px;
             border-top: 1px solid rgb(42, 43, 44);

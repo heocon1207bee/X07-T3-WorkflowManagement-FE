@@ -2,12 +2,11 @@
 
 @mixin inputStyle() {
     padding: 7px 10px;
-    border: 1px solid rgb(42, 43, 44);
-    border-radius: 10px;
+    border: 1px solid $Border01;
+    border-radius: 3px;
     box-sizing: border-box;
-    background-color: rgb(44, 45, 45);
-    color: #fefefe;
     transition: all 0.2s;
+    outline: none;
 
     &:hover {
         border-color: #4096ff;

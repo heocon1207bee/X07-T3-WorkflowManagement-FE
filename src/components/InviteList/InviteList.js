@@ -8,7 +8,9 @@ const InviteList = () => {
     return (
         <div className={`invite-container ${themeStore.theme}-mode`}>
             <div className="invite-label">
-                <h3 style={{ overflow: 'hidden' }}>Danh sách lời mời</h3>
+                <h3 style={{ overflow: 'hidden' }} className={`${themeStore.theme}-mode`}>
+                    Danh sách lời mời
+                </h3>
             </div>
             <div className="invite-list">
                 <InviteItem />

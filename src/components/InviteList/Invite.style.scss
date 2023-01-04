@@ -7,6 +7,7 @@
     max-width: 400px;
     min-height: calc(100vh - 60px);
     padding: 0 0.7rem;
+    border-right: 1px solid $Border01;
 
     .invite-label {
         padding: 20px 0;
@@ -18,7 +19,7 @@
 
     .invite-item {
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: 3px;
         border: 1px solid $Border01;
         margin-bottom: 10px;
 

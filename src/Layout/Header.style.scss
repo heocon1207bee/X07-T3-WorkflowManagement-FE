@@ -7,7 +7,7 @@
     top: 0;
     z-index: 0;
     background-color: rgb(27, 27, 28);
-    border-bottom: solid 1px rgb(42, 43, 44);
+    border-bottom: 1px solid $Border01;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
