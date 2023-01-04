@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import RoleForm from '../RoleForm/RoleForm';
 import { FORM_EDIT } from '../../configs/FORM_STATUS';
 import { MANAGE_ROLE, MANAGE_MEMBER, UPDATE_PROJECT } from '../../configs/CAPABILITIES';
+import { useSelector } from 'react-redux';
 
 const ProjectItem = ({
     projectId = '',
@@ -14,6 +15,7 @@ const ProjectItem = ({
     dadProps,
     project,
 }) => {
+    const themeStore = useSelector((state) => state.theme);
     const [openRole, setOpenRole] = useState(false);
     const { target, deadline } = project;
     const have = (roles, r) => {
@@ -33,7 +35,7 @@ const ProjectItem = ({
             to={`/user/project/${projectId}`}
             className={({ isActive }) => (isActive ? 'project-nav-active' : 'project-nav-unactive')}
         >
-            <div className="project-item">
+            <div className={`project-item ${themeStore.theme}-mode`}>
                 <h4>{title}</h4>
                 <p>Người tạo: {owner}</p>
                 <div className="project-option-button" onClick={(e) => e.stopPropagation()}>

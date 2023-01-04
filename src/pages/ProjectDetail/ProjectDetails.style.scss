@@ -1,137 +1,127 @@
-@import "../../assets/scss/color";
-@import "../../assets/scss/button";
+@import '../../assets/scss/color';
+@import '../../assets/scss/button';
 
 .project-task-page {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  background-color: $BackgroundLayer01;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
 }
 
 .project-list-container {
-  padding: 10px 5px;
-  background-color: $BackgroundLayer02;
-  border-right: 1px solid $Border01;
-  max-height: calc(100vh - 60px);
-  overflow-y: auto;
-  transition: all 0.3s ease;
+    padding: 10px 5px;
+    border-right: 1px solid $Border01;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    transition: all 0.3s ease;
 
-  &:hover {
-    scrollbar-width: thin;
-  }
+    &:hover {
+        scrollbar-width: thin;
+    }
 
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  scrollbar-color: $BackgroundButton01 $BackgroundLayer03;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scrollbar-color: $BackgroundButton01 $BackgroundLayer03;
 
-  .pjl-label {
-    background-color: rgba(27, 27, 28, 0.5);
-    color: #fefefe;
-  }
+    .pjl-label {
+        background-color: rgba(27, 27, 28, 0.5);
+        color: #fefefe;
+    }
 }
 
 .sticky {
-  position: sticky;
-  top: 0;
+    position: sticky;
+    top: 0;
 }
 
 .project-list {
-  padding: 10px 5px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 10px;
-  grid-auto-rows: 150px;
+    padding: 10px 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    grid-auto-rows: 150px;
 }
 
 .project-item {
-  background-color: $BackgroundLayer02;
-  border: 1px solid $Border01;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  border-radius: 10px;
-  cursor: pointer;
-  height: 100%;
-  transition: all 0.2s ease;
+    border: 1px solid $Border01;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 100%;
+    transition: all 0.2s ease;
 
-  &:hover {
-    background-color: rgb(61, 61, 62);
-  }
-
-  a {
-    text-decoration: none;
-    color: #fefefe;
-  }
-
-  h4:hover {
-    text-decoration: underline;
-  }
-
-  p {
-    font-size: 12px;
-    color: #c5c5c5;
-  }
-
-  .project-option-button {
-    display: grid;
-    grid-template-columns: 40px 40px 40px;
-    grid-auto-rows: 40px;
-    grid-gap: 5px;
-
-    button {
-      @include acceptButton();
-      border-radius: 50%;
-      font-size: 17px;
-
-      &:hover {
-        background-color: $BackgroundButton01_hover;
-      }
+    a {
+        text-decoration: none;
+        color: #fefefe;
     }
-  }
+
+    h4:hover {
+        text-decoration: underline;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    .project-option-button {
+        display: grid;
+        grid-template-columns: 40px 40px 40px;
+        grid-auto-rows: 40px;
+        grid-gap: 5px;
+
+        button {
+            @include acceptButton();
+            border-radius: 50%;
+            font-size: 17px;
+
+            &:hover {
+                background-color: $BackgroundButton01_hover;
+            }
+        }
+    }
 }
 
 .project--nav {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .project-name--nav {
-  display: flex;
-  gap: 10px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  color: $BackgroundButton01;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: $BackgroundButton01;
 }
 
 .task-option--nav {
-  padding: 10px;
-  display: flex;
-  gap: 10px;
-  flex-direction: row;
-  align-items: center;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    align-items: center;
 
-  button {
-    @include acceptButton;
-  }
+    button {
+        @include acceptButton;
+    }
 }
 
 .project-nav-active {
-  color: $BackgroundButton01;
-  text-decoration: none;
-  transition: all 0.3s ease;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
-  > .project-item {
-    border: 1px solid $BackgroundButton01;
-  }
+    > .project-item {
+        border: 1px solid $BackgroundButton01;
+    }
 }
 
 .project-nav-unactive {
-  text-decoration: none;
-  color: #fefefe;
+    text-decoration: none;
 }
