@@ -1,4 +1,4 @@
-import { Button, Tooltip } from 'antd';
+import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { CiDark, CiSun } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,10 +24,8 @@ export default function ToggleTheme() {
     }, [themeStore.theme]);
 
     return (
-        <Tooltip title={`${alternativeTheme} mode`}>
-            <Button className={`${alternativeTheme}-mode btn-toggle-theme`} onClick={() => dispatch(toggleTheme())}>
-                {icon}
-            </Button>
-        </Tooltip>
+        <Button className={`${alternativeTheme}-mode btn-toggle-theme`} onClick={() => dispatch(toggleTheme())}>
+            {icon}
+        </Button>
     );
 }
