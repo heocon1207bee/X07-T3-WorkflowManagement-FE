@@ -1,0 +1,41 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/button';
+@import '../../assets/scss/input';
+@import '../../assets/scss/theme';
+.search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 30px;
+
+    .search-bar {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        input {
+            @include inputStyle();
+            margin: 10px;
+            width: 100%;
+            padding: 10px;
+        }
+        .dark-mode {
+            background-color: #f4f5f7;
+            color: $dark-color;
+        }
+    }
+
+    .create-pj-button {
+        display: flex;
+        justify-content: center;
+        min-width: 120px;
+        text-align: right;
+        button {
+            @include acceptButton();
+            padding: 10px 20px;
+            margin: 0 10px;
+            min-width: 100px;
+            height: 38px;
+        }
+    }
+}

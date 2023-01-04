@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import CardModal from '../../components/Card/CardModal';
 import useMembers from '../../hooks/Project/useFetchMember';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 import { BiAddToQueue, BiFilterAlt } from 'react-icons/bi';
 import TaskList from '../../components/TaskList/TaskList';

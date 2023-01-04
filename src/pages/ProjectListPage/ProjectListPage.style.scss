@@ -1,158 +1,27 @@
-@import "../../assets/scss/color";
-@import "../../assets/scss/button";
-@import "../../assets/scss/input";
+@import '../../assets/scss/color';
+@import '../../assets/scss/button';
+@import '../../assets/scss/input';
 
 .project-list-page {
     display: flex;
     z-index: 1;
     flex-direction: row;
     height: 100%;
-    background-color: $BackgroundLayer01;
     background-size: 100%;
-
-    .invite-container {
-        flex: 25%;
-        min-width: 200px;
-        max-width: 400px;
-        min-height: calc(100vh - 60px);
-        padding: 0 0.7rem;
-        border: 1px solid $Border01;
-        background-color: $BackgroundLayer02;
-
-        .invite-label {
-            padding: 20px 0;
-            color: $Text01;
-            h3 {
-                text-align: center;
-            }
-        }
-
-        .invite-item {
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid $Border01;
-            margin-bottom: 10px;
-            background-color: $BackgroundLayer03;
-
-            .invite-name {
-                cursor: pointer;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                color: $Text01;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-
-                h4{
-                    padding: 0.5rem;
-                    overflow: hidden;
-                }
-
-                .collapse-icon {
-                    right: 15px;
-                    top: 22px;
-                }
-            }
-
-            .ReactCollapse--collapse {
-                transition: height 500ms;
-            }
-
-            .invite-info {
-                color: $Text01;
-                margin: 10px 0;
-                padding: 10px 0.5em;
-                border: 1px solid $Border01;
-                font-size: 13px;
-                transition: all 0.2s ease;
-
-                &:hover {
-                    background-color: $BackgroundButton02_hover;
-                }
-            }
-
-            .invite-reply {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: flex-end;
-
-                .accept-button {
-                    @include acceptButton();
-                    margin-left: 5px;
-                    border: none;
-                }
-
-                .cancel-button {
-                    @include cancelButton();
-                    border: none;
-                }
-            }
-        }
-    }
 
     .pjs-container {
         flex: 75%;
         min-height: calc(100vh - 60px);
 
-        .search-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 20px 30px;
-            background-color: rgb(27, 27, 28);
-
-            .search-bar {
-                width: 80%;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                input {
-                    @include inputStyle();
-                    margin: 10px;
-                    width: 80%;
-                    padding: 10px;
-                }
-
-                button {
-                    @include cancelButton();
-                    width: 10%;
-                    height: 38px;
-                    font-size: 17px;
-                }
-            }
-
-            .create-pj-button {
-                display: flex;
-                justify-content: center;
-                width: 20%;
-                min-width: 120px;
-                border-left: 1px solid rgb(42, 43, 44);
-                text-align: right;
-                button {
-                    @include acceptButton();
-                    padding: 10px 20px;
-                    margin: 0 10px;
-                    min-width: 100px;
-                    height: 38px;
-                }
-            }
-        }
-
         .project-list-container {
             padding: 20px 30px;
-            border-top: 1px solid rgb(42, 43, 44);
-            //min-height: 90%;
-            background-color: $BackgroundLayer01;
+            border-top: 1px solid $Border01;
 
             .pjl-label {
-                background-color: $BackgroundLayer01;
-                color: #fefefe;
                 margin-bottom: 20px;
                 font-size: 20px;
                 text-shadow: 0 0.2px 0 #ffffff;
+                padding: 1em;
             }
 
             .project-list {
@@ -162,8 +31,7 @@
                 grid-auto-rows: minmax(150px, 1fr);
 
                 .project-item {
-                    background-color: rgb(44, 45, 45);
-                    border: 1px solid rgb(42, 43, 44);
+                    border: 1px solid $Border01;
                     padding: 1rem;
                     display: grid;
                     grid-template-rows: 1fr 1fr 1fr;
@@ -173,14 +41,12 @@
                     transition: all 0.3s ease-out;
 
                     &:hover {
-                        background-color: rgb(61, 61, 62);
                         border: 1px solid $BackgroundButton01;
                         scale: 107%;
                     }
 
                     a {
                         text-decoration: none;
-                        color: #fefefe;
                     }
 
                     h4:hover {
@@ -189,7 +55,6 @@
 
                     p {
                         font-size: 12px;
-                        color: #c5c5c5;
                     }
 
                     .project-option-button {
@@ -213,5 +78,4 @@
             }
         }
     }
-
 }

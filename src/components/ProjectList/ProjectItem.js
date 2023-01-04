@@ -4,6 +4,8 @@ import { UsergroupAddOutlined, UserSwitchOutlined, EditOutlined } from '@ant-des
 import { NavLink } from 'react-router-dom';
 import RoleForm from '../RoleForm/RoleForm';
 import { FORM_EDIT } from '../../configs/FORM_STATUS';
+import { MANAGE_ROLE, MANAGE_MEMBER, UPDATE_PROJECT } from '../../configs/CAPABILITIES';
+import { useSelector } from 'react-redux';
 
 const ProjectItem = ({
     projectId = '',
@@ -13,6 +15,7 @@ const ProjectItem = ({
     dadProps,
     project,
 }) => {
+    const themeStore = useSelector((state) => state.theme);
     const [openRole, setOpenRole] = useState(false);
     const { target, deadline } = project;
     const have = (roles, r) => {
@@ -32,11 +35,11 @@ const ProjectItem = ({
             to={`/user/project/${projectId}`}
             className={({ isActive }) => (isActive ? 'project-nav-active' : 'project-nav-unactive')}
         >
-            <div className="project-item">
+            <div className={`project-item ${themeStore.theme}-mode`}>
                 <h4>{title}</h4>
                 <p>Người tạo: {owner}</p>
                 <div className="project-option-button" onClick={(e) => e.stopPropagation()}>
-                    {have(roles, 'MANAGE_MEMBER') && (
+                    {have(roles, MANAGE_MEMBER) && (
                         <Tooltip title="Thành viên" placement="bottom">
                             <button
                                 onClick={(e) => {
@@ -47,7 +50,7 @@ const ProjectItem = ({
                             </button>
                         </Tooltip>
                     )}
-                    {have(roles, 'MANAGE_ROLE') && (
+                    {have(roles, MANAGE_ROLE) && (
                         <Tooltip title="Vai trò" placement="bottom">
                             <button
                                 onClick={(e) => {
@@ -61,7 +64,7 @@ const ProjectItem = ({
                         </Tooltip>
                     )}
                     {openRole && <RoleForm projectId={projectId} opening={openRole} handleOpen={handleRole} />}
-                    {have(roles, 'UPDATE_PROJECT') && (
+                    {have(roles, UPDATE_PROJECT) && (
                         <Tooltip title="Cập nhật" placement="bottom">
                             <button
                                 onClick={(e) => {

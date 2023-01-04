@@ -1,0 +1,14 @@
+@import './color.scss';
+
+$light-color: #ebecf0;
+$dark-color: $BackgroundLayer02;
+
+.light-mode {
+    background-color: $light-color;
+    color: $dark-color;
+}
+
+.dark-mode {
+    background-color: $dark-color;
+    color: $light-color;
+}

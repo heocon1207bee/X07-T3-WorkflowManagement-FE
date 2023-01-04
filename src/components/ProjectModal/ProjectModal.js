@@ -1,5 +1,5 @@
 import { Button, Modal, Form } from 'antd';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { FORM_EDIT } from '../../configs/FORM_STATUS';
 
 import ProjectForm from '../ProjectForm/ProjectForm';
@@ -16,8 +16,19 @@ const ProjectModal = ({ modal, type }) => {
     const [header, setHeader] = useState(() => {
         if (isUpdate()) {
             return 'Tạo mới dự án';
+        } else {
+            return 'Chỉnh sửa dự án';
         }
     });
+    useEffect(() => {
+        setHeader(() => {
+            if (isUpdate()) {
+                return 'Chỉnh sửa dự án';
+            } else {
+                return 'Tạo mới dự án';
+            }
+        });
+    }, [isUpdate]);
 
     const [form] = Form.useForm();
 
@@ -31,7 +42,7 @@ const ProjectModal = ({ modal, type }) => {
     return (
         <Modal
             open={openProject}
-            title="Tạo mới / chỉnh sửa dự án"
+            title={header}
             onOk={handleOk}
             onCancel={handleCancel}
             footer={[

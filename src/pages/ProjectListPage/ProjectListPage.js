@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './ProjectListPage.style.scss';
 import InviteList from '../../components/InviteList/InviteList';
 import ProjectList from '../../components/ProjectList/ProjectList';
@@ -16,6 +16,7 @@ const ProjectListPage = () => {
     const [openProject, setOpenProject] = useState(false);
     const [formType, setFormType] = useState(FORM_CREATE);
     const [currentProject, setCurrentProject] = useState(null);
+    const themeStore = useSelector((state) => state.theme);
 
     const dispatch = useDispatch();
 
@@ -51,9 +52,9 @@ const ProjectListPage = () => {
     };
 
     return (
-        <div className="project-list-page">
+        <div className={`project-list-page ${themeStore.theme}-mode`}>
             <InviteList />
-            <div className="pjs-container">
+            <div className={`pjs-container ${themeStore.theme}-mode`}>
                 <SearchBar modal={{ setOpenProject, setFormType }} />
                 <ProjectList
                     overlay={overlay}
