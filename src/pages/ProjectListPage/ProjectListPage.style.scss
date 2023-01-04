@@ -7,7 +7,6 @@
     z-index: 1;
     flex-direction: row;
     height: 100%;
-    background-color: $BackgroundLayer01;
     background-size: 100%;
 
     .pjs-container {
@@ -17,11 +16,8 @@
         .project-list-container {
             padding: 20px 30px;
             border-top: 1px solid rgb(42, 43, 44);
-            //min-height: 90%;
-            background-color: $BackgroundLayer01;
 
             .pjl-label {
-                background-color: $BackgroundLayer01;
                 color: #fefefe;
                 margin-bottom: 20px;
                 font-size: 20px;

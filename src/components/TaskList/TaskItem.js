@@ -1,5 +1,5 @@
 import React from 'react';
-import {formatDate} from '../../utils/DateTimeFormater'
+import { formatDate } from '../../utils/DateTimeFormater';
 
 const TaskItem = (props) => {
     const status = (status) => {
@@ -45,19 +45,32 @@ const TaskItem = (props) => {
         }
     };
     return (
-        <div className='task-item' onClick={props.taskClickHandle}
-             onDragStart={e => props.onDragStart(e, props.task.id)} onDragEnd={props.onDragEnd} draggable>
-            <div className='task-item-title'>
+        <div
+            className="task-item"
+            onClick={props.taskClickHandle}
+            onDragStart={(e) => props.onDragStart(e, props.task.id)}
+            onDragEnd={props.onDragEnd}
+            draggable
+        >
+            <div className="task-item-title">
                 {props.task.title} - <span>{status(props.task.status)}</span>
             </div>
-            <div className='task-item-info'>
+            <div className="task-item-info">
                 <div
-                    className={props.task.type === 'TASK' ? 'task-item-type task-status' : 'task-item-type issue-status'}>{props.task.type}</div>
-                <div className={'task-item-priority ' + priority(props.task.priority)}>{priorityTrans(props.task.priority)}</div>
-                <div className='task-item-create'>Người
-                    tạo: {props.task.create ? props.task.create : 'Không dữ liệu'}</div>
-                <div className='task-item-do'>Người thực hiện: {props.task.do ? props.task.do : 'Không dữ liệu'}</div>
-                <div className='task-item-deadline'>Hết hạn: {formatDate(props.task.deadline)}</div>
+                    className={
+                        props.task.type === 'TASK' ? 'task-item-type task-status' : 'task-item-type issue-status'
+                    }
+                >
+                    {props.task.type}
+                </div>
+                <div className={'task-item-priority ' + priority(props.task.priority)}>
+                    {priorityTrans(props.task.priority)}
+                </div>
+                <div className="task-item-create">
+                    Người tạo: {props.task.create ? props.task.create : 'Không dữ liệu'}
+                </div>
+                <div className="task-item-do">Người thực hiện: {props.task.do ? props.task.do : 'Không dữ liệu'}</div>
+                <div className="task-item-deadline">Hết hạn: {formatDate(props.task.deadline)}</div>
             </div>
         </div>
     );
