@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import './Header.style.scss';
 import logo from '../assets/images/pumanager-logo.png';
 import { Link } from 'react-router-dom';
-import { BsPersonCircle } from 'react-icons/bs';
+
+import ToggleTheme from '../components/ToggleTheme/ToggleTheme';
 
 const Header = () => {
     const [showModal, setShowModal] = useState(false);
-    const userName = localStorage.getItem('worlflow_store') && JSON.parse(localStorage.getItem('worlflow_store')).user.fullname;
+    const userName =
+        localStorage.getItem('worlflow_store') && JSON.parse(localStorage.getItem('worlflow_store')).user.fullname;
     const handleShowModal = (e) => {
         e.preventDefault();
         setShowModal(true);
@@ -31,28 +33,34 @@ const Header = () => {
     };
 
     return (
-        <div className='header'>
-            <div className='header-logo'>
-                <Link to='/'><img src={logo} alt='logo' /></Link>
+        <div className="header">
+            <div className="header-logo">
+                <Link to="/">
+                    <img src={logo} alt="logo" />
+                </Link>
             </div>
-            <div className='header-button'>
-                <span>Xin chào, <Link to='/user'>{userName}</Link></span>
-                <span className='user-avatar' onMouseEnter={e => handleShowModal(e)}
-                      onMouseLeave={e => handleHideModal(e)} onClick={e => handleModal(e)}>
-                    <img
-                    src='https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg' />
-                    <div className='nav-modal' style={showModal ? showStyles : null}>
-                        <div className='modal-user-info'>
-                            <img
-                                src='https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg' />
+            <div className="header-button">
+                <ToggleTheme />
+                <span>
+                    Xin chào, <Link to="/user">{userName}</Link>
+                </span>
+                <span
+                    className="user-avatar"
+                    onMouseEnter={(e) => handleShowModal(e)}
+                    onMouseLeave={(e) => handleHideModal(e)}
+                    onClick={(e) => handleModal(e)}
+                >
+                    <img src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" />
+                    <div className="nav-modal" style={showModal ? showStyles : null}>
+                        <div className="modal-user-info">
+                            <img src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" />
                             <p>{userName}</p>
                         </div>
-                        <div className='modal-user-actions'>
+                        <div className="modal-user-actions">
                             <button onClick={handleLogOut}>Đăng xuất</button>
                         </div>
                     </div>
                 </span>
-
             </div>
         </div>
     );
