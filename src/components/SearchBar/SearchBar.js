@@ -1,10 +1,11 @@
 import React from 'react';
 import { AppstoreAddOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { FiDelete } from 'react-icons/fi';
 import { FORM_CREATE } from '../../configs/FORM_STATUS';
 
 import './SearchBar.style.scss';
+import { Input } from 'antd';
+const { Search } = Input;
 
 const SearchBar = ({ modal }) => {
     const themeStore = useSelector((state) => state.theme);
@@ -24,8 +25,8 @@ const SearchBar = ({ modal }) => {
     return (
         <div className={`search-container ${themeStore.theme}-mode`}>
             <div className="search-bar">
-                <input
-                    className={`${themeStore.theme}-mode`}
+                <Search
+                    className={`${themeStore.theme}-mode input-search`}
                     value={searchValue}
                     onChange={(e) => handleSearch(e)}
                     placeholder="Tìm kiếm"

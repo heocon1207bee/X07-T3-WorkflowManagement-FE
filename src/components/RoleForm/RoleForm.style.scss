@@ -1,5 +1,6 @@
-@import "../../assets/scss/color";
-@import "../../assets/scss/button";
+@import '../../assets/scss/color';
+@import '../../assets/scss/button';
+@import '../../assets/scss/theme';
 
 //.role-page {
 //max-width: 650px;
@@ -17,88 +18,65 @@
 //}
 
 .role-container {
-  color: $Text01;
-
-  .ant-modal-content {
-    background-color: $BackgroundLayer02;
-    border: 1px solid $Border01;
-
-    .ant-modal-close {
-      color: $Text01;
+    .ant-modal-content {
+        border: 1px solid $Border01;
     }
-  }
 
-  .ant-modal-header {
-    background-color: $BackgroundLayer02;
-
-    .ant-modal-title {
-      color: $Text01;
+    .ant-modal-footer {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        button {
+            @include acceptButton();
+        }
     }
-  }
-
-  .ant-modal-footer {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    button {
-      @include acceptButton();
-    }
-  }
 }
 
 .animated {
-  width: 100%;
+    width: 100%;
 }
 
 .role-label {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-
-  button {
-    @include acceptButton();
-  }
-}
-
-.role-item {
-  border: 1px solid $Border01;
-  border-radius: 10px;
-  padding: 1rem 0.5rem;
-  margin-bottom: 10px;
-  transition: all 0.3s ease-out;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $BackgroundLayer03_hover;
-  }
-
-  .ReactCollapse--collapse {
-    transition: height 500ms;
-  }
-
-  button {
-    @include acceptButton();
-  }
-
-  .main-role-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    p{
-      &:hover {
-        text-decoration: underline;
-      }
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+
+    button {
+        @include acceptButton();
     }
-  }
+}
+
+.role-item {
+    padding: 1rem 0.5rem;
+    margin-bottom: 10px;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+    &:hover {
+        background-color: $dinamic-backgroud-color-transparent;
+    }
+
+    .ReactCollapse--collapse {
+        transition: height 500ms;
+    }
+
+    button {
+        @include acceptButton();
+    }
+
+    .main-role-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 .role-list {
-  height: 360px;
-  overflow-y: scroll;
+    height: 360px;
+    overflow-y: scroll;
 }
 
 //}

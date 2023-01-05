@@ -1,41 +1,29 @@
-@import "../../assets/scss/button.scss";
-@import "../../assets/scss/input.scss";
-@import "../../assets/scss/color.scss";
+@import '../../assets/scss/button.scss';
+@import '../../assets/scss/input.scss';
+@import '../../assets/scss/color.scss';
 
 .role-modal {
-  .ant-modal-content {
-    background-color: $BackgroundLayer02;
-  }
-  .ant-modal-close {
-    color: #fefefe;
-  }
-  .ant-modal-header {
-    background-color: $BackgroundLayer02;
-    .ant-modal-title{
-      color: $Text01;
+    .ant-modal-body {
+        input {
+            @include inputStyle();
+            &::placeholder {
+                color: $Text01;
+            }
+        }
+        .ant-space-item {
+            label {
+                color: $Text01;
+            }
+        }
     }
-  }
-  .ant-modal-body {
-    input {
-      @include inputStyle();
-      &::placeholder {
-        color: $Text01;
-      }
+    .ant-modal-footer {
+        .close-role-btn {
+            @include cancelButton();
+        }
+        .submit-role-btn {
+            @include acceptButton();
+            padding-right: 30px;
+            padding-left: 30px;
+        }
     }
-    .ant-space-item {
-      label {
-        color: $Text01;
-      }
-    }
-  }
-  .ant-modal-footer {
-    .close-role-btn {
-      @include cancelButton();
-    }
-    .submit-role-btn {
-      @include acceptButton();
-      padding-right: 30px;
-      padding-left: 30px;
-    }
-  }
 }

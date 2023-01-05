@@ -1,144 +1,141 @@
-@import "../../assets/scss/color.scss";
+@import '../../assets/scss/color.scss';
 
 .task-list {
-  padding: 10px;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 10px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .task-list-child {
-  height: 80vh;
-  border: 1px solid $Border01;
-  border-radius: 10px;
-  box-shadow: 1px 4px rgb(18, 18, 18);
-  background-color: $BackgroundLayer02;
+    height: 80vh;
+    border-radius: 3px;
 }
 
 .status-label {
-  height: 5%;
-  padding: 10px;
-  background-color: $BackgroundButton01;
-  border-radius: 10px;
-  box-shadow: 1px 1px $BackgroundLayer03;
-  color: $Text01;
-  font-weight: 500;
-  text-align: center;
+    padding: 10px;
+    background-color: $BackgroundButton01;
+    border-radius: 3px;
+    color: $Text01;
+    font-weight: 500;
+    text-align: center;
 }
 
 .task-box {
-  padding-top: 5px;
-  overflow-y: scroll;
-  height: 95%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-auto-rows: 200px;
-  border-radius: 10px;
-  transition: all 0.3s ease;
+    padding: 0.5em;
+    overflow-y: scroll;
+    height: 95%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 200px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
 
-  &:hover::-webkit-scrollbar-track {
-    display: block;
-    background-color: $BackgroundLayer03;
-  }
+    &:hover::-webkit-scrollbar-track {
+        display: block;
+        background-color: $BackgroundLayer03;
+    }
 
-  &:hover::-webkit-scrollbar {
-    width: 1px;
-    display: block;
-  }
+    &:hover::-webkit-scrollbar {
+        width: 1px;
+        display: block;
+    }
 
-  &:hover::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: $BackgroundButton01;
-  }
+    &:hover::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: $BackgroundButton01;
+    }
 
-  &:hover {
-    scrollbar-width: thin;
-  }
+    &:hover {
+        scrollbar-width: thin;
+    }
 
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  scrollbar-color: $BackgroundButton01 $BackgroundLayer03;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scrollbar-color: $BackgroundButton01 $BackgroundLayer03;
 }
 
 .task-item {
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px solid $Border01;
-  border-radius: 10px;
-  background-color: $BackgroundLayer03;
-  color: $Text01;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: $BackgroundLayer03_hover;
-  }
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s;
+    &.dark-mode {
+        background-color: $BackgroundLayer03;
+    }
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .task-item-title {
-  font-weight: 700;
-  font-size: 18px;
-  color: $BackgroundButton01;
+    font-weight: 700;
+    font-size: 18px;
+    color: $BackgroundButton01;
 }
 
 .task-item-info {
-  display: grid;
-  margin-top: 10px;
-  grid-gap: 5px;
-  grid-template-areas: "type priority"
-  "create create"
-  "do do"
-  "deadline deadline";
-  font-size: 0.8rem;
-  color: #b5b5b5;
+    display: grid;
+    margin-top: 10px;
+    grid-gap: 5px;
+    grid-template-areas:
+        'type priority'
+        'create create'
+        'do do'
+        'deadline deadline';
+    font-size: 0.8rem;
 
-  .task-status {
-    color: #4096ff;
-  }
+    .task-status {
+        color: #4096ff;
+    }
 
-  .issue-status {
-    color: #ff0000;
-  }
+    .issue-status {
+        color: #ff0000;
+    }
 
-  .highest-p, .high-p {
-    color: #e50000;
-  }
+    .highest-p,
+    .high-p {
+        color: #e50000;
+    }
 
-  .medium-p {
-    color: #e5dc00;
-  }
+    .medium-p {
+        color: #e5dc00;
+    }
 
-  .low-p, .lowest-p {
-    color: #65e500;
-  }
+    .low-p,
+    .lowest-p {
+        color: #65e500;
+    }
 }
 
 .task-item-type {
-  grid-area: type;
-  font-size: 0.9rem;
+    grid-area: type;
+    font-size: 0.9rem;
 }
 
 .task-item-priority {
-  grid-area: priority;
-  font-size: 0.9rem;
+    grid-area: priority;
+    font-size: 0.9rem;
 }
 
 .task-item-create {
-  grid-area: create;
+    grid-area: create;
 }
 
 .task-item-do {
-  grid-area: do;
+    grid-area: do;
 }
 
 .task-item-deadline {
-  grid-area: deadline;
+    grid-area: deadline;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 ::-webkit-scrollbar-track {
-  display: none;
+    display: none;
 }
-

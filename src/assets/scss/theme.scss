@@ -1,7 +1,8 @@
 @import './color.scss';
 
 $light-color: #ebecf0;
-$dark-color: $BackgroundLayer02;
+$dark-color: $BackgroundLayer03_hover;
+$dinamic-backgroud-color-transparent: hsla(0, 0%, 0%, 0.16);
 
 .light-mode {
     background-color: $light-color;
