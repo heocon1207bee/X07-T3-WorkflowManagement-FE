@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { formatDate } from '../../utils/DateTimeFormater';
 
 const TaskItem = (props) => {
+    const themeStore = useSelector((state) => state.theme);
     const status = (status) => {
         switch (status) {
             case 'CARD_OPEN':
@@ -46,7 +48,7 @@ const TaskItem = (props) => {
     };
     return (
         <div
-            className="task-item"
+            className={`task-item ${themeStore.theme}-mode`}
             onClick={props.taskClickHandle}
             onDragStart={(e) => props.onDragStart(e, props.task.id)}
             onDragEnd={props.onDragEnd}

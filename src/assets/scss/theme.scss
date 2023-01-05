@@ -6,9 +6,15 @@ $dark-color: $BackgroundLayer02;
 .light-mode {
     background-color: $light-color;
     color: $dark-color;
+    &:hover {
+        background-color: #ffffff;
+    }
 }
 
 .dark-mode {
     background-color: $dark-color;
     color: $light-color;
+    &:hover {
+        background-color: $BackgroundLayer03;
+    }
 }
