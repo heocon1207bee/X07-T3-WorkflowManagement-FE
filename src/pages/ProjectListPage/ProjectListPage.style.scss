@@ -14,8 +14,7 @@
         min-height: calc(100vh - 60px);
 
         .project-list-container {
-            padding: 20px 30px;
-            border-top: 1px solid $Border01;
+            border-top: 1px solid #ffffff;
 
             .pjl-label {
                 margin-bottom: 20px;
@@ -26,31 +25,29 @@
 
             .project-list {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
                 grid-gap: 15px;
                 grid-auto-rows: minmax(150px, 1fr);
 
                 .project-item {
-                    border: 1px solid $Border01;
                     padding: 1rem;
                     display: grid;
                     grid-template-rows: 1fr 1fr 1fr;
-                    border-radius: 10px;
+                    border-radius: 8px;
                     cursor: pointer;
                     height: 100%;
                     transition: all 0.3s ease-out;
 
+                    &.dark-mode {
+                        background-color: $BackgroundLayer03;
+                    }
+
                     &:hover {
-                        border: 1px solid $BackgroundButton01;
-                        scale: 107%;
+                        scale: 1.07;
                     }
 
                     a {
                         text-decoration: none;
-                    }
-
-                    h4:hover {
-                        text-decoration: underline;
                     }
 
                     p {
