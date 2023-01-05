@@ -1,0 +1,12 @@
+.user-info-container {
+  height: calc(100vh - 60px);
+  padding: 2rem;
+}
+
+.user-info-avatar {
+  img {
+    width: 17rem;
+    height: 17rem;
+    border-radius: 50%;
+  }
+}

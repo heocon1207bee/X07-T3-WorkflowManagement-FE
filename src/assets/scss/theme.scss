@@ -4,11 +4,11 @@ $light-color: #ebecf0;
 $dark-color: $BackgroundLayer02;
 
 .light-mode {
-    background-color: $light-color;
+    background-color: $light-color !important;
     color: $dark-color;
 }
 
 .dark-mode {
-    background-color: $dark-color;
+    background-color: $dark-color !important;
     color: $light-color;
 }

@@ -27,7 +27,9 @@ const Header = () => {
 
     const showStyles = {
         visibility: 'visible',
-        transform: 'scale(1,1)',
+        transform: 'translate(0px) scale(1)',
+        right: '0',
+        top: '55px'
     };
 
     const handleLogOut = () => {
@@ -46,7 +48,7 @@ const Header = () => {
                 <ToggleTheme />
                 <span className={`${themeStore.theme}-mode`}>
                     Xin chào,{' '}
-                    <Link to="/user" className={`${themeStore.theme}-mode`}>
+                    <Link to="/info" className={`${themeStore.theme}-mode`}>
                         {userName}
                     </Link>
                 </span>

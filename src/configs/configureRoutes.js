@@ -4,7 +4,8 @@ import ProjectListPage from '../pages/ProjectListPage/ProjectListPage';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import RolePage from '../pages/RolePage/RolePage';
 import ProjectDetail from '../pages/ProjectDetail/ProjectDetail';
-// import InfoPage from '../pages/InfoPage/InfoPage';
+import InfoPage from '../pages/InfoPage/InfoPage';
+import ChangePasswordPage from '../pages/ChangePasswordPage/ChangePasswordPage';
 
 const routes = [
     {
@@ -27,10 +28,14 @@ const routes = [
         path: '/role',
         element: <RolePage />,
     },
-    // {
-    //     path: '/info',
-    //     element: <InfoPage />,
-    // },
+    {
+        path: '/info',
+        element: <InfoPage />,
+    },
+    {
+        path: '/change-password',
+        element: <ChangePasswordPage />,
+    }
 ];
 
 export default routes;
