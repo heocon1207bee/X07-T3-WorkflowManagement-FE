@@ -1,5 +1,5 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
@@ -33,6 +33,12 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
     const [content, setContent] = useState('');
+
+    useEffect(() => {
+        form.setFieldsValue({
+            description: content,
+        });
+    }, [content]);
 
     const assignee = members.reduce((assignee, item) => {
         if (item.status === ACCEPTED) assignee.push(item.member);
@@ -100,6 +106,10 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
         form.resetFields();
     };
 
+    const handleError = (values) => {
+        console.log(values);
+    };
+
     return (
         <Form
             form={form}
@@ -110,6 +120,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 priority: PRIORITY_LOW,
             }}
             onFinish={handleFinish}
+            onFinishFailed={handleError}
         >
             <Form.Item
                 label="Tiêu đề"
@@ -209,9 +220,9 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                         },
                     }),
                 ]}
-                validateTrigger={false}
+                validateTrigger={'onBlur'}
             >
-                <JoditEditor value={content} onChange={setContent} />
+                <JoditEditor content={content} setContent={setContent} />
             </Form.Item>
             {contextHolder}
         </Form>

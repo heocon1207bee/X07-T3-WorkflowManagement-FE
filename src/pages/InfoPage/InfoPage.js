@@ -17,7 +17,7 @@ const InfoPage = () => {
                         src='https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg' />
                 </div>
                 <div className='user-info'>
-                    <button onClick={()=>{setEdit(!edit)}}><AiOutlineEdit/></button>
+                    <button className='edit-info-button' onClick={()=>{setEdit(!edit)}}><AiOutlineEdit/></button>
                     {edit?<UserInfoModal/>:<UserInfoInf />}
                 </div>
             </div>
@@ -42,7 +42,7 @@ export const UserInfoInf = () => {
 
 export const UserInfoModal = () => {
     return (
-        <Form>
+        <Form layout={'horizontal'} labelCol={{span: 5}}>
             <Form.Item label='Họ và tên' required>
                 <Input placeholder='Nhập họ và tên'/>
             </Form.Item>
@@ -67,7 +67,7 @@ export const UserInfoModal = () => {
             <Form.Item label='Mô tả bản thân'>
                 <Input.TextArea placeholder='Nhập mô tả bản thân'/>
             </Form.Item>
-            <Form.Item>
+            <Form.Item wrapperCol={{span: 12, offset: 5}}>
                 <Button type='primary' htmlType='submit'>Lưu</Button>
             </Form.Item>
         </Form>

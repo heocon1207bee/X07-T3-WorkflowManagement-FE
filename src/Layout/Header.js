@@ -29,7 +29,7 @@ const Header = () => {
         visibility: 'visible',
         transform: 'scale(1)',
         right: '0',
-        top: '55px'
+        top: '55px',
     };
 
     const handleLogOut = () => {
@@ -39,31 +39,35 @@ const Header = () => {
 
     return (
         <div className={`header ${themeStore.theme}-mode`}>
-            <div className="header-logo">
-                <Link to="/">
-                    <img src={logo} alt="logo" />
+            <div className='header-logo'>
+                <Link to='/'>
+                    <img src={logo} alt='logo' />
                 </Link>
             </div>
-            <div className="header-button">
+            <div className='header-button'>
                 <ToggleTheme />
                 <span className={`welcome-text ${themeStore.theme}-mode`}>
                     Xin chào,{' '}
-                    <Link to="/user/info" className={`${themeStore.theme}-mode`}>
+                    <Link to='/user/info' className={`${themeStore.theme}-mode`}>
                         {userName}
                     </Link>
                 </span>
                 <span
-                    className="user-avatar"
+                    className='user-avatar'
                     onMouseEnter={(e) => handleShowModal(e)}
                     onMouseLeave={(e) => handleHideModal(e)}
                     onClick={(e) => handleModal(e)}
                 >
-                    <img src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" />
+                    <img
+                        src='https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg' />
                     <div className={`nav-modal ${themeStore.theme}-mode`} style={showModal ? showStyles : null}>
-                        <div className="modal-user-info">
-                            <img src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" />
-                            <p>{userName}</p>
-                        </div>
+                        <Link to='/user/info'>
+                            <div className='modal-user-info'>
+                                <img
+                                    src='https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg' />
+                                <p>{userName}</p>
+                            </div>
+                        </Link>
                         <div className={`modal-user-actions ${themeStore.theme}-mode`}>
                             <button onClick={handleLogOut}>Đăng xuất</button>
                         </div>

@@ -43,7 +43,7 @@ const ProjectItem = ({
             <div className={`project-item ${themeStore.theme}-mode`}>
                 <h4>{title}</h4>
                 <p>Người tạo: {owner}</p>
-                <div className="project-option-button" onClick={(e) => e.stopPropagation()}>
+                <div className="project-option-button" onClick={(e) => {e.preventDefault()}}>
                     {have(roles, MANAGE_MEMBER) && (
                         <Tooltip title="Thành viên" placement="bottom">
                             <button

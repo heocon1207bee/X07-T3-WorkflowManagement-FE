@@ -6,6 +6,14 @@ import TaskDetails from '../TaskDetails/TaskDetails';
 import TaskItem from './TaskItem';
 import { useSelector } from 'react-redux';
 import CardServices from '../../services/Project/Card/CardServices';
+import {
+    CARD_OPEN_VN,
+    CARD_INPROGRESS_VN,
+    CARD_REOPEN_VN,
+    CARD_DONE_VN,
+    CARD_PREVIEW_VN,
+} from '../../configs/i18n/VietNamese';
+import { CARD_DONE, CARD_INPROGRESS, CARD_OPEN, CARD_PREVIEW, CARD_REOPEN } from '../../configs/CARD_STATUS';
 
 const task = [
     {
@@ -102,29 +110,29 @@ const TaskList = (props) => {
                 break;
             case 1:
                 task.map((task) => {
-                    if (task.id == isDrag && (task.status === 'open' || task.status === 're open')) {
-                        task.status = 'in progress';
+                    if (task.id == isDrag && (task.status === CARD_OPEN || task.status === CARD_REOPEN)) {
+                        task.status = CARD_INPROGRESS;
                     }
                 });
                 break;
             case 2:
                 task.map((task) => {
-                    if (task.id == isDrag && task.status === 'in progress') {
-                        task.status = 'in review';
+                    if (task.id == isDrag && task.status === CARD_INPROGRESS) {
+                        task.status = CARD_PREVIEW;
                     }
                 });
                 break;
             case 3:
                 task.map((task) => {
-                    if (task.id == isDrag && (task.status === 'in review' || task.status === 'done')) {
-                        task.status = 're open';
+                    if (task.id == isDrag && (task.status === CARD_PREVIEW || task.status === CARD_DONE)) {
+                        task.status = CARD_REOPEN;
                     }
                 });
                 break;
             case 4:
                 task.map((task) => {
-                    if (task.id == isDrag && task.status === 'in review') {
-                        task.status = 'done';
+                    if (task.id == isDrag && task.status === CARD_PREVIEW) {
+                        task.status = CARD_DONE;
                     }
                 });
                 break;
@@ -161,7 +169,7 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 0)}
                 >
                     <div className="status-label">
-                        <h3>Open</h3>
+                        <h3>{CARD_OPEN_VN}</h3>
                     </div>
                     <div className="task-box">
                         {statusFilter('CARD_OPEN').map((task) => (
@@ -181,7 +189,7 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 3)}
                 >
                     <div className="status-label">
-                        <h3>Re-Open</h3>
+                        <h3>{CARD_REOPEN_VN}</h3>
                     </div>
                     <div className="task-box">
                         {statusFilter('re open').map((task) => (
@@ -201,7 +209,7 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 1)}
                 >
                     <div className="status-label">
-                        <h3>In Progress</h3>
+                        <h3>{CARD_INPROGRESS_VN}</h3>
                     </div>
                     <div className="task-box">
                         {statusFilter('in progress').map((task) => (
@@ -221,7 +229,7 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 2)}
                 >
                     <div className="status-label">
-                        <h3>In Review</h3>
+                        <h3>{CARD_PREVIEW_VN}</h3>
                     </div>
                     <div className="task-box">
                         {statusFilter('in review').map((task) => (
@@ -241,7 +249,7 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 4)}
                 >
                     <div className="status-label">
-                        <h3>Done</h3>
+                        <h3>{CARD_DONE_VN}</h3>
                     </div>
                     <div className="task-box">
                         {statusFilter('done').map((task) => (
