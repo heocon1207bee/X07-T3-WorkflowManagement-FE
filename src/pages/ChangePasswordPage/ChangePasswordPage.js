@@ -6,6 +6,7 @@ import { Form, Input, Button } from 'antd';
 
 const ChangePasswordPage = (props) => {
     const themeStore = useSelector(state => state.theme);
+    console.log('change password page loaded')
     return (
         <InfoPageLayout>
             <div className='change-password-container'>

@@ -7,13 +7,14 @@ import { Spin } from 'antd';
 import removeVietnamese from '../../utils/RemoveVietnamese';
 
 const ProjectList = (props) => {
+    const themeStore = useSelector((state) => state.theme);
     const searchValue = removeVietnamese(useSelector((state) => state.searchValue).toLowerCase());
     const projectDataWithoutSearch = useSelector((state) => state.projectData);
     const projectData = props.lazy
         ? projectDataWithoutSearch.filter((d) => removeVietnamese(d.project.title.toLowerCase()).includes(searchValue))
         : projectDataWithoutSearch;
     return (
-        <div className="project-list-container">
+        <div className={`project-list-container ${themeStore.theme}-mode`}>
             <div className={!props.lazy ? 'pjl-label sticky' : 'pjl-label'}>
                 <h3>Danh sách dự án {props.loading && <Spin />}</h3>
             </div>

@@ -7,18 +7,19 @@ import { NavLink } from 'react-router-dom';
 const { Sider, Content } = Layout;
 
 const InfoPageLayout = (props) => {
-    const themeStore = useSelector(state => state.theme);
+    const themeStore = useSelector((state) => state.theme);
     const activeClassName = `info-page-nav ${themeStore.theme}-mode info-page-nav-active`;
     const unActiveClassName = `info-page-nav ${themeStore.theme}-mode`;
+    console.log('info page layout loaded')
     return (
         <div className={`user-info-page ${themeStore.theme}-mode`}>
             <Layout className={`${themeStore.theme}-mode`}>
-                <Sider width='15rem' theme={themeStore.theme}
+               <Sider width='15rem' theme={themeStore.theme}
                        className={`user-info-page-sider ${themeStore.theme}-mode`}>
-                    <NavLink to='/info' className={({ isActive }) => isActive ? activeClassName : unActiveClassName}>
+                    <NavLink to='/user/info' className={({ isActive }) => isActive ? activeClassName : unActiveClassName}>
                         Thông tin người dùng
                     </NavLink>
-                    <NavLink to='/change-password'
+                    <NavLink to='/user/change-password'
                              className={({ isActive }) => isActive ? activeClassName : unActiveClassName}
                              activeClassName='info-page-nav-active'>
                         Đổi mật khẩu

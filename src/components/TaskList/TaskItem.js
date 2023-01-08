@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { formatDate } from '../../utils/DateTimeFormater';
+import TaskDetails from '../TaskDetails/TaskDetails';
 
 const TaskItem = (props) => {
+    const [openDetail, setOpenDetail] = useState(false);
+    const themeStore = useSelector((state) => state.theme);
     const status = (status) => {
         switch (status) {
             case 'CARD_OPEN':
@@ -44,10 +48,14 @@ const TaskItem = (props) => {
                 return '';
         }
     };
+
+    const handleDetailClose = () => {
+        setOpenDetail(false);
+    }
     return (
         <div
-            className="task-item"
-            onClick={props.taskClickHandle}
+            className={`task-item ${themeStore.theme}-mode`}
+            onClick={()=>setOpenDetail(true)}
             onDragStart={(e) => props.onDragStart(e, props.task.id)}
             onDragEnd={props.onDragEnd}
             draggable
@@ -72,6 +80,7 @@ const TaskItem = (props) => {
                 <div className="task-item-do">Người thực hiện: {props.task.do ? props.task.do : 'Không dữ liệu'}</div>
                 <div className="task-item-deadline">Hết hạn: {formatDate(props.task.deadline)}</div>
             </div>
+            <TaskDetails open={openDetail} setClose={handleDetailClose}/>
         </div>
     );
 };

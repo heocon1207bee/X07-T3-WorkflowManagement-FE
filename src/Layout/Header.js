@@ -27,7 +27,7 @@ const Header = () => {
 
     const showStyles = {
         visibility: 'visible',
-        transform: 'translate(0px) scale(1)',
+        transform: 'scale(1)',
         right: '0',
         top: '55px'
     };
@@ -46,9 +46,9 @@ const Header = () => {
             </div>
             <div className="header-button">
                 <ToggleTheme />
-                <span className={`${themeStore.theme}-mode`}>
+                <span className={`welcome-text ${themeStore.theme}-mode`}>
                     Xin chào,{' '}
-                    <Link to="/info" className={`${themeStore.theme}-mode`}>
+                    <Link to="/user/info" className={`${themeStore.theme}-mode`}>
                         {userName}
                     </Link>
                 </span>
@@ -59,12 +59,12 @@ const Header = () => {
                     onClick={(e) => handleModal(e)}
                 >
                     <img src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" />
-                    <div className="nav-modal" style={showModal ? showStyles : null}>
+                    <div className={`nav-modal ${themeStore.theme}-mode`} style={showModal ? showStyles : null}>
                         <div className="modal-user-info">
                             <img src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" />
                             <p>{userName}</p>
                         </div>
-                        <div className="modal-user-actions">
+                        <div className={`modal-user-actions ${themeStore.theme}-mode`}>
                             <button onClick={handleLogOut}>Đăng xuất</button>
                         </div>
                     </div>

@@ -8,9 +8,10 @@ import TaskList from '../../components/TaskList/TaskList';
 import './ProjectDetails.style.scss';
 import ProjectList from '../../components/ProjectList/ProjectList';
 import ProjectServices from '../../services/Project/projectServices';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ProjectDetail = () => {
+    const themeStore = useSelector((state) => state.theme);
     const [openModal, setOpenModal] = useState(false);
     const [loading, setLoading] = useState(false);
     const [pError, setPError] = useState();
@@ -62,7 +63,7 @@ const ProjectDetail = () => {
         <div className="project-task-page">
             <ProjectList loading={loading} />
             <div>
-                <div className="project--nav">
+                <div className={`project--nav ${themeStore.theme}-mode`}>
                     <div className="project-name--nav">
                         <Link
                             to="/"
@@ -74,7 +75,7 @@ const ProjectDetail = () => {
                             }}
                         >
                             <LeftOutlined />
-                            Tên của dự án
+                            Về trang chủ
                         </Link>
                     </div>
                     <div className="task-option--nav">

@@ -9,18 +9,17 @@
     padding: 20px 30px;
 
     .search-bar {
-        width: 80%;
+        width: 600px;
         display: flex;
         flex-direction: row;
         align-items: center;
-        input {
+        .input-search {
             @include inputStyle();
-            margin: 10px;
             width: 100%;
-            padding: 10px;
+            border: none;
+            padding: 0;
         }
         .dark-mode {
-            background-color: #f4f5f7;
             color: $dark-color;
         }
     }
