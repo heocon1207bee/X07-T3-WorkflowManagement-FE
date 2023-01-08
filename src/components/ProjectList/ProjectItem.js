@@ -6,6 +6,7 @@ import RoleForm from '../RoleForm/RoleForm';
 import { FORM_EDIT } from '../../configs/FORM_STATUS';
 import { MANAGE_ROLE, MANAGE_MEMBER, UPDATE_PROJECT } from '../../configs/CAPABILITIES';
 import { useSelector } from 'react-redux';
+import InviteForm from '../InviteForm/InviteForm';
 
 const ProjectItem = ({
     projectId = '',
@@ -17,6 +18,7 @@ const ProjectItem = ({
 }) => {
     const themeStore = useSelector((state) => state.theme);
     const [openRole, setOpenRole] = useState(false);
+    const [openMember, setOpenMember] = useState(false);
     const { target, deadline } = project;
     const have = (roles, r) => {
         const role = roles.filter((d) => d === r);
@@ -29,6 +31,9 @@ const ProjectItem = ({
     const handleRole = () => {
         setOpenRole(!openRole);
     };
+    const handleMember = () => {
+        setOpenMember(!openMember);
+    };
 
     return (
         <NavLink
@@ -38,18 +43,21 @@ const ProjectItem = ({
             <div className={`project-item ${themeStore.theme}-mode`}>
                 <h4>{title}</h4>
                 <p>Người tạo: {owner}</p>
-                <div className="project-option-button" onClick={(e) => e.stopPropagation()}>
+                <div className="project-option-button" onClick={(e) => {e.preventDefault()}}>
                     {have(roles, MANAGE_MEMBER) && (
                         <Tooltip title="Thành viên" placement="bottom">
                             <button
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    e.stopPropagation();
+                                    handleMember();
                                 }}
                             >
                                 <UsergroupAddOutlined />
                             </button>
                         </Tooltip>
                     )}
+                    {openMember && <InviteForm projectId={projectId} opening={openMember} handleOpen={handleMember}/>}
                     {have(roles, MANAGE_ROLE) && (
                         <Tooltip title="Vai trò" placement="bottom">
                             <button

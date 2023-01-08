@@ -1,0 +1,55 @@
+@import "../../assets/scss/button";
+
+.user-info-container {
+  min-height: calc(100vh - 60px);
+  height: fit-content;
+  padding: 2rem;
+}
+
+.user-info-avatar {
+  img {
+    width: 17rem;
+    height: 17rem;
+    border-radius: 50%;
+  }
+}
+
+.dark-mode {
+  .user-info {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+.light-mode {
+  .user-info {
+    border: 1px solid rgba(0, 0, 0, 0.3)
+  }
+}
+
+.user-info {
+  position: relative;
+  margin-top: 3rem;
+  padding: 10px;
+  max-width: 800px;
+  button {
+    @include acceptButton();
+  }
+
+  .ant-form {
+    margin-top: 1rem;
+  }
+
+  .edit-info-button {
+    position: absolute;
+    top: -30px;
+    right: 0;
+  }
+}
+
+.user-info-info {
+  margin-top: 1rem;
+  height: 300px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr 1fr 3fr 1fr;
+}

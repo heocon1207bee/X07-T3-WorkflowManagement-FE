@@ -1,0 +1,33 @@
+@import "../../assets/scss/color";
+
+.user-info-page-sider {
+  border-right: 1px solid $Border01;
+
+  .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+
+    .info-page-nav {
+      margin-top: 5px;
+      padding: 20px 10px;
+      border-radius: 0 30px 30px 0;
+      border: 1px solid $Border01;
+      border-left: none;
+
+      &:hover {
+        color: $BackgroundButton01_hover;
+      }
+    }
+
+    .info-page-nav-active {
+      background-color: $BackgroundButton01 !important;
+      border-color: transparent;
+      font-weight: bold;
+
+      &:hover {
+        //text-decoration: underline;
+        color: currentColor;
+      }
+    }
+  }
+}

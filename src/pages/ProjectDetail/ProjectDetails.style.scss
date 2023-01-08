@@ -5,13 +5,17 @@
 .project-task-page {
     display: grid;
     grid-template-columns: 1fr 4fr;
+
+    .project-list-container {
+        max-height: calc(100vh - 60px);
+        overflow-y: scroll;
+    }
 }
 
 .project-list-container {
     border-right: 1px solid #ffffff;
-    max-height: calc(100vh - 60px);
-    overflow-y: auto;
     transition: all 0.3s ease;
+    min-height: calc(100vh - 60px);
 
     &:hover {
         scrollbar-width: thin;

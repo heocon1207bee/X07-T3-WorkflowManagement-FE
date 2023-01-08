@@ -6,7 +6,7 @@
     height: 60px !important;
     position: sticky;
     top: 0;
-    z-index: 0;
+    z-index: 1;
     background-color: rgb(27, 27, 28);
     display: flex;
     flex-direction: row;
@@ -20,6 +20,7 @@
 }
 
 .header-logo {
+    margin-left: 20px;
     img {
         height: 60px !important;
         width: auto;
@@ -48,7 +49,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%;
+
         img {
             height: 35px;
             width: auto;
@@ -70,14 +71,14 @@
 .nav-modal {
     position: absolute;
     z-index: 100;
-    right: -10px;
-    top: 55px;
+    right: -120px;
+    top: -30px;
     background-color: $BackgroundLayer02;
     padding: 15px;
     border-radius: 10px;
     min-width: 300px;
     border: 1px solid $Border01;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-out;
     visibility: hidden;
     transform: scale(0);
 }
@@ -107,5 +108,11 @@
         color: $buttonRed;
         width: 100%;
         padding: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .welcome-text {
+        display: none;
     }
 }

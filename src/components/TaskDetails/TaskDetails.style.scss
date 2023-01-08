@@ -3,18 +3,20 @@
 @import "../../assets/scss/input";
 
 .task-details {
-  width: 50%;
-  min-width: 600px;
-  max-width: 750px;
-  height: 480px;
-  background-color: $mainBgWhite;
   border-radius: 10px;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
+
+  .ant-modal-content {
+
+    .ant-modal-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 }
 
 .task-info-container {
   padding: 20px;
+
 }
 
 .task-info-header {
@@ -36,10 +38,11 @@
 }
 
 .task-comment-container {
-  border-radius: 10px;
+  //border-radius: 10px;
   display: table;
   padding: 20px;
-  background-color: #c5c5c5;
+  //background-color: #c5c5c5;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .comments-box {

@@ -75,7 +75,7 @@ const ProjectDetail = () => {
                             }}
                         >
                             <LeftOutlined />
-                            Tên của dự án
+                            Về trang chủ
                         </Link>
                     </div>
                     <div className="task-option--nav">

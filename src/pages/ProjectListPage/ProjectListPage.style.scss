@@ -25,9 +25,10 @@
 
             .project-list {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+                grid-template-columns: repeat(auto-fit, minmax(200px, auto));
                 grid-gap: 15px;
                 grid-auto-rows: minmax(150px, 1fr);
+                overflow-y: unset;
 
                 .project-item {
                     padding: 1rem;

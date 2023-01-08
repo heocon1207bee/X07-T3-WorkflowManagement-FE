@@ -4,10 +4,13 @@
 
 .invite-container {
     flex: 25%;
-    min-width: 200px;
     max-width: 400px;
     min-height: calc(100vh - 60px);
     border-right: 1px solid #fff;
+    z-index: auto;
+    position: relative;
+    transition: all 0.06s ease-out;
+    transform-origin: 0 50%;
 
     &.light-mode {
         background-color: $dinamic-backgroud-color-transparent;
@@ -80,5 +83,49 @@
                 border: none;
             }
         }
+    }
+}
+
+.visible-invite-button {
+    position: fixed;
+    width: 25px;
+    height: 6rem;
+    font-size: 20px;
+    top: calc(50vh - (50vh - 50%) - 3rem);
+    left: 0;
+    transform: scale(0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 10px 10px 0;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+
+@media (max-width: 1000px) {
+    .invite-container {
+        visibility: hidden;
+        transform: scaleX(0);
+        flex: 0;
+        position: fixed;
+        z-index: 2;
+        width: 100vw;
+
+        .invite-label {
+            padding: 0;
+        }
+    }
+
+
+
+    .invite-visible-true {
+        visibility: visible;
+        transform: scaleX(1);
+    }
+
+    .visible-invite-button {
+        visibility: visible;
+        transform: scale(1);
+        z-index: 3;
     }
 }

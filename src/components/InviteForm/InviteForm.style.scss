@@ -1,0 +1,64 @@
+@import "../../assets/scss/color";
+@import "../../assets/scss/button";
+
+.member-modal {
+
+}
+
+.member-form {
+  width: 100%;
+  .member-form-button {
+    background-color: $BackgroundButton01;
+    font-size: 19px;
+    &:hover {
+      background-color: $BackgroundButton01_hover;
+    }
+  }
+}
+
+.member-form-list-title {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr 1fr 0.5fr 0.2fr;
+  margin-top: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 5px 0;
+}
+
+.member-form-list {
+  margin-top: 10px;
+  height: 260px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.member-item {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 0.2fr 1fr 1fr 0.5fr 0.2fr;
+  align-items: center;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  text-align: center;
+
+
+  @mixin memberItemButton() {
+    visibility: hidden;
+    transform: scale(0);
+    width: 0;
+    border: none;
+    box-shadow: none;
+  }
+  .edit-button {
+    @include memberItemButton();
+    font-size: 17px;
+  }
+  .delete-button {
+    font-size: 20px;
+    @include memberItemButton();
+    &:hover {
+      color: $buttonRed;
+    }
+  }
+}
