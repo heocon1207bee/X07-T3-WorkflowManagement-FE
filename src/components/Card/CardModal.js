@@ -32,7 +32,7 @@ const CardModal = ({ modal, members }) => {
             ]}
             closable={false}
             className="modal-card"
-            width={'50%'}
+            width={'80%'}
         >
             <CardForm
                 form={form}
