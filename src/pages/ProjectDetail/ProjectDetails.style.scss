@@ -24,6 +24,7 @@
     .pjl-label {
         padding: 1em;
         border-bottom: 1px solid #ffffff;
+        background-color: inherit;
         &.light-mode {
             color: $dark-color;
         }

@@ -1,5 +1,5 @@
 import Jodit from 'jodit-react';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 const config = {
     cloud_name: process.env.REACT_APP_CLOUD_NAME,
@@ -9,19 +9,13 @@ const config = {
     folder: process.env.REACT_APP_CLOUD_FOLDER,
 };
 
-const JoditEditor = ({ value, onChange }) => {
-    const editor = useRef(null);
-    useEffect(() => {
-        editor.current.focus();
-    }, [editor]);
-
+const JoditEditor = ({ content, setContent }) => {
+    const editorRef = useRef(null);
     return (
         <Jodit
-            ref={editor}
-            value={value}
-            useInput={true}
-            tabIndex={-1}
-            onChange={onChange}
+            ref={editorRef}
+            value={content}
+            onBlur={(newContent) => setContent(newContent)}
             config={{
                 placeholder: '',
                 uploader: {
@@ -45,7 +39,7 @@ const JoditEditor = ({ value, onChange }) => {
                         return def;
                     },
                     isSuccess: (response) => {
-                        editor.current.component.selection.insertImage(response.secure_url, response.public_id);
+                        editorRef.current.component.selection.insertImage(response.secure_url, response.public_id);
                     },
                 },
             }}
