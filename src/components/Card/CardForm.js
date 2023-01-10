@@ -1,5 +1,5 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
@@ -104,6 +104,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
         }
 
         form.resetFields();
+        setContent('');
     };
 
     const handleError = (values) => {
