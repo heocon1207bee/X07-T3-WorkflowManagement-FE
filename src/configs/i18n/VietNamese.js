@@ -29,8 +29,8 @@ export const ACCEPTED_VN = 'Đã chấp nhận';
 export const REJECTED_VN = 'Đã từ chối';
 
 export const CARD_OPEN_VN = 'Mở';
-export const CARD_INPROGRESS_VN = 'Đang thực hiện';
-export const CARD_REOPEN_VN = 'Mở lại';
+export const CARD_IN_PROGRESS_VN = 'Đang thực hiện';
+export const CARD_RE_OPEN_VN = 'Mở lại';
 export const CARD_DONE_VN = 'Hoàn thành';
-export const CARD_PREVIEW_VN = 'Đang xét duyệt';
+export const CARD_IN_PREVIEW_VN = 'Đang xét duyệt';
 export const CARD_CANCEL_VN = 'Hủy bỏ';
