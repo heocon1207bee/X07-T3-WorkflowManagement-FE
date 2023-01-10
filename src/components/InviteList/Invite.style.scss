@@ -4,7 +4,7 @@
 
 .invite-container {
     flex: 25%;
-    max-width: 400px;
+    max-width: 450px;
     min-height: calc(100vh - 60px);
     border-right: 1px solid #fff;
     z-index: auto;
@@ -88,7 +88,7 @@
 
 .visible-invite-button {
     position: fixed;
-    width: 25px;
+    width: 45px;
     height: 6rem;
     font-size: 20px;
     top: calc(50vh - (50vh - 50%) - 3rem);
@@ -97,12 +97,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0 50% 50% 0;
+    border-radius: 0 100px 100px 0;
     border: 1px solid rgba(0, 0, 0, 0.5);
-    //background-color: $BackgroundButton01;
-    //color: $Text01;
+    opacity: .8;
 }
 
+.dark-mode {
+    .visible-invite-button {
+        background-color: $BackgroundButton01;
+        border: 1px solid $Border01;
+        color: white;
+    }
+}
+
+.invite-overlay {
+    display: none;
+}
 
 @media (max-width: 1000px) {
     .invite-container {
@@ -118,7 +128,23 @@
         }
     }
 
+    .invite-overlay {
+        display: unset;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 
+    .invisible-overlay {
+        transform: scaleX(0);
+    }
+    .visible-overlay {
+        transform: scaleX(1);
+    }
 
     .invite-visible-true {
         visibility: visible;

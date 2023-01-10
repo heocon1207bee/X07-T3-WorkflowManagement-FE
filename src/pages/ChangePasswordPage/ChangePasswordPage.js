@@ -12,13 +12,13 @@ const ChangePasswordPage = (props) => {
             <div className='change-password-container'>
                 <h1>Đổi mật khẩu</h1>
                 <Form labelCol={{span: 5}} autoComplete='off'>
-                    <Form.Item label='Old Password (*)'>
+                    <Form.Item label='Old Password' required>
                         <Input.Password/>
                     </Form.Item>
-                    <Form.Item label='New Password (*)'>
+                    <Form.Item label='New Password' required>
                         <Input.Password/>
                     </Form.Item>
-                    <Form.Item label='Confirm New Password (*)'>
+                    <Form.Item label='Confirm New Password' required>
                         <Input.Password/>
                     </Form.Item>
                     <Form.Item wrapperCol={{offset: 22, span: 22 }}>

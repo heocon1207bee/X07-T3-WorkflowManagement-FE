@@ -9,6 +9,7 @@ import './ProjectDetails.style.scss';
 import ProjectList from '../../components/ProjectList/ProjectList';
 import ProjectServices from '../../services/Project/projectServices';
 import { useDispatch, useSelector } from 'react-redux';
+import CardFilter from '../../components/CardFilter/CardFilter';
 
 const ProjectDetail = () => {
     const themeStore = useSelector((state) => state.theme);
@@ -78,6 +79,7 @@ const ProjectDetail = () => {
                             Về trang chủ
                         </Link>
                     </div>
+
                     <div className="task-option--nav">
                         <button>
                             Lọc <BiFilterAlt />
@@ -87,6 +89,7 @@ const ProjectDetail = () => {
                         </button>
                     </div>
                 </div>
+                {/*<CardFilter />*/}
                 <div className="project-task-container">
                     <TaskList reRender={openModal} />
                 </div>
