@@ -107,10 +107,6 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
         setContent('');
     };
 
-    const handleError = (values) => {
-        console.log(values);
-    };
-
     return (
         <Form
             form={form}
@@ -121,7 +117,6 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 priority: PRIORITY_LOW,
             }}
             onFinish={handleFinish}
-            onFinishFailed={handleError}
         >
             <Form.Item
                 label="Tiêu đề"
