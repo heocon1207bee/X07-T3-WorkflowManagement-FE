@@ -8,12 +8,12 @@ import { useSelector } from 'react-redux';
 import CardServices from '../../services/Project/Card/CardServices';
 import {
     CARD_OPEN_VN,
-    CARD_INPROGRESS_VN,
-    CARD_REOPEN_VN,
+    CARD_IN_PROGRESS_VN,
+    CARD_RE_OPEN_VN,
     CARD_DONE_VN,
-    CARD_PREVIEW_VN,
+    CARD_IN_PREVIEW_VN,
 } from '../../configs/i18n/VietNamese';
-import { CARD_DONE, CARD_INPROGRESS, CARD_OPEN, CARD_PREVIEW, CARD_REOPEN } from '../../configs/CARD_STATUS';
+import { CARD_DONE, CARD_IN_PROGRESS, CARD_OPEN, CARD_IN_PREVIEW, CARD_RE_OPEN } from '../../configs/CARD_STATUS';
 
 const task = [
     {
@@ -110,28 +110,28 @@ const TaskList = (props) => {
                 break;
             case 1:
                 task.map((task) => {
-                    if (task.id == isDrag && (task.status === CARD_OPEN || task.status === CARD_REOPEN)) {
-                        task.status = CARD_INPROGRESS;
+                    if (task.id == isDrag && (task.status === CARD_OPEN || task.status === CARD_RE_OPEN)) {
+                        task.status = CARD_IN_PROGRESS;
                     }
                 });
                 break;
             case 2:
                 task.map((task) => {
-                    if (task.id == isDrag && task.status === CARD_INPROGRESS) {
-                        task.status = CARD_PREVIEW;
+                    if (task.id == isDrag && task.status === CARD_IN_PROGRESS) {
+                        task.status = CARD_IN_PREVIEW;
                     }
                 });
                 break;
             case 3:
                 task.map((task) => {
-                    if (task.id == isDrag && (task.status === CARD_PREVIEW || task.status === CARD_DONE)) {
-                        task.status = CARD_REOPEN;
+                    if (task.id == isDrag && (task.status === CARD_IN_PREVIEW || task.status === CARD_DONE)) {
+                        task.status = CARD_RE_OPEN;
                     }
                 });
                 break;
             case 4:
                 task.map((task) => {
-                    if (task.id == isDrag && task.status === CARD_PREVIEW) {
+                    if (task.id == isDrag && task.status === CARD_IN_PREVIEW) {
                         task.status = CARD_DONE;
                     }
                 });
@@ -172,7 +172,7 @@ const TaskList = (props) => {
                         <h3>{CARD_OPEN_VN}</h3>
                     </div>
                     <div className="task-box">
-                        {statusFilter('CARD_OPEN').map((task) => (
+                        {statusFilter(CARD_OPEN).map((task) => (
                             <TaskItem
                                 key={task._id}
                                 task={task}
@@ -189,10 +189,10 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 3)}
                 >
                     <div className="status-label">
-                        <h3>{CARD_REOPEN_VN}</h3>
+                        <h3>{CARD_RE_OPEN_VN}</h3>
                     </div>
                     <div className="task-box">
-                        {statusFilter('re open').map((task) => (
+                        {statusFilter(CARD_RE_OPEN).map((task) => (
                             <TaskItem
                                 key={task.id}
                                 task={task}
@@ -209,10 +209,10 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 1)}
                 >
                     <div className="status-label">
-                        <h3>{CARD_INPROGRESS_VN}</h3>
+                        <h3>{CARD_IN_PROGRESS_VN}</h3>
                     </div>
                     <div className="task-box">
-                        {statusFilter('in progress').map((task) => (
+                        {statusFilter(CARD_IN_PROGRESS).map((task) => (
                             <TaskItem
                                 key={task.id}
                                 task={task}
@@ -229,10 +229,10 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 2)}
                 >
                     <div className="status-label">
-                        <h3>{CARD_PREVIEW_VN}</h3>
+                        <h3>{CARD_IN_PREVIEW_VN}</h3>
                     </div>
                     <div className="task-box">
-                        {statusFilter('in review').map((task) => (
+                        {statusFilter(CARD_IN_PREVIEW).map((task) => (
                             <TaskItem
                                 key={task.id}
                                 task={task}
@@ -252,7 +252,7 @@ const TaskList = (props) => {
                         <h3>{CARD_DONE_VN}</h3>
                     </div>
                     <div className="task-box">
-                        {statusFilter('done').map((task) => (
+                        {statusFilter(CARD_DONE).map((task) => (
                             <TaskItem
                                 key={task.id}
                                 task={task}
