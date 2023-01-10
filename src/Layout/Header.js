@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Header.style.scss';
-import logo from '../assets/images/pumanager-logo.png';
+import logo from '../assets/images/X-logo.png';
+import logo_dark from '../assets/images/X-logo-white.png';
+import logo_light from '../assets/images/X-logo-black.png';
 import { Link } from 'react-router-dom';
 
 import ToggleTheme from '../components/ToggleTheme/ToggleTheme';
@@ -41,7 +43,7 @@ const Header = () => {
         <div className={`header ${themeStore.theme}-mode`}>
             <div className='header-logo'>
                 <Link to='/'>
-                    <img src={logo} alt='logo' />
+                    <img src={themeStore.theme==='dark'?logo_dark:logo_light} alt='logo' />
                 </Link>
             </div>
             <div className='header-button'>

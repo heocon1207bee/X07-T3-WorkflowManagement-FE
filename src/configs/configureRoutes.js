@@ -29,11 +29,11 @@ const routes = [
     },
     {
         path: '/user/change-password',
-        element: <ChangePasswordPage />,
+        element: <PrivateRoute component={ChangePasswordPage}  />,
     },
     {
         path: '/user/info',
-        element: <InfoPage />,
+        element: <PrivateRoute component={InfoPage}  />,
     },
 ];
 

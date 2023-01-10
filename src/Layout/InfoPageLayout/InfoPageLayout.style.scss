@@ -31,3 +31,22 @@
     }
   }
 }
+
+@media (max-width: 820px) {
+  aside {
+    flex: 0 !important;
+    min-width: 0 !important;
+    max-width: 45px !important;
+    width: 45px !important;
+    .info-page-nav {
+      width: 30px;
+      writing-mode:tb-rl;
+      -webkit-transform:rotate(360deg);
+      -moz-transform:rotate(360deg);
+      -o-transform: rotate(360deg);
+      -ms-transform:rotate(360deg);
+      transform: rotate(360deg);
+      white-space:nowrap;
+    }
+  }
+}
