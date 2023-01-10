@@ -1,5 +1,5 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
@@ -104,10 +104,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
         }
 
         form.resetFields();
-    };
-
-    const handleError = (values) => {
-        console.log(values);
+        setContent('');
     };
 
     return (
@@ -120,7 +117,6 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 priority: PRIORITY_LOW,
             }}
             onFinish={handleFinish}
-            onFinishFailed={handleError}
         >
             <Form.Item
                 label="Tiêu đề"

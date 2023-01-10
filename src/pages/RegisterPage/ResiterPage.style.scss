@@ -1,6 +1,6 @@
-@import '../../assets/scss/color.scss';
-@import '../../assets/scss/input.scss';
-@import '../../assets/scss/button.scss';
+@import '../../assets/scss/color';
+@import '../../assets/scss/input';
+@import '../../assets/scss/button';
 
 .wrapper {
     background-color: $mainBgGray;
@@ -26,9 +26,10 @@
 }
 
 .form-button {
-    @include acceptButton();
     width: 80%;
     margin-top: 10px;
+    background-color: $BackgroundButton01;
+    color: $Text01;
 }
 
 .text-require {
