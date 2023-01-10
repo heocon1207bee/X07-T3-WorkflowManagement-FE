@@ -15,6 +15,7 @@
 
         .project-list-container {
             border-top: 1px solid #ffffff;
+            min-height: unset;
 
             .pjl-label {
                 margin-bottom: 20px;
@@ -38,6 +39,7 @@
                     cursor: pointer;
                     height: 100%;
                     transition: all 0.3s ease-out;
+                    max-width: 500px;
 
                     &.dark-mode {
                         background-color: $BackgroundLayer03;

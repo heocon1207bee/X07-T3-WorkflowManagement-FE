@@ -9,7 +9,7 @@
 
     .ant-modal-body {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 2fr 1fr;
     }
   }
 }
@@ -68,11 +68,11 @@
 .author-comment-avatar {
   grid-area: item1;
   text-align: center;
-  
-  div {
-    height: 30px;
-    width: 30px;
-    background-color: #000;
+  width: 100%;
+
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
   }
 }
@@ -105,11 +105,30 @@
 }
 
 .current-avatar-comment {
-  p {
-    width: 30px;
-    height: 30px;
+  text-align: center;
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
-    background-color: #000000
+    border: 0.3px solid rgba(45, 45, 45, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  .task-details {
+
+    .ant-modal-content {
+
+      .ant-modal-body {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+  .comment {
+    grid-template-areas:
+    'item1 item2 item2 item2 item2 item2 item2 item2 item2'
+    'item1 item3 item3 item3 item3 item3 item3 item3 item3';
   }
 }
 

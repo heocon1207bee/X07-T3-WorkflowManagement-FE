@@ -4,14 +4,12 @@ import TaskComments from './TaskComments/TaskComments';
 import './TaskDetails.style.scss';
 import { Modal } from 'antd';
 
-const TaskDetails = (props) => {
+const TaskDetails = ({ open= false , setClose}) => {
+
     return (
-        <Modal className='task-details' open={props.open}
-               onOk={
-                   e => e.stopPropagation()
-               }
-               onCancel={props.setClose}
-               footer={[]}>
+        <Modal className='task-details' open={open}
+               onCancel={()=>setClose()}
+               footer={[]} width={700}>
             <TaskInfo />
             <TaskComments />
         </Modal>

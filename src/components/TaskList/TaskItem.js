@@ -71,10 +71,8 @@ const TaskItem = (props) => {
         }
     };
 
-    const handleDetailClose = () => {
-        setOpenDetail(false);
-    }
     return (
+        <>
         <div
             className={`task-item ${themeStore.theme}-mode`}
             onClick={()=>setOpenDetail(true)}
@@ -102,8 +100,9 @@ const TaskItem = (props) => {
                 <div className="task-item-do">Người thực hiện: {props.task.do ? props.task.do : 'Không dữ liệu'}</div>
                 <div className="task-item-deadline">Hết hạn: {formatDate(props.task.deadline)}</div>
             </div>
-            <TaskDetails open={openDetail} setClose={handleDetailClose}/>
-        </div>
+
+        </div> {openDetail&&<TaskDetails open={openDetail} setClose={()=>setOpenDetail(false)}/>}
+        </>
     );
 };
 
