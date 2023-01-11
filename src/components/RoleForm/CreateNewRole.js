@@ -5,6 +5,17 @@ import { CheckboxValueType } from 'antd/es/checkbox/Group';
 import './CreateNewRole.style.scss';
 import ProjectServices from '../../services/Project/projectServices';
 
+import {
+    CREATE_CARD_ID,
+    DELETE_CARD_ID,
+    MANAGE_MEMBER_ID,
+    MANAGE_ROLE_ID,
+    UPDATE_ASSIGNEE_ID,
+    UPDATE_CARD_STATUS_ID,
+    UPDATE_CARD_ID,
+    UPDATE_PROJECT_ID,
+} from '../../configs/CAPABILITIES';
+
 export default function CreateNewRole(props) {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
@@ -55,18 +66,18 @@ export default function CreateNewRole(props) {
         <>
             <Modal
                 open={props.open}
-                title="Thêm vai trò mới/chỉnh sửa"
+                title='Thêm vai trò mới/chỉnh sửa'
                 onOk={handleOk}
                 onCancel={props.close}
-                className="role-modal"
+                className='role-modal'
                 footer={[
-                    <Button className="close-role-btn" key="back" onClick={props.close}>
+                    <Button className='close-role-btn' key='back' onClick={props.close}>
                         Hủy
                     </Button>,
                     <Button
-                        className="submit-role-btn"
-                        key="submit"
-                        type="primary"
+                        className='submit-role-btn'
+                        key='submit'
+                        type='primary'
                         loading={loading}
                         onClick={(e) => {
                             handleOk(e);
@@ -77,7 +88,7 @@ export default function CreateNewRole(props) {
                 ]}
             >
                 <Input
-                    placeholder="Tên Vai Trò Mới"
+                    placeholder='Tên Vai Trò Mới'
                     value={inputValue}
                     onChange={(e) => {
                         e.preventDefault();
@@ -85,19 +96,19 @@ export default function CreateNewRole(props) {
                     }}
                 ></Input>
                 <Checkbox.Group onChange={onChange}>
-                    <Space direction="vertical" style={{ marginTop: '10px' }}>
-                        <Checkbox value={'6396f45d5ddd6db8260440c9'}>Quyền P1: Cập nhật dự án</Checkbox>
-                        <Checkbox value={'6396f45d5ddd6db8260440c4'}>Quyền P2: Quản lý thành viên</Checkbox>
-                        <Checkbox value={'6396f45d5ddd6db8260440c2'}>Quyền P3: Tạo mới công việc</Checkbox>
-                        <Checkbox value={'6396f45d5ddd6db8260440c7'}>
+                    <Space direction='vertical' style={{ marginTop: '10px' }}>
+                        <Checkbox value={UPDATE_PROJECT_ID}>Quyền P1: Cập nhật dự án</Checkbox>
+                        <Checkbox value={MANAGE_MEMBER_ID}>Quyền P2: Quản lý thành viên</Checkbox>
+                        <Checkbox value={CREATE_CARD_ID}>Quyền P3: Tạo mới công việc</Checkbox>
+                        <Checkbox value={UPDATE_CARD_ID}>
                             Quyền P4: Cập nhật thông tin chung công việc
                         </Checkbox>
-                        <Checkbox value={'6396f45d5ddd6db8260440c8'}>Quyền P5: Cập nhật trạng thái công việc</Checkbox>
-                        <Checkbox value={'6396f45d5ddd6db8260440c6'}>
+                        <Checkbox value={UPDATE_CARD_STATUS_ID}>Quyền P5: Cập nhật trạng thái công việc</Checkbox>
+                        <Checkbox value={UPDATE_ASSIGNEE_ID}>
                             Quyền P6: Cập nhật người thực hiện công việc
                         </Checkbox>
-                        <Checkbox value={'6396f45d5ddd6db8260440c3'}>Quyền P7: Hủy bỏ công việc</Checkbox>
-                        <Checkbox value={'6396f45d5ddd6db8260440c5'}>Quyền P8: Quản lý vai trò</Checkbox>
+                        <Checkbox value={DELETE_CARD_ID}>Quyền P7: Hủy bỏ công việc</Checkbox>
+                        <Checkbox value={MANAGE_ROLE_ID}>Quyền P8: Quản lý vai trò</Checkbox>
                     </Space>
                 </Checkbox.Group>
             </Modal>

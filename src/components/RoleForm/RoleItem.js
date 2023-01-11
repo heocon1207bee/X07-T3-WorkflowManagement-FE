@@ -9,7 +9,7 @@ const RoleItem = ({roleName='Chưa có tên', capabilities=[]}) => {
     const handleCollapse = () => {
         setCollapse(!isCollapse);
     }
-    const newCap = capabilities.map((d)=>{return roleTrans(d,true)}).sort();
+    const newCap = capabilities.map((d)=>{return roleTrans(d.name,true)}).sort();
     return (
         <div className='role-item'>
             <div className='main-role-item'>

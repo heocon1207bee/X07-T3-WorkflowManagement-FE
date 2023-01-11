@@ -1,5 +1,6 @@
 import axiosInstance from '../Axios/axiosInstance';
 import { API_USER_PROJECTS, AUTH_TOKEN } from '../Axios/urlServerConfigure';
+import async from 'async';
 
 export default {
     getProject: async () => {
@@ -14,10 +15,14 @@ export default {
         const config = {
             headers: { access_token: token },
         }
-        return await axiosInstance.get(`${API_USER_PROJECTS}/${projectId}/roles`, config)
+        return await axiosInstance.get(`${API_USER_PROJECTS}/${projectId}/roles`, config);
     },
     addRole: async (projectId, roleName, capabilities) => {
         const token = await JSON.parse(localStorage.getItem('worlflow_store')).token;
-        return await axiosInstance.post(`${API_USER_PROJECTS}/${projectId}/roles`, { roleName, capabilities })
+        return await axiosInstance.post(`${API_USER_PROJECTS}/${projectId}/roles`, { roleName, capabilities });
+    },
+    inviteMember: async (projectId, data) => {
+        const token = await JSON.parse(localStorage.getItem('worlflow_store')).token;
+        return await axiosInstance.post(`${API_USER_PROJECTS}/${projectId}/invites`, data);
     }
 };

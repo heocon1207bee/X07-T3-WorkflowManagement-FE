@@ -7,12 +7,12 @@
         input {
             @include inputStyle();
             &::placeholder {
-                color: $Text01;
+                //color: $Text01;
             }
         }
         .ant-space-item {
             label {
-                color: $Text01;
+                //color: $Text01;
             }
         }
     }

@@ -44,6 +44,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
         if (item.status === ACCEPTED) assignee.push(item.member);
         return assignee;
     }, []);
+    console.log(members)
     const [priority] = useState([
         {
             label: PRIORITY_HIGHEST_VN,
