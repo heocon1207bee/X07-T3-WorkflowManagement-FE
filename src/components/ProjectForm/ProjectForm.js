@@ -175,7 +175,7 @@ const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate }) => {
                     style={{ width: '60%' }}
                 />
             </Form.Item>
-            <Form.Item label="Trạng thái dự án" name="status">
+            {isUpdate()&&<Form.Item label='Trạng thái dự án' name='status'>
                 <Select style={{ width: '60%' }}>
                     {status.map((item, index) => (
                         <Option key={`${item.value}-${index}`} value={item.value} disabled={item.disable}>
@@ -184,7 +184,7 @@ const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate }) => {
                         </Option>
                     ))}
                 </Select>
-            </Form.Item>
+            </Form.Item>}
         </Form>
     );
 };

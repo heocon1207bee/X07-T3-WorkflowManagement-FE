@@ -31,7 +31,7 @@ const RoleForm = (props) => {
                 setError(err.message);
             }
         } finally {
-            await setRole(role);
+            await setRole(role.sort((a, b)=>a.name > b.name));
         }
     };
 
@@ -39,6 +39,7 @@ const RoleForm = (props) => {
         await getRole()
         setAddRole(false)
     }
+
 
     return (
         <Modal title='Vai trò trong dự án'

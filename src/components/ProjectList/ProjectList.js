@@ -13,6 +13,12 @@ const ProjectList = (props) => {
     const projectData = props.lazy
         ? projectDataWithoutSearch.filter((d) => removeVietnamese(d.project.title.toLowerCase()).includes(searchValue))
         : projectDataWithoutSearch;
+
+    const projectOwner = (data) => {
+        const name = data.project.members.find(d => d.role.name === 'Chủ dự án');
+        return name.user.fullname;
+    }
+
     return (
         <div className={`project-list-container ${themeStore.theme}-mode`}>
             <div className={!props.lazy ? 'pjl-label sticky' : 'pjl-label'}>
@@ -22,16 +28,16 @@ const ProjectList = (props) => {
                 {projectData.map((data) =>
                     props.lazy ? (
                         <LazyLoad
-                            key={data.project_id}
+                            key={data.project._id}
                             height={100}
                             offset={[-100, 100]}
                             placeholder={<ProjectLoading />}
                         >
                             <ProjectItem
-                                key={data.project_id}
-                                projectId={data.project_id}
+                                key={data.project._id}
+                                projectId={data.project._id}
                                 title={data.project.title}
-                                owner={data.project.owner.fullname}
+                                owner={projectOwner(data)}
                                 roles={data.role.capabilities}
                                 project={data.project}
                                 dadProps={props}
@@ -39,10 +45,10 @@ const ProjectList = (props) => {
                         </LazyLoad>
                     ) : (
                         <ProjectItem
-                            key={data.project_id}
-                            projectId={data.project_id}
+                            key={data.project._id}
+                            projectId={data.project._id}
                             title={data.project.title}
-                            owner={data.project.owner.fullname}
+                            owner={projectOwner(data)}
                             roles={data.role.capabilities}
                             project={data.project}
                             dadProps={props}

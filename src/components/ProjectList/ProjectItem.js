@@ -21,7 +21,7 @@ const ProjectItem = ({
     const [openMember, setOpenMember] = useState(false);
     const { target, deadline } = project;
     const have = (roles, r) => {
-        const role = roles.filter((d) => d === r);
+        const role = roles.filter((d) => d.name === r);
         if (role.length > 0) {
             return true;
         } else {
