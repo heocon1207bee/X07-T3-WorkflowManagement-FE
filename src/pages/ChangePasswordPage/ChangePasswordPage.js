@@ -11,14 +11,14 @@ const ChangePasswordPage = (props) => {
         <InfoPageLayout>
             <div className='change-password-container'>
                 <h1>Đổi mật khẩu</h1>
-                <Form labelCol={{span: 5}} autoComplete='off'>
-                    <Form.Item label='Old Password' required>
+                <Form labelCol={{span: 5}} autoComplete='off' onFinish={(values)=>console.log(values)}>
+                    <Form.Item name={'old_password'} label='Old Password' required>
                         <Input.Password/>
                     </Form.Item>
-                    <Form.Item label='New Password' required>
+                    <Form.Item name={'new_password'} label='New Password' required>
                         <Input.Password/>
                     </Form.Item>
-                    <Form.Item label='Confirm New Password' required>
+                    <Form.Item name={'confirm'} label='Confirm New Password' required>
                         <Input.Password/>
                     </Form.Item>
                     <Form.Item wrapperCol={{offset: 22, span: 22 }}>

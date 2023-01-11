@@ -9,7 +9,7 @@ const TaskDetails = ({ open= false , setClose}) => {
     return (
         <Modal className='task-details' open={open}
                onCancel={()=>setClose()}
-               footer={[]} width={700}>
+               footer={[]} width={900}>
             <TaskInfo />
             <TaskComments />
         </Modal>

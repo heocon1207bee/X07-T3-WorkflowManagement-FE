@@ -70,7 +70,6 @@ const ProjectDetail = () => {
                             to="/"
                             style={{
                                 color: 'rgb(255, 117, 23)',
-                                fontSize: '23px',
                                 textDecoration: 'none',
                                 fontWeight: '600',
                             }}
