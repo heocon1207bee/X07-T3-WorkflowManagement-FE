@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import moment from 'moment';
 import './ProjectForm.style.scss';
 import { Form, Input, DatePicker, Select } from 'antd';
@@ -11,79 +11,45 @@ import { PROJECT_IN_PROGRESS, PROJECT_DONE, PROJECT_CANCEL } from '../../configs
 import { PROJECT_CANCEL_VN, PROJECT_DONE_VN, PROJECT_IN_PROGRESS_VN } from '../../configs/i18n/VietNamese';
 const { Option } = Select;
 
-const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate }) => {
+const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate, loadingAnimate }) => {
     const { contextHolder, setNotificationWithIcon } = useNotification();
-    const [status, setStatus] = useState([
+    const status = useRef([
         {
             label: PROJECT_IN_PROGRESS_VN,
             value: PROJECT_IN_PROGRESS,
             icon: <FcSynchronize />,
-            disable: false,
         },
         {
             label: PROJECT_DONE_VN,
             value: PROJECT_DONE,
             icon: <FcCheckmark />,
-            disable: true,
         },
         {
             label: PROJECT_CANCEL_VN,
             value: PROJECT_CANCEL,
             icon: <FcCancel />,
-            disable: true,
         },
     ]);
+    const dateFormat = useRef('DD-MM-YYYY');
 
     useEffect(() => {
-        if (currentProject) {
-            form.setFieldsValue({
-                title: currentProject.title,
-                target: currentProject.target,
-                deadline: moment(currentProject.deadline, 'DD-MM-YYYY'),
-            });
-        }
+        form.setFieldsValue({
+            title: currentProject.title,
+            target: currentProject.target,
+            status: currentProject.status,
+        });
     }, [form, currentProject]);
-
-    useEffect(() => {
-        if (isUpdate()) {
-            setStatus((prev) => prev.map((item) => ({ ...item, disable: false })));
-        } else {
-            setStatus([
-                {
-                    label: PROJECT_IN_PROGRESS_VN,
-                    value: PROJECT_IN_PROGRESS,
-                    icon: <FcSynchronize />,
-                    disable: false,
-                },
-                {
-                    label: PROJECT_DONE_VN,
-                    value: PROJECT_DONE,
-                    icon: <FcCheckmark />,
-                    disable: true,
-                },
-                {
-                    label: PROJECT_CANCEL_VN,
-                    value: PROJECT_CANCEL,
-                    icon: <FcCancel />,
-                    disable: true,
-                },
-            ]);
-            form.resetFields();
-        }
-    }, [isUpdate, form]);
 
     const handleSubmit = async (values) => {
         const deadline = values.deadline.format('YYYY-MM-DD');
         const project = { ...values, deadline };
-        const createProject = await projectOwnerServices.create(project);
-        const updateProject = null;
-
+        let projectApi;
         try {
-            let projectApi;
+            loadingAnimate.setLoading(true);
             if (isUpdate()) {
-                projectApi = updateProject;
+                projectApi = await projectOwnerServices.update(currentProject.id, project);
             } else {
-                projectApi = createProject;
+                projectApi = await projectOwnerServices.create(project);
             }
 
             setNotificationWithIcon({ type: 'success', message: projectApi.data.msg });
@@ -94,6 +60,7 @@ const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate }) => {
                 setNotificationWithIcon({ type: 'error', message: err.response.data.msg });
             }
         } finally {
+            loadingAnimate.setLoading(false);
             setCloseModal(false);
         }
 
@@ -101,15 +68,7 @@ const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate }) => {
     };
 
     return (
-        <Form
-            form={form}
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 20 }}
-            onFinish={handleSubmit}
-            initialValues={{
-                status: status[0].value,
-            }}
-        >
+        <Form form={form} labelCol={{ span: 8 }} wrapperCol={{ span: 20 }} onFinish={handleSubmit}>
             {contextHolder}
             <Form.Item
                 label="Tiêu đề dự án"
@@ -167,24 +126,26 @@ const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate }) => {
                 ]}
             >
                 <DatePicker
-                    format={'DD-MM-YYYY'}
+                    format={dateFormat.current}
                     disabledDate={(current) => {
-                        let customDate = moment().format('DD-MM-YYYY');
-                        return current && current < moment(customDate, 'DD-MM-YYYY');
+                        let customDate = moment().format(dateFormat.current);
+                        return current && current < moment(customDate, dateFormat.current);
                     }}
                     style={{ width: '60%' }}
                 />
             </Form.Item>
-            {isUpdate()&&<Form.Item label='Trạng thái dự án' name='status'>
-                <Select style={{ width: '60%' }}>
-                    {status.map((item, index) => (
-                        <Option key={`${item.value}-${index}`} value={item.value} disabled={item.disable}>
-                            {item.icon}
-                            <span style={{ paddingLeft: '10px' }}>{item.label}</span>
-                        </Option>
-                    ))}
-                </Select>
-            </Form.Item>}
+            {isUpdate() && (
+                <Form.Item label="Trạng thái dự án" name="status">
+                    <Select style={{ width: '60%' }}>
+                        {status.current.map((item, index) => (
+                            <Option key={`${item.value}-${index}`} value={item.value}>
+                                {item.icon}
+                                <span style={{ paddingLeft: '10px' }}>{item.label}</span>
+                            </Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+            )}
         </Form>
     );
 };

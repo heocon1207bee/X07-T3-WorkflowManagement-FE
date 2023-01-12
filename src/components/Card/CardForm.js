@@ -38,13 +38,12 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
         form.setFieldsValue({
             description: content,
         });
-    }, [content]);
+    }, [content, form]);
 
     const assignee = members.reduce((assignee, item) => {
-        if (item.status === ACCEPTED) assignee.push(item.member);
+        if (item.status === ACCEPTED) assignee.push(item.user);
         return assignee;
     }, []);
-    console.log(members)
     const [priority] = useState([
         {
             label: PRIORITY_HIGHEST_VN,
