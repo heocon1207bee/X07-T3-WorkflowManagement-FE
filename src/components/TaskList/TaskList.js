@@ -15,6 +15,7 @@ import {
 } from '../../configs/i18n/VietNamese';
 import { CARD_DONE, CARD_IN_PROGRESS, CARD_OPEN, CARD_IN_PREVIEW, CARD_RE_OPEN } from '../../configs/CARD_STATUS';
 import { notification, Spin } from 'antd';
+import removeVietnamese from '../../utils/RemoveVietnamese';
 
 const TaskList = (props) => {
     const [isDrag, setIsDrag] = useState('');
@@ -25,13 +26,14 @@ const TaskList = (props) => {
     const [overlay, setOverlay] = useState(false);
     const [projectId, setProjectId] = useState(window.location.pathname.split('/')[3]);
     const themeStore = useSelector((state) => state.theme);
+    const filterStore = useSelector((state) => state.filterValue);
 
     useEffect(() => {
         setProjectId(window.location.pathname.split('/')[3]);
     }, [window.location.pathname.split('/')[3]]);
     useEffect(() => {
         getCard();
-    }, [projectId, props.reRender, dragStatus]);
+    }, [projectId, props.reRender, dragStatus, filterStore]);
 
     const [cardData, setCardData] = useState([]);
     const [cError, setCError] = useState();
@@ -83,7 +85,7 @@ const TaskList = (props) => {
     };
 
     const statusFilter = (status) => {
-        return cardData.filter((t) => t.status === status);
+        return filterCardData().filter((t) => t.status === status);
     };
 
     const onDragStart = (e, id, status) => {
@@ -169,14 +171,44 @@ const TaskList = (props) => {
         setOverlay(!overlay);
     };
 
+    const filterCardData = () => {
+        function cardFilter(oldItem, filItem) {
+            if (filItem.length === 0) return true;
+            const newItem = filItem.filter(m => {
+                if (oldItem == m) {
+                    return m;
+                }
+            });
+            if (newItem.length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function typeFilter(data, filData) {
+            if (filData.trim() === '') return true;
+            if (data === filData) return true;
+            else return false;
+        }
+        const newData = cardData.filter(d => {
+            if (removeVietnamese(d.title.toLowerCase()).includes(removeVietnamese(filterStore.title.toLowerCase())) === true
+                && cardFilter(d.assignee._id, filterStore.member) === true
+                && cardFilter(d.priority, filterStore.priority) === true
+                && typeFilter(d.type, filterStore.type) === true) {
+                return d;
+            }
+        });
+        return newData;
+    };
+
     return (
         <>
             {contextHolder}
             <Animated
                 animationInDuration={200}
-                animationIn="fadeIn"
+                animationIn='fadeIn'
                 animationOutDuration={300}
-                animationOut="fadeOut"
+                animationOut='fadeOut'
                 isVisible={overlay}
             >
                 <Overlay overlay={overlay} handleOverlay={taskClickHandle}>
@@ -185,15 +217,15 @@ const TaskList = (props) => {
             </Animated>
             <div className={`task-list ${themeStore.theme}-mode`}>
                 <div
-                    className="open-list task-list-child"
+                    className='open-list task-list-child'
                     onDrop={(e) => onDrop(e, 0)}
                     onDragOver={(e) => onDragOver(e, 0)}
                     style={dragOvering === 0 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
-                    <div className="status-label">
+                    <div className='status-label'>
                         <h3>{CARD_OPEN_VN}</h3>
                     </div>
-                    <div className="task-box">
+                    <div className='task-box'>
                         {statusFilter(CARD_OPEN).map((task) => (
                             <TaskItem
                                 key={task._id}
@@ -206,7 +238,7 @@ const TaskList = (props) => {
                     </div>
                 </div>
                 <div
-                    className="re-open-list task-list-child"
+                    className='re-open-list task-list-child'
                     onDrop={(e) => onDrop(e, 3)}
                     onDragOver={(e) => onDragOver(e, 3)}
                     style={dragOvering === 3 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
@@ -217,7 +249,7 @@ const TaskList = (props) => {
                             {loading && droped === 3 && <Spin />}
                         </h3>
                     </div>
-                    <div className="task-box">
+                    <div className='task-box'>
                         {statusFilter(CARD_RE_OPEN).map((task) => (
                             <TaskItem
                                 key={task._id}
@@ -230,7 +262,7 @@ const TaskList = (props) => {
                     </div>
                 </div>
                 <div
-                    className="in-progress-list task-list-child"
+                    className='in-progress-list task-list-child'
                     onDrop={(e) => onDrop(e, 1)}
                     onDragOver={(e) => onDragOver(e, 1)}
                     style={dragOvering === 1 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
@@ -241,7 +273,7 @@ const TaskList = (props) => {
                             {loading && droped === 1 && <Spin />}
                         </h3>
                     </div>
-                    <div className="task-box">
+                    <div className='task-box'>
                         {statusFilter(CARD_IN_PROGRESS).map((task) => (
                             <TaskItem
                                 key={task._id}
@@ -254,7 +286,7 @@ const TaskList = (props) => {
                     </div>
                 </div>
                 <div
-                    className="in-review-list task-list-child"
+                    className='in-review-list task-list-child'
                     onDrop={(e) => onDrop(e, 2)}
                     onDragOver={(e) => onDragOver(e, 2)}
                     style={dragOvering === 2 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
@@ -265,7 +297,7 @@ const TaskList = (props) => {
                             {loading && droped === 2 && <Spin />}
                         </h3>
                     </div>
-                    <div className="task-box">
+                    <div className='task-box'>
                         {statusFilter(CARD_IN_PREVIEW).map((task) => (
                             <TaskItem
                                 key={task._id}
@@ -289,7 +321,7 @@ const TaskList = (props) => {
                             {loading && droped === 4 && <Spin />}
                         </h3>
                     </div>
-                    <div className="task-box">
+                    <div className='task-box'>
                         {statusFilter(CARD_DONE).map((task) => (
                             <TaskItem
                                 key={task._id}

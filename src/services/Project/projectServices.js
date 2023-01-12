@@ -34,5 +34,8 @@ export default {
     },
     inviteResponse: async (projectId, data) => {
         return await axiosInstance.put(`${API_USER_PROJECTS}/${projectId}${API_INVITE}`, data);
+    },
+    changeMemberRole: async (projectId, data) => {
+        return await axiosInstance.put(`${API_USER_PROJECTS}/${projectId}/member`, data);
     }
 };
