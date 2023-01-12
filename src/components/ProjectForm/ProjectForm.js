@@ -33,11 +33,13 @@ const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate, loadingAni
     const dateFormat = useRef('DD-MM-YYYY');
 
     useEffect(() => {
-        form.setFieldsValue({
-            title: currentProject.title,
-            target: currentProject.target,
-            status: currentProject.status,
-        });
+        if (currentProject) {
+            form.setFieldsValue({
+                title: currentProject.title,
+                target: currentProject.target,
+                status: currentProject.status,
+            });
+        }
     }, [form, currentProject]);
 
     const handleSubmit = async (values) => {
