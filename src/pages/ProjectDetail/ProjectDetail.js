@@ -10,6 +10,8 @@ import ProjectList from '../../components/ProjectList/ProjectList';
 import ProjectServices from '../../services/Project/projectServices';
 import { useDispatch, useSelector } from 'react-redux';
 import CardFilter from '../../components/CardFilter/CardFilter';
+import ProjectForm from '../../components/ProjectModal/ProjectModal';
+import { FORM_EDIT } from '../../configs/FORM_STATUS';
 
 const ProjectDetail = () => {
     const themeStore = useSelector((state) => state.theme);
@@ -17,6 +19,9 @@ const ProjectDetail = () => {
     const [loading, setLoading] = useState(false);
     const [pError, setPError] = useState();
     const [projectId, setProjectId] = useState(window.location.pathname.split('/')[3]);
+    const [openProject, setOpenProject] = useState(false);
+    const [formType, setFormType] = useState(FORM_EDIT);
+    const [currentProject, setCurrentProject] = useState(null);
     const handleAdd = () => {
         setOpenModal(true);
     };
@@ -62,7 +67,7 @@ const ProjectDetail = () => {
 
     return (
         <div className="project-task-page">
-            <ProjectList loading={loading} />
+            <ProjectList loading={loading} modal={{ setOpenProject, setFormType, setCurrentProject }} />
             <div>
                 <div className={`project--nav ${themeStore.theme}-mode`}>
                     <div className="project-name--nav">
@@ -94,6 +99,7 @@ const ProjectDetail = () => {
                 </div>
             </div>
             {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
+            <ProjectForm modal={{ openProject, setOpenProject, currentProject }} type={formType} />
         </div>
     );
 };

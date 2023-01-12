@@ -43,7 +43,12 @@ const ProjectItem = ({
             <div className={`project-item ${themeStore.theme}-mode`}>
                 <h4>{title}</h4>
                 <p>Người tạo: {owner}</p>
-                <div className="project-option-button" onClick={(e) => {e.preventDefault()}}>
+                <div
+                    className="project-option-button"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                >
                     {have(roles, MANAGE_MEMBER) && (
                         <Tooltip title="Thành viên" placement="bottom">
                             <button
@@ -57,7 +62,7 @@ const ProjectItem = ({
                             </button>
                         </Tooltip>
                     )}
-                    {openMember && <InviteForm projectId={projectId} opening={openMember} handleOpen={handleMember}/>}
+                    {openMember && <InviteForm projectId={projectId} opening={openMember} handleOpen={handleMember} />}
                     {have(roles, MANAGE_ROLE) && (
                         <Tooltip title="Vai trò" placement="bottom">
                             <button
