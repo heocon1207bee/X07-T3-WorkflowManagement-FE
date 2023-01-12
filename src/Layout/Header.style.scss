@@ -81,6 +81,10 @@
     transition: all 0.3s ease-out;
     visibility: hidden;
     transform: scale(0);
+
+    a {
+        color: currentColor;
+    }
 }
 
 .modal-user-info {
@@ -95,8 +99,11 @@
         border-radius: 50%;
     }
 
-    p {
-        margin-left: 10px;
+    .inf{
+        padding-left: 1rem;
+    }
+    .inf-small {
+        font-size: 13px;
     }
 }
 
