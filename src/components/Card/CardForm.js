@@ -73,7 +73,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
         },
     ]);
 
-    const [cardType] = useState([
+    const cardType = useRef([
         {
             label: CARD_TASK_VN,
             value: CARD_TASK,
@@ -144,7 +144,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
             </Form.Item>
             <Form.Item label="Loại công việc" name="type">
                 <Select>
-                    {cardType.map((item, index) => (
+                    {cardType.current.map((item, index) => (
                         <Option key={`${item.value}-${index}`} value={item.value}>
                             {item.icon}
                             <span style={{ paddingLeft: '10px' }}>{item.label}</span>
