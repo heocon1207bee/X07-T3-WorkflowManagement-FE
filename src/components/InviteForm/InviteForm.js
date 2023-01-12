@@ -14,9 +14,11 @@ const InviteForm = (props) => {
     const [memberInfo, setMemberInfo] = useState([]);
     const [inputEmail, setInputEmail] = useState('');
     const [inputRoleId, setInputRoleId] = useState('');
+    const [putRole, setPutRole] = useState('');
     const [error, setError] = useState();
     const [iError, setIError] = useState();
     const [mError, setMError] = useState();
+    const [cError, setCError] = useState();
     const ref1 = useRef(null);
     const [r1W, setR1W] = useState(0);
     const ref2 = useRef(null);
@@ -40,7 +42,7 @@ const InviteForm = (props) => {
     useEffect(() => {
         getRole();
         getMemberInfo(setMError, props.projectId);
-    }, [props.projectId]);
+    }, [props.projectId, putRole]);
 
     const getRole = async () => {
         let role = [];
@@ -117,6 +119,23 @@ const InviteForm = (props) => {
         }
     };
 
+    const changeMemberRole = async (setError, projectId, data) => {
+        try {
+            await ProjectServices.changeMemberRole(projectId, data);
+        } catch (err) {
+            if (err.response && Array.isArray(err.response.data)) {
+                const errorResponse = err.response.data;
+                const errorValue = errorResponse.map((e) => e.message);
+                setError(errorValue);
+            } else if (err.response) {
+                setError(err.response.data.msg);
+            } else {
+                setError(err.message);
+            }
+        }
+        setPutRole(`${data.value} for ${data.memberId} successfully`);
+    };
+
     const handleSendInvite = async (e) => {
         e.preventDefault();
         setIError();
@@ -138,6 +157,23 @@ const InviteForm = (props) => {
                 openNotificationWithIcon('success', 'Thành công', 'Đã gửi lời mời');
             setInputEmail('');
             setInputRoleId('');
+        }
+    };
+
+    const handleEdit = async (selectValue, value, memberId) => {
+        if (selectValue === '') {
+
+        } else if (selectValue === value) {
+
+        } else {
+            const changeData = {
+                roleId: selectValue,
+                memberId,
+            };
+            await changeMemberRole(setCError, props.projectId, changeData);
+            cError ?
+                openNotificationWithIcon('error', 'Có lỗi xảy ra', cError) :
+                openNotificationWithIcon('success', 'Thành công', 'Đã chỉnh sửa thành viên');
         }
     };
 
@@ -182,7 +218,8 @@ const InviteForm = (props) => {
                     <ul className={'member-form-list'}>
                         {memberInfo.map(data => {
                             return <MemberItem key={data._id} editMember={editMember} data={data}
-                                               roleName={getAllRoleName(role)} />;
+                                               roleName={getAllRoleName(role)} putRole={putRole}
+                                               handleEdit={handleEdit} />;
                         })}
                     </ul>
                 </div>
@@ -201,12 +238,13 @@ export default InviteForm;
 
 export const MemberItem = (props) => {
     const [editing, setEditing] = useState(false);
+    const [selectValue, setSelectValue] = useState('');
     useEffect(() => {
         !props.editMember && setEditing(false);
     }, [props.editMember]);
-    const handleEdit = () => {
-
-    };
+    useEffect(() => {
+        props.handleEdit(selectValue, props.data.role._id, props.data.user._id);
+    }, [props.editMember]);
     const statusToIcon = (status) => {
         switch (status) {
             case 'ACCEPTED':
@@ -231,9 +269,11 @@ export const MemberItem = (props) => {
             <p>{props.data.user.fullname}</p>
             {!props.editMember ? <div>
                 {props.data.role.name}
-            </div> : <Select>
+            </div> : <Select defaultValue={props.data.role._id} onSelect={(value) => {
+                setSelectValue(value);
+            }}>
                 {props.roleName.map(role => {
-                    return <Select.Option value={role.value}>{role.label}</Select.Option>;
+                    return <Select.Option key={role._id} value={role.value}>{role.label}</Select.Option>;
                 })}
             </Select>}
             <p>{statusToIcon(props.data.status)}</p>
