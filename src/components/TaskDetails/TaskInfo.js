@@ -71,9 +71,6 @@ const TaskInfo = ({ card }) => {
             </div>
             <div className="task-info">
                 <p>
-                    <b>Tiêu đề:</b> {title}
-                </p>
-                <p>
                     <b>Loại:</b> {cardType[type].icon} {cardType[type].label}
                 </p>
                 <p>
@@ -89,8 +86,8 @@ const TaskInfo = ({ card }) => {
                 <p>
                     <b>Mô tả công việc</b>
                 </p>
-                <div dangerouslySetInnerHTML={{ __html: description }}></div>
             </div>
+            <div dangerouslySetInnerHTML={{ __html: description }}></div>
         </div>
     );
 };

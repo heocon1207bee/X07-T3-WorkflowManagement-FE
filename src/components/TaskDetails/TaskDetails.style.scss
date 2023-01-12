@@ -6,8 +6,6 @@
     border-radius: 10px;
     .ant-modal-content {
         .ant-modal-body {
-            // display: grid;
-            // grid-template-columns: 2fr 1fr;
             overflow-x: scroll;
         }
     }
@@ -30,12 +28,12 @@
 
 .task-info {
     padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
     p {
-        display: flex;
-        align-items: center;
-        gap: 0.3em;
-        text-align: center;
         padding: 0.4em 0;
+        display: inline-block;
     }
 }
 
@@ -129,5 +127,15 @@
         grid-template-areas:
             'item1 item2 item2 item2 item2 item2 item2 item2 item2'
             'item1 item3 item3 item3 item3 item3 item3 item3 item3';
+    }
+    .task-info {
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        p {
+            padding: 0.4em 0;
+            display: inline-block;
+        }
     }
 }
