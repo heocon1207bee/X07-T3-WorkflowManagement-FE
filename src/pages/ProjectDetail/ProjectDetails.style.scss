@@ -155,6 +155,7 @@
 
 @media (max-width: 900px) {
     .project-task-page {
+        min-height: calc(100vh - 55px);
         .task-list {
             grid-template-columns: 1fr;
             .task-list-child {

@@ -81,7 +81,7 @@ const TaskItem = (props) => {
             draggable
         >
             <div className="task-item-title">
-                {props.task.title} - <span>{status(props.task.status)}</span>
+                {props.task.title} {/*-<span>{status(props.task.status)}</span>*/}
             </div>
             <div className="task-item-info">
                 <div

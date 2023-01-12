@@ -34,7 +34,7 @@ const SearchBar = ({ modal }) => {
             </div>
             <div className="create-pj-button">
                 <button onClick={handleCreateProject}>
-                    Tạo mới <AppstoreAddOutlined />
+                    Tạo mới <span style={{width: '5px'}}></span> <AppstoreAddOutlined />
                 </button>
             </div>
         </div>
