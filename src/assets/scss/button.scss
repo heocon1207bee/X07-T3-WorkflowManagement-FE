@@ -25,9 +25,9 @@
 
 @mixin cancelButton() {
     @include generalButton();
-    background-color: rgb(44, 45, 45);
+    background-color: $BackgroundLayer01;
     &:hover {
-        background-color: rgb(61, 61, 62);
+        background-color: $BackgroundLayer02;
         color: $buttonRedHover;
     }
 }

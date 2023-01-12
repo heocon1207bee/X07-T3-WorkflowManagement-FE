@@ -14,6 +14,8 @@ const Header = () => {
 
     const userName =
         localStorage.getItem('worlflow_store') && JSON.parse(localStorage.getItem('worlflow_store')).user.fullname;
+    const userEmail =
+        localStorage.getItem('worlflow_store') && JSON.parse(localStorage.getItem('worlflow_store')).user.email;
     const handleShowModal = (e) => {
         e.preventDefault();
         setShowModal(true);
@@ -67,7 +69,11 @@ const Header = () => {
                             <div className='modal-user-info'>
                                 <img
                                     src='https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg' />
-                                <p>{userName}</p>
+                                <div className='inf'>
+                                    <p className='inf-name'>{userName}</p>
+                                    <small className={'inf-name inf-small'}>{userEmail}</small>
+                                </div>
+
                             </div>
                         </Link>
                         <div className={`modal-user-actions ${themeStore.theme}-mode`}>

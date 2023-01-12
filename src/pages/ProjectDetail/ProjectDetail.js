@@ -18,11 +18,14 @@ const ProjectDetail = () => {
     const [openModal, setOpenModal] = useState(false);
     const [openFilter, setOpenFilter] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [iError, setIError] = useState();
     const [pError, setPError] = useState();
     const [projectId, setProjectId] = useState(window.location.pathname.split('/')[3]);
+    const [projectInfo, setProjectInfo] = useState({});
     const [openProject, setOpenProject] = useState(false);
     const [formType, setFormType] = useState(FORM_EDIT);
     const [currentProject, setCurrentProject] = useState(null);
+
     const handleAdd = () => {
         setOpenModal(true);
     };
@@ -54,8 +57,26 @@ const ProjectDetail = () => {
         }
     }, [dispatch]);
 
+    const getProjectInfo = async (setError, projectId) => {
+        try {
+            const getProjectInfo = await ProjectServices.getProjectInfo(projectId);
+            setProjectInfo(getProjectInfo.data.data);
+        } catch (err) {
+            if (err.response && Array.isArray(err.response.data)) {
+                const errorResponse = err.response.data;
+                const errorValue = errorResponse.map((e) => e.message);
+                setError(errorValue);
+            } else if (err.response) {
+                setError(err.response.data.msg);
+            } else {
+                setError(err.message);
+            }
+        }
+    };
+
     useEffect(() => {
         getProject();
+        getProjectInfo(setIError, projectId);
     }, [projectId, getProject]);
 
     useEffect(() => {
@@ -71,7 +92,7 @@ const ProjectDetail = () => {
     }
 
     return (
-        <div className="project-task-page">
+        <div className={`project-task-page ${themeStore.theme}-mode`}>
             <ProjectList loading={loading} modal={{ setOpenProject, setFormType, setCurrentProject }} />
             <div style={{maxHeight: 'calc(100vh - 60px)', overflow: 'scroll'}}>
                 <div className={`project--nav ${themeStore.theme}-mode`}>
@@ -85,22 +106,22 @@ const ProjectDetail = () => {
                             }}
                         >
                             <LeftOutlined />
-                            Về trang chủ
+                            {projectInfo.title}
                         </Link>
                     </div>
 
                     <div className="task-option--nav">
-                        <button onClick={handleFilterForm}>
-                            Lọc <BiFilterAlt />
-                        </button>
+                        {!openFilter&&<button onClick={handleFilterForm}>
+                            Lọc <span style={{width: '5px'}}></span> <BiFilterAlt />
+                        </button>}
                         <button onClick={handleAdd}>
-                            Tạo công việc <BiAddToQueue />
+                            Tạo công việc <span style={{width: '5px'}}></span> <BiAddToQueue />
                         </button>
                     </div>
                 </div>
-                {openFilter&&<CardFilter />}
+                {openFilter&&<CardFilter members={projectInfo.members} formClose={handleFilterForm}/>}
                 <div className="project-task-container">
-                    <TaskList reRender={openModal} />
+                    <TaskList reRender={openModal}/>
                 </div>
             </div>
             {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
