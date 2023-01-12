@@ -88,6 +88,8 @@ const ProjectItem = ({
                                         title,
                                         target,
                                         deadline,
+                                        id: project._id,
+                                        status: project.status
                                     });
                                 }}
                             >
