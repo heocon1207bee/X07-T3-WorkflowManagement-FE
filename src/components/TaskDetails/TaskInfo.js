@@ -87,8 +87,9 @@ const TaskInfo = ({ card }) => {
                     <FcAlarmClock /> {dayjs(deadline).format('DD-MM-YYYY')}
                 </p>
                 <p>
-                    <b>Mô tả công việc:</b> {description}
+                    <b>Mô tả công việc</b>
                 </p>
+                <div dangerouslySetInnerHTML={{ __html: description }}></div>
             </div>
         </div>
     );
