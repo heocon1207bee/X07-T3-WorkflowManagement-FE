@@ -95,9 +95,9 @@ const TaskItem = (props) => {
                     {priorityTrans(props.task.priority)}
                 </div>
                 <div className="task-item-create">
-                    Người tạo: {props.task.create ? props.task.create : 'Không dữ liệu'}
+                    Người tạo: {props.task.owner.fullname ? props.task.owner.fullname : 'Không dữ liệu'}
                 </div>
-                <div className="task-item-do">Người thực hiện: {props.task.do ? props.task.do : 'Không dữ liệu'}</div>
+                <div className="task-item-do">Người thực hiện: {props.task.assignee.fullname ? props.task.assignee.fullname : 'Không dữ liệu'}</div>
                 <div className="task-item-deadline">Hết hạn: {formatDate(props.task.deadline)}</div>
             </div>
 
