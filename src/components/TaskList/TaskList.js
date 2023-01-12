@@ -17,7 +17,6 @@ import { CARD_DONE, CARD_IN_PROGRESS, CARD_OPEN, CARD_IN_PREVIEW, CARD_RE_OPEN }
 import { notification, Spin } from 'antd';
 import removeVietnamese from '../../utils/RemoveVietnamese';
 
-
 const TaskList = (props) => {
     const [isDrag, setIsDrag] = useState('');
     const [dragStatus, setDragStatus] = useState('');
@@ -232,7 +231,7 @@ const TaskList = (props) => {
                                 key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e => onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
@@ -244,8 +243,11 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 3)}
                     style={dragOvering === 3 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
-                    <div className='status-label'>
-                        <h3>{CARD_RE_OPEN_VN}{(loading && droped === 3) && <Spin />}</h3>
+                    <div className="status-label">
+                        <h3>
+                            {CARD_RE_OPEN_VN}
+                            {loading && droped === 3 && <Spin />}
+                        </h3>
                     </div>
                     <div className='task-box'>
                         {statusFilter(CARD_RE_OPEN).map((task) => (
@@ -253,7 +255,7 @@ const TaskList = (props) => {
                                 key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e => onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
@@ -265,8 +267,11 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 1)}
                     style={dragOvering === 1 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
-                    <div className='status-label'>
-                        <h3>{CARD_IN_PROGRESS_VN}{(loading && droped === 1) && <Spin />}</h3>
+                    <div className="status-label">
+                        <h3>
+                            {CARD_IN_PROGRESS_VN}
+                            {loading && droped === 1 && <Spin />}
+                        </h3>
                     </div>
                     <div className='task-box'>
                         {statusFilter(CARD_IN_PROGRESS).map((task) => (
@@ -274,7 +279,7 @@ const TaskList = (props) => {
                                 key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e => onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
@@ -286,8 +291,11 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 2)}
                     style={dragOvering === 2 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
-                    <div className='status-label'>
-                        <h3>{CARD_IN_PREVIEW_VN}{(loading && droped === 2) && <Spin />}</h3>
+                    <div className="status-label">
+                        <h3>
+                            {CARD_IN_PREVIEW_VN}
+                            {loading && droped === 2 && <Spin />}
+                        </h3>
                     </div>
                     <div className='task-box'>
                         {statusFilter(CARD_IN_PREVIEW).map((task) => (
@@ -295,7 +303,7 @@ const TaskList = (props) => {
                                 key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e => onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
@@ -307,8 +315,11 @@ const TaskList = (props) => {
                     onDragOver={(e) => onDragOver(e, 4)}
                     style={dragOvering === 4 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
-                    <div className='status-label'>
-                        <h3>{CARD_DONE_VN}{(loading && droped === 4) && <Spin />}</h3>
+                    <div className="status-label">
+                        <h3>
+                            {CARD_DONE_VN}
+                            {loading && droped === 4 && <Spin />}
+                        </h3>
                     </div>
                     <div className='task-box'>
                         {statusFilter(CARD_DONE).map((task) => (
@@ -316,7 +327,7 @@ const TaskList = (props) => {
                                 key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e => onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}

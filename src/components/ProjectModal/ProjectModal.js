@@ -8,6 +8,7 @@ import './ProjectModal.style.scss';
 
 const ProjectModal = ({ modal, type }) => {
     const { openProject, setOpenProject, currentProject } = modal;
+    const [loading, setLoading] = useState(false);
 
     const isUpdate = useCallback(() => {
         return type === FORM_EDIT;
@@ -49,7 +50,7 @@ const ProjectModal = ({ modal, type }) => {
                 <Button key="back" onClick={handleCancel} className="btn-cancel">
                     Hủy bỏ
                 </Button>,
-                <Button key="submit" onClick={handleOk} className="btn-ok">
+                <Button key="submit" onClick={handleOk} className="btn-ok" loading={loading}>
                     Đồng ý
                 </Button>,
             ]}
@@ -59,6 +60,7 @@ const ProjectModal = ({ modal, type }) => {
                 setCloseModal={setOpenProject}
                 currentProject={currentProject}
                 isUpdate={isUpdate}
+                loadingAnimate={{ setLoading }}
             />
         </Modal>
     );
