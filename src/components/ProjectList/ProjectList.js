@@ -5,6 +5,7 @@ import LazyLoad from 'react-lazyload';
 import ProjectLoading from './ProjectLoading';
 import { Spin } from 'antd';
 import removeVietnamese from '../../utils/RemoveVietnamese';
+import { PROJECT_OWNER } from '../../configs/ROLES';
 
 const ProjectList = (props) => {
     const themeStore = useSelector((state) => state.theme);
@@ -15,9 +16,10 @@ const ProjectList = (props) => {
         : projectDataWithoutSearch;
 
     const projectOwner = (data) => {
-        const name = data.project.members.find(d => d.role.name === 'Chủ dự án');
+        const name = data.project.members.find((d) => d.role.name === PROJECT_OWNER);
         return name.user.fullname;
-    }
+    };
+
     return (
         <div className={`project-list-container ${themeStore.theme}-mode`}>
             <div className={!props.lazy ? 'pjl-label sticky' : 'pjl-label'}>

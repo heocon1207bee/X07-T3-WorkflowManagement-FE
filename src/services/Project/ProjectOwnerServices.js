@@ -10,7 +10,13 @@ const getDetail = (projectId) => {
     return axiosInstance.get(`${API_USER_PROJECTS}/${projectId}`);
 };
 
+const update = (projectId, data) => {
+    return axiosInstance.put(`${API_USER_PROJECTS}/${projectId}`, data);
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     create,
     getDetail,
+    update,
 };

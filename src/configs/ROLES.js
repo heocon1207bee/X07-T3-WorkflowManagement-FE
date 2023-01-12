@@ -1,3 +1,3 @@
-export const PROJECT_OWNER = 'PROJECT_OWNER';
-export const PROJECT_MANAGER = 'PROJECT_MANAGER';
-export const PROJECT_MEMBER = 'PROJECT_MEMBER';
+export const PROJECT_OWNER = 'Chủ dự án';
+export const PROJECT_MANAGER = 'Quản lý dự án';
+export const PROJECT_MEMBER = 'Thành viên';
