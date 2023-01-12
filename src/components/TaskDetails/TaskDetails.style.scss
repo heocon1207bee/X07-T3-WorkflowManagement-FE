@@ -1,134 +1,134 @@
-@import "../../assets/scss/color";
-@import "../../assets/scss/button";
-@import "../../assets/scss/input";
+@import '../../assets/scss/color';
+@import '../../assets/scss/button';
+@import '../../assets/scss/input';
 
 .task-details {
-  border-radius: 10px;
+    border-radius: 10px;
 
-  .ant-modal-content {
-
-    .ant-modal-body {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
+    .ant-modal-content {
+        .ant-modal-body {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+        }
     }
-  }
 }
 
 .task-info-container {
-  padding: 20px;
-
+    padding: 20px;
 }
 
 .task-info-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-  button {
-    @include acceptButton();
-  }
+    button {
+        @include acceptButton();
+    }
 }
 
 .task-info {
-  padding-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 15px;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
+    p {
+        display: flex;
+        align-items: center;
+        gap: 0.3em;
+    }
 }
 
 .task-comment-container {
-  //border-radius: 10px;
-  display: table;
-  padding: 20px;
-  //background-color: #c5c5c5;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+    //border-radius: 10px;
+    display: table;
+    padding: 20px;
+    //background-color: #c5c5c5;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .comments-box {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 10px;
-  padding: 10px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    padding: 10px 0;
 }
 
 .comment {
-  background-color: #9d9d9d;
-  display: grid;
-  grid-template-areas:
-    'item1 item2 item2'
-    'item1 item3 item3';
-  grid-gap: 5px;
+    background-color: #9d9d9d;
+    display: grid;
+    grid-template-areas:
+        'item1 item2 item2'
+        'item1 item3 item3';
+    grid-gap: 5px;
 }
 
 .comment-item {
-  padding: 5px;
+    padding: 5px;
 }
 
 .author-comment-avatar {
-  grid-area: item1;
-  text-align: center;
-  width: 100%;
+    grid-area: item1;
+    text-align: center;
+    width: 100%;
 
-  img {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-  }
+    img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+    }
 }
 
 .author-comment-name {
-  grid-area: item2;
+    grid-area: item2;
 }
 
 .author-comment {
-  grid-area: item3;
+    grid-area: item3;
 }
 
 .comment-input-box {
-  display: table-footer-group;
+    display: table-footer-group;
 }
 
 .comment-input {
-  display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
-  grid-gap: 5px;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-gap: 5px;
 
-  input {
-    @include inputStyle();
-  }
+    input {
+        @include inputStyle();
+    }
 
-  button {
-    @include acceptButton();
-    font-size: 15px;
-  }
+    button {
+        @include acceptButton();
+        font-size: 15px;
+    }
 }
 
 .current-avatar-comment {
-  text-align: center;
-  img {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    border: 0.3px solid rgba(45, 45, 45, 0.3);
-  }
+    text-align: center;
+    img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        border: 0.3px solid rgba(45, 45, 45, 0.3);
+    }
 }
 
 @media (max-width: 768px) {
-  .task-details {
-
-    .ant-modal-content {
-
-      .ant-modal-body {
-        display: grid;
-        grid-template-columns: 1fr;
-      }
+    .task-details {
+        .ant-modal-content {
+            .ant-modal-body {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+        }
     }
-  }
-  .comment {
-    grid-template-areas:
-    'item1 item2 item2 item2 item2 item2 item2 item2 item2'
-    'item1 item3 item3 item3 item3 item3 item3 item3 item3';
-  }
+    .comment {
+        grid-template-areas:
+            'item1 item2 item2 item2 item2 item2 item2 item2 item2'
+            'item1 item3 item3 item3 item3 item3 item3 item3 item3';
+    }
 }
-

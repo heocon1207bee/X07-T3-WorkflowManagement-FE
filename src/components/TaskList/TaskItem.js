@@ -102,8 +102,8 @@ const TaskItem = (props) => {
                     </div>
                     <div className="task-item-deadline">Hết hạn: {formatDate(props.task.deadline)}</div>
                 </div>
-            </div>{' '}
-            {openDetail && <TaskDetails open={openDetail} setClose={() => setOpenDetail(false)} />}
+            </div>
+            {openDetail && <TaskDetails open={openDetail} setClose={() => setOpenDetail(false)} card={props.task} />}
         </>
     );
 };
