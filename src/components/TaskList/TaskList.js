@@ -220,7 +220,7 @@ const TaskList = (props) => {
                     <div className="task-box">
                         {statusFilter(CARD_RE_OPEN).map((task) => (
                             <TaskItem
-                                key={`${task.id}-${task.status}`}
+                                key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}
@@ -244,7 +244,7 @@ const TaskList = (props) => {
                     <div className="task-box">
                         {statusFilter(CARD_IN_PROGRESS).map((task) => (
                             <TaskItem
-                                key={`${task.id}-${task.status}`}
+                                key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}
@@ -268,7 +268,7 @@ const TaskList = (props) => {
                     <div className="task-box">
                         {statusFilter(CARD_IN_PREVIEW).map((task) => (
                             <TaskItem
-                                key={`${task.id}-${task.status}`}
+                                key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}
@@ -292,7 +292,7 @@ const TaskList = (props) => {
                     <div className="task-box">
                         {statusFilter(CARD_DONE).map((task) => (
                             <TaskItem
-                                key={`${task.id}-${task.status}`}
+                                key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}

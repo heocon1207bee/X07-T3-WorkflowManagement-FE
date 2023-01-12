@@ -73,35 +73,37 @@ const TaskItem = (props) => {
 
     return (
         <>
-        <div
-            className={`task-item ${themeStore.theme}-mode`}
-            onClick={()=>setOpenDetail(true)}
-            onDragStart={(e) => props.onDragStart(e, props.task.id)}
-            onDragEnd={props.onDragEnd}
-            draggable
-        >
-            <div className="task-item-title">
-                {props.task.title} - <span>{status(props.task.status)}</span>
-            </div>
-            <div className="task-item-info">
-                <div
-                    className={
-                        props.task.type === CARD_TASK ? 'task-item-type task-status' : 'task-item-type issue-status'
-                    }
-                >
-                    {card_trans[props.task.type]}
+            <div
+                className={`task-item ${themeStore.theme}-mode`}
+                onClick={() => setOpenDetail(true)}
+                onDragStart={(e) => props.onDragStart(e, props.task.id)}
+                onDragEnd={props.onDragEnd}
+                draggable
+            >
+                <div className="task-item-title">
+                    <h4>{props.task.title}</h4>
                 </div>
-                <div className={'task-item-priority ' + priority(props.task.priority)}>
-                    {priorityTrans(props.task.priority)}
+                <div className="task-item-info">
+                    <div
+                        className={
+                            props.task.type === CARD_TASK ? 'task-item-type task-status' : 'task-item-type issue-status'
+                        }
+                    >
+                        {card_trans[props.task.type]}
+                    </div>
+                    <div className={'task-item-priority ' + priority(props.task.priority)}>
+                        {priorityTrans(props.task.priority)}
+                    </div>
+                    <div className="task-item-create">
+                        Người tạo: {props.task.owner.fullname ? props.task.owner.fullname : 'Không dữ liệu'}
+                    </div>
+                    <div className="task-item-do">
+                        Người thực hiện: {props.task.assignee.fullname ? props.task.assignee.fullname : 'Không dữ liệu'}
+                    </div>
+                    <div className="task-item-deadline">Hết hạn: {formatDate(props.task.deadline)}</div>
                 </div>
-                <div className="task-item-create">
-                    Người tạo: {props.task.owner.fullname ? props.task.owner.fullname : 'Không dữ liệu'}
-                </div>
-                <div className="task-item-do">Người thực hiện: {props.task.assignee.fullname ? props.task.assignee.fullname : 'Không dữ liệu'}</div>
-                <div className="task-item-deadline">Hết hạn: {formatDate(props.task.deadline)}</div>
-            </div>
-
-        </div> {openDetail&&<TaskDetails open={openDetail} setClose={()=>setOpenDetail(false)}/>}
+            </div>{' '}
+            {openDetail && <TaskDetails open={openDetail} setClose={() => setOpenDetail(false)} />}
         </>
     );
 };

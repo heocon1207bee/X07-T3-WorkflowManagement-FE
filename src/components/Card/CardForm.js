@@ -1,6 +1,6 @@
 import { DatePicker, Form, Input, Select } from 'antd';
-import { useEffect, useState } from 'react';
-import moment from 'moment';
+import { useEffect, useState, useRef } from 'react';
+import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import { FcBriefcase, FcHighPriority, FcLowPriority, FcMediumPriority, FcVlc } from 'react-icons/fc';
 import JoditEditor from '../JoditEditor/JoditEditor';
@@ -33,6 +33,7 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
     const [content, setContent] = useState('');
+    const dateFormat = useRef('DD-MM-YYYY');
 
     useEffect(() => {
         form.setFieldsValue({
@@ -110,8 +111,8 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     return (
         <Form
             form={form}
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 20 }}
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 18 }}
             initialValues={{
                 type: CARD_TASK,
                 priority: PRIORITY_LOW,
@@ -193,12 +194,11 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                 validateTrigger={false}
             >
                 <DatePicker
-                    format={'DD-MM-YYYY'}
+                    format={dateFormat.current}
                     disabledDate={(current) => {
-                        let customDate = moment().format('DD-MM-YYYY');
-                        return current && current < moment(customDate, 'DD-MM-YYYY');
+                        return current && dayjs().isAfter(current, 'day');
                     }}
-                    style={{ width: '100%' }}
+                    style={{ width: '50%' }}
                 />
             </Form.Item>
             <Form.Item
@@ -211,8 +211,6 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
                             if (value !== '<p><br></p>') {
                                 return Promise.resolve();
                             }
-
-                            return Promise.reject(new Error('Vui lòng nhập Mô tả công việc'));
                         },
                     }),
                 ]}
