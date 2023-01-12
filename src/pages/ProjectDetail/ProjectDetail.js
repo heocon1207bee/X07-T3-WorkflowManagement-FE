@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CardFilter from '../../components/CardFilter/CardFilter';
 import ProjectForm from '../../components/ProjectModal/ProjectModal';
 import { FORM_EDIT } from '../../configs/FORM_STATUS';
+import { useParams } from 'react-router-dom';
 
 const ProjectDetail = () => {
     const themeStore = useSelector((state) => state.theme);
@@ -81,7 +82,7 @@ const ProjectDetail = () => {
 
     useEffect(() => {
         setProjectId(window.location.pathname.split('/')[3]);
-    }, [setProjectId]);
+    }, [useParams(), getProject]);
 
     if (error) {
         console.log(error);
