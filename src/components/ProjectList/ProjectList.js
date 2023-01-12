@@ -18,7 +18,6 @@ const ProjectList = (props) => {
         const name = data.project.members.find(d => d.role.name === 'Chủ dự án');
         return name.user.fullname;
     }
-
     return (
         <div className={`project-list-container ${themeStore.theme}-mode`}>
             <div className={!props.lazy ? 'pjl-label sticky' : 'pjl-label'}>
@@ -28,13 +27,13 @@ const ProjectList = (props) => {
                 {projectData.map((data) =>
                     props.lazy ? (
                         <LazyLoad
-                            key={data.project._id}
+                            key={data._id}
                             height={100}
                             offset={[-100, 100]}
                             placeholder={<ProjectLoading />}
                         >
                             <ProjectItem
-                                key={data.project._id}
+                                key={data._id}
                                 projectId={data.project._id}
                                 title={data.project.title}
                                 owner={projectOwner(data)}
@@ -45,7 +44,7 @@ const ProjectList = (props) => {
                         </LazyLoad>
                     ) : (
                         <ProjectItem
-                            key={data.project._id}
+                            key={data._id}
                             projectId={data.project._id}
                             title={data.project.title}
                             owner={projectOwner(data)}

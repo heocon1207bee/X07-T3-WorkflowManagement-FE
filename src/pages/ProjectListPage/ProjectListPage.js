@@ -16,6 +16,7 @@ const ProjectListPage = () => {
     const [openProject, setOpenProject] = useState(false);
     const [formType, setFormType] = useState(FORM_CREATE);
     const [currentProject, setCurrentProject] = useState(null);
+    const [inviteChange, setInviteChange] = useState('');
     const themeStore = useSelector((state) => state.theme);
 
     const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const ProjectListPage = () => {
         if (openProject === false) {
             getProject();
         }
-    }, [getProject, openProject]);
+    }, [getProject, openProject, inviteChange]);
 
     const handleRoleButton = () => {
         setOverlay(!overlay);
@@ -53,7 +54,7 @@ const ProjectListPage = () => {
 
     return (
         <div className={`project-list-page ${themeStore.theme}-mode`}>
-            <InviteList />
+            <InviteList changed={setInviteChange}/>
             <div className={`pjs-container ${themeStore.theme}-mode`}>
                 <SearchBar modal={{ setOpenProject, setFormType }} />
                 <ProjectList

@@ -14,6 +14,7 @@ import CardFilter from '../../components/CardFilter/CardFilter';
 const ProjectDetail = () => {
     const themeStore = useSelector((state) => state.theme);
     const [openModal, setOpenModal] = useState(false);
+    const [openFilter, setOpenFilter] = useState(false);
     const [loading, setLoading] = useState(false);
     const [pError, setPError] = useState();
     const [projectId, setProjectId] = useState(window.location.pathname.split('/')[3]);
@@ -60,10 +61,14 @@ const ProjectDetail = () => {
         console.log(error);
     }
 
+    const handleFilterForm = () => {
+        setOpenFilter(!openFilter);
+    }
+
     return (
         <div className="project-task-page">
             <ProjectList loading={loading} />
-            <div>
+            <div style={{maxHeight: 'calc(100vh - 60px)', overflow: 'scroll'}}>
                 <div className={`project--nav ${themeStore.theme}-mode`}>
                     <div className="project-name--nav">
                         <Link
@@ -80,7 +85,7 @@ const ProjectDetail = () => {
                     </div>
 
                     <div className="task-option--nav">
-                        <button>
+                        <button onClick={handleFilterForm}>
                             Lọc <BiFilterAlt />
                         </button>
                         <button onClick={handleAdd}>
@@ -88,7 +93,7 @@ const ProjectDetail = () => {
                         </button>
                     </div>
                 </div>
-                {/*<CardFilter />*/}
+                {openFilter&&<CardFilter />}
                 <div className="project-task-container">
                     <TaskList reRender={openModal} />
                 </div>

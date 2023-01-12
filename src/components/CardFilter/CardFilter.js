@@ -1,116 +1,43 @@
-import { Table } from 'antd';
-import React,{useEffect, useState} from "react";
-import { Input } from 'antd';
-import axios from "axios";
+import React, {useState, useEffect} from "react";
+import { Button, Form, Input, Select, Space } from 'antd';
+import './CardFilter.style.scss'
 
-const columns = [
-    {
-        title: 'công việc',
-        dataIndex: 'work',
-    },
-    {
-        title: 'trạng thái',
-        dataIndex: 'status',
-        filters: [
-            {
-                text: 'mới tạo',
-                value: 'mới tạo',
-            },
-            {
-                text: 'bị hủy bỏ',
-                value: 'bị hủy bỏ',
-            },
-
-        ],
-        filterMode: 'tree',
-        filterSearch: true,
-        onFilter: (value, record) => record.status.includes(value),
-        width: '30%',
-    },
-    {
-        title: 'tiến độ',
-        dataIndex: 'progress',
-    },
-    {
-        title: 'độ ưu tiên',
-        dataIndex: 'priority',
-        filters: [
-            {
-                text: 'rất cao',
-                value: 'rất cao',
-            },
-            {
-                text: 'cao',
-                value: 'cao',
-            },
-            {
-                text: 'trung bình',
-                value: 'trung bình',
-            },
-            {
-                text: 'thấp',
-                value: 'thấp',
-            },
-            {
-                text: 'rất thấp',
-                value: 'rất thấp',
-            },
-        ],
-        onFilter: (value, record) => record.priority.startsWith(value),
-        filterSearch: true,
-        width: '40%',
-    },
-    {
-        title: 'mô tả',
-        dataIndex: 'description',
-    },
-    {
-        title: 'hết hạn',
-        dataIndex: 'deadline',
-    },
-];
-
-const onChange = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
-};
 
 export default function CardFilter(){
-    const [data, setData]=useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [keyword, setKeyword] = useState('');
 
-    // const CallApi = async()=>{
-    //     setIsLoading(true);
-    //
-    //
-    //     await axios.get('http://localhost:5000/api/work')
-    //         .then(function (response) {
-    //             // handle success
-    //             console.log(response.data);
-    //             setData(response.data)
-    //         })
-    //         .catch(function (error) {
-    //             // handle error
-    //             console.log(error);
-    //         });
-    //
-    //     setIsLoading(false);
-    // }
-
-    useEffect(()=>{
-        // CallApi();
-
-    },[]);
-
-    // const result = data.filter(item=>item.work.toLowerCase().indexOf(keyword.toLowerCase())>-1);
-    const result = []
 
     return(
-        <div>
-            <Input style={{width:"50%", margin:"2px 25%"}} type="text" placeholder="tìm kiếm" onChange={(event)=>setKeyword(event.target.value)}/><br/><br/>
-            {
-                isLoading ? <h1>Loading...</h1>:<Table columns={columns} dataSource={result} onChange={onChange} />
-            }
-        </div>
+        <Form className={'card-filter'} style={{padding: '1rem 2rem'}} onFinish={values => {console.log(values)}}>
+            <Form.Item name={'title'} label={'Tên dự án'}>
+                <Input placeholder={'Nhập từ khóa tìm kiếm'}></Input>
+            </Form.Item>
+            <Space direction={'horizontal'} style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
+                <Form.Item name={'member'} label={'Thành viên'}>
+                    <Select mode={'multiple'} style={{minWidth: '150px'}}>
+
+                    </Select>
+                </Form.Item>
+                <Form.Item name={'priority'} label={'Độ ưu tiên'}>
+                    <Select mode={'multiple'} style={{minWidth: '150px'}}>
+                        <Select.Option value={'VERY_HIGH'} >Cao nhất</Select.Option>
+                        <Select.Option value={'HIGH'} >Cao</Select.Option>
+                        <Select.Option value={'NORMAL'} >Bình thường</Select.Option>
+                        <Select.Option value={'LOW'} >Thấp</Select.Option>
+                        <Select.Option value={'VERY_LOW'} >Rất thấp</Select.Option>
+                    </Select>
+                </Form.Item>
+                <Space direction={'horizontal'}>
+                    <Form.Item name={'type'} label={'Loại công việc'}>
+                        <Select placeholder={'Loại công việc'}>
+                            <Select.Option value={'TASK'}>Công việc</Select.Option>
+                            <Select.Option value={'ISSUE'}>Vấn đề</Select.Option>
+                        </Select>
+                    </Form.Item>
+                </Space>
+            </Space>
+            <Form.Item>
+                <Button type={'primary'} htmlType={'submit'}>Hoàn tất</Button>
+            </Form.Item>
+        </Form>
     )
 }

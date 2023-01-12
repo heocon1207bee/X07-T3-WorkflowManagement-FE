@@ -1,0 +1,10 @@
+.select{
+  display: flex;
+  margin: 5px 5px;
+  background-color: rgb(241, 241, 241);
+  justify-content: center;
+}
+.select select{
+  border: 1px solid rgb(79, 79, 248);
+  margin: 5px 15px 5px 2px;
+}

@@ -21,7 +21,7 @@ export const PRIORITY_MEDIUM_VN = 'Trung bình';
 export const PRIORITY_LOW_VN = 'Thấp';
 export const PRIORITY_LOWEST_VN = 'Thấp nhất';
 
-export const CARD_TASK_VN = 'Công viêc';
+export const CARD_TASK_VN = 'Công việc';
 export const CARD_ISSUE_VN = 'Vấn đề';
 
 export const WAITING_VN = 'Đang chờ';

@@ -20,8 +20,8 @@ const RoleItem = ({roleName='Chưa có tên', capabilities=[]}) => {
             </div>
             <Collapse isOpened={isCollapse}>
                 <Space direction='vertical' style={{marginTop:'20px'}} onClick={e=>{e.stopPropagation()}}>
-                    {newCap.map((d) => {
-                        return <small className='role-item-info'>
+                    {newCap.map((d, index) => {
+                        return <small key={index} className='role-item-info'>
                             {d}
                         </small>
                     })}

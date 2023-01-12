@@ -40,7 +40,6 @@ const RoleForm = (props) => {
         setAddRole(false)
     }
 
-
     return (
         <Modal title='Vai trò trong dự án'
                className='role-container'
