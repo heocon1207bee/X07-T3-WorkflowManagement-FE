@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import './ProjectForm.style.scss';
 import { Form, Input, DatePicker, Select } from 'antd';
 import { FcSynchronize, FcCheckmark, FcCancel } from 'react-icons/fc';
@@ -38,6 +38,7 @@ const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate, loadingAni
                 title: currentProject.title,
                 target: currentProject.target,
                 status: currentProject.status,
+                deadline: dayjs(currentProject.deadline),
             });
         }
     }, [form, currentProject]);
@@ -130,8 +131,7 @@ const ProjectForm = ({ form, setCloseModal, currentProject, isUpdate, loadingAni
                 <DatePicker
                     format={dateFormat.current}
                     disabledDate={(current) => {
-                        let customDate = moment().format(dateFormat.current);
-                        return current && current < moment(customDate, dateFormat.current);
+                        return current && dayjs().isAfter(current, 'day');
                     }}
                     style={{ width: '60%' }}
                 />
