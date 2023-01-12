@@ -16,12 +16,11 @@ import {
 import { CARD_DONE, CARD_IN_PROGRESS, CARD_OPEN, CARD_IN_PREVIEW, CARD_RE_OPEN } from '../../configs/CARD_STATUS';
 import { notification, Spin } from 'antd';
 
-
 const TaskList = (props) => {
     const [isDrag, setIsDrag] = useState('');
     const [dragStatus, setDragStatus] = useState('');
     const [dragOvering, setDragOvering] = useState();
-    const [droped, setDropped] = useState()
+    const [droped, setDropped] = useState();
     const [loading, setLoading] = useState(false);
     const [overlay, setOverlay] = useState(false);
     const [projectId, setProjectId] = useState(window.location.pathname.split('/')[3]);
@@ -47,7 +46,7 @@ const TaskList = (props) => {
     };
 
     const getCard = async () => {
-        setLoading(true)
+        setLoading(true);
         try {
             const getCardResponse = await CardServices.getCard(projectId);
             setCardData(getCardResponse.data.data);
@@ -62,7 +61,7 @@ const TaskList = (props) => {
                 setCError(err.message);
             }
         }
-        setLoading(false)
+        setLoading(false);
     };
 
     const setCardStatus = async (projectId, cardId, status) => {
@@ -106,62 +105,62 @@ const TaskList = (props) => {
     };
 
     const onDrop = async (e, number) => {
-        const des = 'Bạn không thể chuyển trạng thái về '
-        const warn = 'Có lỗi xảy ra'
+        const des = 'Bạn không thể chuyển trạng thái về ';
+        const warn = 'Có lỗi xảy ra';
         setSError();
         switch (number) {
             case 0:
-                openNotificationWithIcon('error', 'Không hợp lệ', des + '"Mở"')
+                openNotificationWithIcon('error', 'Không hợp lệ', des + '"Mở"');
                 break;
             case 1:
                 if (dragStatus === CARD_OPEN || dragStatus === CARD_RE_OPEN) {
                     setDropped(1);
-                    await setCardStatus(projectId, isDrag, {status: CARD_IN_PROGRESS})
-                    sError&&openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái')
-                } else if(dragStatus === CARD_IN_PROGRESS){
+                    await setCardStatus(projectId, isDrag, { status: CARD_IN_PROGRESS });
+                    sError && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái');
+                } else if (dragStatus === CARD_IN_PROGRESS) {
                     break;
                 } else {
-                    openNotificationWithIcon('error', 'Không hợp lệ', des + '"Đang thực hiện"')
+                    openNotificationWithIcon('error', 'Không hợp lệ', des + '"Đang thực hiện"');
                 }
                 break;
             case 2:
                 if (dragStatus === CARD_IN_PROGRESS) {
                     setDropped(2);
-                    await setCardStatus(projectId, isDrag, {status: CARD_IN_PREVIEW})
-                    sError&&openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái')
-                } else if(dragStatus === CARD_IN_PREVIEW){
+                    await setCardStatus(projectId, isDrag, { status: CARD_IN_PREVIEW });
+                    sError && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái');
+                } else if (dragStatus === CARD_IN_PREVIEW) {
                     break;
                 } else {
-                    openNotificationWithIcon('error', 'Không hợp lệ', des + '"Đang xét duyệt"')
+                    openNotificationWithIcon('error', 'Không hợp lệ', des + '"Đang xét duyệt"');
                 }
                 break;
             case 3:
                 if (dragStatus === CARD_IN_PREVIEW || dragStatus === CARD_DONE) {
                     setDropped(3);
-                    await setCardStatus(projectId, isDrag, JSON.stringify({status: CARD_RE_OPEN}))
-                    sError&&openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái')
-                } else if(dragStatus === CARD_RE_OPEN){
+                    await setCardStatus(projectId, isDrag, JSON.stringify({ status: CARD_RE_OPEN }));
+                    sError && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái');
+                } else if (dragStatus === CARD_RE_OPEN) {
                     break;
                 } else {
-                    openNotificationWithIcon('error', 'Không hợp lệ', des + '"Mở lại"')
+                    openNotificationWithIcon('error', 'Không hợp lệ', des + '"Mở lại"');
                 }
                 break;
             case 4:
                 if (dragStatus === CARD_IN_PREVIEW) {
                     setDropped(4);
-                    await setCardStatus(projectId, isDrag, {status: CARD_DONE})
-                    sError&&openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái')
-                } else if(dragStatus === CARD_DONE){
+                    await setCardStatus(projectId, isDrag, { status: CARD_DONE });
+                    sError && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái');
+                } else if (dragStatus === CARD_DONE) {
                     break;
                 } else {
-                    openNotificationWithIcon('error', 'Không hợp lệ', des + '"Hoàn thành"')
+                    openNotificationWithIcon('error', 'Không hợp lệ', des + '"Hoàn thành"');
                 }
                 break;
             default:
                 break;
         }
         setIsDrag('');
-        setDragStatus('')
+        setDragStatus('');
         e.stopPropagation();
         e.preventDefault();
     };
@@ -189,7 +188,7 @@ const TaskList = (props) => {
                     className="open-list task-list-child"
                     onDrop={(e) => onDrop(e, 0)}
                     onDragOver={(e) => onDragOver(e, 0)}
-                    style={dragOvering===0?{boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px'}:null}
+                    style={dragOvering === 0 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
                     <div className="status-label">
                         <h3>{CARD_OPEN_VN}</h3>
@@ -200,7 +199,7 @@ const TaskList = (props) => {
                                 key={task._id}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e=>onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
@@ -210,18 +209,21 @@ const TaskList = (props) => {
                     className="re-open-list task-list-child"
                     onDrop={(e) => onDrop(e, 3)}
                     onDragOver={(e) => onDragOver(e, 3)}
-                    style={dragOvering===3?{boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px'}:null}
+                    style={dragOvering === 3 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
                     <div className="status-label">
-                        <h3>{CARD_RE_OPEN_VN}{(loading&&droped===3)&& <Spin/>}</h3>
+                        <h3>
+                            {CARD_RE_OPEN_VN}
+                            {loading && droped === 3 && <Spin />}
+                        </h3>
                     </div>
                     <div className="task-box">
                         {statusFilter(CARD_RE_OPEN).map((task) => (
                             <TaskItem
-                                key={task.id}
+                                key={`${task.id}-${task.status}`}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e=>onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
@@ -231,18 +233,21 @@ const TaskList = (props) => {
                     className="in-progress-list task-list-child"
                     onDrop={(e) => onDrop(e, 1)}
                     onDragOver={(e) => onDragOver(e, 1)}
-                    style={dragOvering===1?{boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px'}:null}
+                    style={dragOvering === 1 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
                     <div className="status-label">
-                        <h3>{CARD_IN_PROGRESS_VN}{(loading&&droped===1)&& <Spin/>}</h3>
+                        <h3>
+                            {CARD_IN_PROGRESS_VN}
+                            {loading && droped === 1 && <Spin />}
+                        </h3>
                     </div>
                     <div className="task-box">
                         {statusFilter(CARD_IN_PROGRESS).map((task) => (
                             <TaskItem
-                                key={task.id}
+                                key={`${task.id}-${task.status}`}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e=>onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
@@ -252,18 +257,21 @@ const TaskList = (props) => {
                     className="in-review-list task-list-child"
                     onDrop={(e) => onDrop(e, 2)}
                     onDragOver={(e) => onDragOver(e, 2)}
-                    style={dragOvering===2?{boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px'}:null}
+                    style={dragOvering === 2 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
                     <div className="status-label">
-                        <h3>{CARD_IN_PREVIEW_VN}{(loading&&droped===2)&& <Spin/>}</h3>
+                        <h3>
+                            {CARD_IN_PREVIEW_VN}
+                            {loading && droped === 2 && <Spin />}
+                        </h3>
                     </div>
                     <div className="task-box">
                         {statusFilter(CARD_IN_PREVIEW).map((task) => (
                             <TaskItem
-                                key={task.id}
+                                key={`${task.id}-${task.status}`}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e=>onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
@@ -273,18 +281,21 @@ const TaskList = (props) => {
                     className={`done-list task-list-child `}
                     onDrop={(e) => onDrop(e, 4)}
                     onDragOver={(e) => onDragOver(e, 4)}
-                    style={dragOvering===4?{boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px'}:null}
+                    style={dragOvering === 4 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
                     <div className="status-label">
-                        <h3>{CARD_DONE_VN}{(loading&&droped===4)&& <Spin/>}</h3>
+                        <h3>
+                            {CARD_DONE_VN}
+                            {loading && droped === 4 && <Spin />}
+                        </h3>
                     </div>
                     <div className="task-box">
                         {statusFilter(CARD_DONE).map((task) => (
                             <TaskItem
-                                key={task.id}
+                                key={`${task.id}-${task.status}`}
                                 task={task}
                                 onClick={taskClickHandle}
-                                onDragStart={e=>onDragStart(e, task._id, task.status)}
+                                onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
                         ))}
