@@ -27,7 +27,7 @@ export default function CardFilter({members, formClose}){
                 <Input placeholder={'Nhập từ khóa tìm kiếm'}></Input>
             </Form.Item>
             <Space direction={'horizontal'} style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
-                <Form.Item name={'member'} label={'Thành viên'} className={`${themeStore.theme}-mode`}>
+                <Form.Item name={'member'} label={'Người thực hiện:'} className={`${themeStore.theme}-mode`}>
                     <Select mode={'multiple'} style={{minWidth: '150px', width: '300px'}}>
                         {members.map(m => {
                             return (
@@ -40,7 +40,7 @@ export default function CardFilter({members, formClose}){
                     <Select mode={'multiple'} style={{minWidth: '150px', width: '300px'}}>
                         <Select.Option value={'VERY_HIGH'} >Cao nhất</Select.Option>
                         <Select.Option value={'HIGH'} >Cao</Select.Option>
-                        <Select.Option value={'NORMAL'} >Bình thường</Select.Option>
+                        <Select.Option value={'MEDIUM'} >Trung bình</Select.Option>
                         <Select.Option value={'LOW'} >Thấp</Select.Option>
                         <Select.Option value={'VERY_LOW'} >Rất thấp</Select.Option>
                     </Select>

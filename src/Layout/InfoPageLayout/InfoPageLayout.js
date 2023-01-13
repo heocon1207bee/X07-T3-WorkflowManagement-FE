@@ -10,7 +10,6 @@ const InfoPageLayout = (props) => {
     const themeStore = useSelector((state) => state.theme);
     const activeClassName = `info-page-nav ${themeStore.theme}-mode info-page-nav-active`;
     const unActiveClassName = `info-page-nav ${themeStore.theme}-mode`;
-    console.log('info page layout loaded')
     return (
         <div className={`user-info-page ${themeStore.theme}-mode`}>
             <Layout className={`${themeStore.theme}-mode`}>
@@ -20,8 +19,7 @@ const InfoPageLayout = (props) => {
                         Thông tin người dùng
                     </NavLink>
                     <NavLink to='/user/change-password'
-                             className={({ isActive }) => isActive ? activeClassName : unActiveClassName}
-                             activeClassName='info-page-nav-active'>
+                             className={({ isActive }) => isActive ? activeClassName : unActiveClassName}>
                         Đổi mật khẩu
                     </NavLink>
                 </Sider>
