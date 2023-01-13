@@ -38,6 +38,7 @@ const ProjectModal = ({ modal, type }) => {
     };
     const handleCancel = () => {
         setOpenProject(false);
+        form.resetFields();
     };
 
     return (
