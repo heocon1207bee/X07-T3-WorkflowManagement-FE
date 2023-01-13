@@ -109,7 +109,7 @@ const TaskList = (props) => {
     const onDrop = async (e, number) => {
         const des = 'Bạn không thể chuyển trạng thái về ';
         const warn = 'Có lỗi xảy ra';
-        setSError();
+        setSError('');
         switch (number) {
             case 0:
                 openNotificationWithIcon('error', 'Không hợp lệ', des + '"Mở"');
@@ -118,7 +118,7 @@ const TaskList = (props) => {
                 if (dragStatus === CARD_OPEN || dragStatus === CARD_RE_OPEN) {
                     setDropped(1);
                     await setCardStatus(projectId, isDrag, { status: CARD_IN_PROGRESS });
-                    sError && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái');
+                    sError!='' && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái. ' + sError);
                 } else if (dragStatus === CARD_IN_PROGRESS) {
                     break;
                 } else {
@@ -129,7 +129,7 @@ const TaskList = (props) => {
                 if (dragStatus === CARD_IN_PROGRESS) {
                     setDropped(2);
                     await setCardStatus(projectId, isDrag, { status: CARD_IN_PREVIEW });
-                    sError && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái');
+                    sError!='' && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái. ' + sError);
                 } else if (dragStatus === CARD_IN_PREVIEW) {
                     break;
                 } else {
@@ -140,7 +140,7 @@ const TaskList = (props) => {
                 if (dragStatus === CARD_IN_PREVIEW || dragStatus === CARD_DONE) {
                     setDropped(3);
                     await setCardStatus(projectId, isDrag, JSON.stringify({ status: CARD_RE_OPEN }));
-                    sError && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái');
+                    sError!='' && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái. ' + sError);
                 } else if (dragStatus === CARD_RE_OPEN) {
                     break;
                 } else {
@@ -151,7 +151,7 @@ const TaskList = (props) => {
                 if (dragStatus === CARD_IN_PREVIEW) {
                     setDropped(4);
                     await setCardStatus(projectId, isDrag, { status: CARD_DONE });
-                    sError && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái');
+                    sError!='' && openNotificationWithIcon('warning', warn, warn + ', chưa chuyển được trạng thái. ' + sError);
                 } else if (dragStatus === CARD_DONE) {
                     break;
                 } else {
