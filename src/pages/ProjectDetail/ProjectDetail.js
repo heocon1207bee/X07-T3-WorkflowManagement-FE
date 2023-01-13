@@ -11,8 +11,7 @@ import ProjectServices from '../../services/Project/projectServices';
 import { useDispatch, useSelector } from 'react-redux';
 import CardFilter from '../../components/CardFilter/CardFilter';
 import ProjectForm from '../../components/ProjectModal/ProjectModal';
-import { FORM_EDIT } from '../../configs/FORM_STATUS';
-import { useParams } from 'react-router-dom';
+import { FORM_CREATE, FORM_EDIT } from '../../configs/FORM_STATUS';
 
 const ProjectDetail = () => {
     const themeStore = useSelector((state) => state.theme);
@@ -25,13 +24,16 @@ const ProjectDetail = () => {
     const [projectInfo, setProjectInfo] = useState({});
     const [openProject, setOpenProject] = useState(false);
     const [formType, setFormType] = useState(FORM_EDIT);
+    const [cardFormType, setCardFormType] = useState(FORM_CREATE);
     const [currentProject, setCurrentProject] = useState(null);
+    const [currentCard, setCurrentCard] = useState(null);
 
     const handleAdd = () => {
+        setCardFormType(FORM_CREATE);
         setOpenModal(true);
     };
 
-    const { members, error } = useMembers();
+    const { members } = useMembers();
     const [memberList, setMemberList] = useState(members);
     useEffect(() => setMemberList(members), [members]);
 
@@ -82,20 +84,16 @@ const ProjectDetail = () => {
 
     useEffect(() => {
         setProjectId(window.location.pathname.split('/')[3]);
-    }, [useParams(), getProject]);
-
-    if (error) {
-        console.log(error);
-    }
+    }, [getProject]);
 
     const handleFilterForm = () => {
         setOpenFilter(!openFilter);
-    }
+    };
 
     return (
         <div className={`project-task-page ${themeStore.theme}-mode`}>
             <ProjectList loading={loading} modal={{ setOpenProject, setFormType, setCurrentProject }} />
-            <div style={{maxHeight: 'calc(100vh - 60px)', overflow: 'scroll'}}>
+            <div style={{ maxHeight: 'calc(100vh - 60px)', overflow: 'scroll' }}>
                 <div className={`project--nav ${themeStore.theme}-mode`}>
                     <div className="project-name--nav">
                         <Link
@@ -112,20 +110,30 @@ const ProjectDetail = () => {
                     </div>
 
                     <div className="task-option--nav">
-                        {!openFilter&&<button onClick={handleFilterForm}>
-                            Lọc <span style={{width: '5px'}}></span> <BiFilterAlt />
-                        </button>}
+                        {!openFilter && (
+                            <button onClick={handleFilterForm}>
+                                Lọc <span style={{ width: '5px' }}></span> <BiFilterAlt />
+                            </button>
+                        )}
                         <button onClick={handleAdd}>
-                            Tạo công việc <span style={{width: '5px'}}></span> <BiAddToQueue />
+                            Tạo công việc <span style={{ width: '5px' }}></span> <BiAddToQueue />
                         </button>
                     </div>
                 </div>
-                {openFilter&&<CardFilter members={projectInfo.members} formClose={handleFilterForm}/>}
+                {openFilter && <CardFilter members={projectInfo.members} formClose={handleFilterForm} />}
                 <div className="project-task-container">
-                    <TaskList reRender={openModal}/>
+                    <TaskList
+                        reRender={openModal}
+                        cardModal={{ setOpenModal, openModal, setCardFormType, setCurrentCard }}
+                    />
                 </div>
             </div>
-            {members && <CardModal modal={{ setOpenModal, openModal }} members={memberList} />}
+            {members && (
+                <CardModal
+                    modal={{ setOpenModal, openModal, cardFormType, currentCard, setCurrentCard }}
+                    members={memberList}
+                />
+            )}
             <ProjectForm modal={{ openProject, setOpenProject, currentProject }} type={formType} />
         </div>
     );

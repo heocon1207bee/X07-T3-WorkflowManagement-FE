@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { FiEdit } from 'react-icons/fi';
+import React from 'react';
 import dayjs from 'dayjs';
 import {
     FcAlarmClock,
@@ -11,7 +10,6 @@ import {
     FcOpenedFolder,
     FcProcess,
     FcRefresh,
-    FcRegisteredTrademark,
     FcSearch,
     FcVlc,
 } from 'react-icons/fc';
@@ -39,7 +37,6 @@ import {
     PRIORITY_MEDIUM,
 } from '../../configs/PRIORITIES';
 
-import { Tooltip } from 'antd';
 import { CARD_DONE, CARD_IN_PREVIEW, CARD_IN_PROGRESS, CARD_OPEN, CARD_RE_OPEN } from '../../configs/CARD_STATUS';
 
 const cardType = {
@@ -104,11 +101,6 @@ const TaskInfo = ({ card }) => {
         <div className="task-info-container">
             <div className="task-info-header">
                 <h3>{title}</h3>
-                <Tooltip title="Chỉnh sửa" placement="bottom">
-                    <button>
-                        <FiEdit />
-                    </button>
-                </Tooltip>
             </div>
             <div className="task-info">
                 <p>

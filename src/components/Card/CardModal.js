@@ -13,6 +13,7 @@ const CardModal = ({ modal, members }) => {
     };
 
     const handleCancel = () => {
+        modal.setCurrentCard(null);
         modal.setOpenModal(false);
     };
 
@@ -39,6 +40,8 @@ const CardModal = ({ modal, members }) => {
                 members={members}
                 setCloseModal={() => modal.setOpenModal(false)}
                 loadingAnimate={{ loading, setLoading }}
+                currentCard={modal.currentCard}
+                cardFormType={modal.cardFormType}
             />
         </Modal>
     );

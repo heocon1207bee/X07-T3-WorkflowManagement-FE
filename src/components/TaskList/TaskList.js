@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './TaskList.style.scss';
-import { Animated } from 'react-animated-css';
-import Overlay from '../Overlay/Overlay';
-import TaskDetails from '../TaskDetails/TaskDetails';
 import TaskItem from './TaskItem';
 import { useSelector } from 'react-redux';
 import CardServices from '../../services/Project/Card/CardServices';
@@ -167,17 +164,20 @@ const TaskList = (props) => {
         e.preventDefault();
     };
 
-    const taskClickHandle = () => {
+    const taskClickHandle = (task) => {
+        console.log(task);
         setOverlay(!overlay);
+        props.cardModal.setCurrentCard(task);
     };
 
     const filterCardData = () => {
         function cardFilter(oldItem, filItem) {
             if (filItem.length === 0) return true;
-            const newItem = filItem.filter(m => {
-                if (oldItem == m) {
+            const newItem = filItem.filter((m) => {
+                if (oldItem === m) {
                     return m;
                 }
+                return null;
             });
             if (newItem.length > 0) {
                 return true;
@@ -190,11 +190,14 @@ const TaskList = (props) => {
             if (data === filData) return true;
             else return false;
         }
-        const newData = cardData.filter(d => {
-            if (removeVietnamese(d.title.toLowerCase()).includes(removeVietnamese(filterStore.title.toLowerCase())) === true
-                && cardFilter(d.assignee._id, filterStore.member) === true
-                && cardFilter(d.priority, filterStore.priority) === true
-                && typeFilter(d.type, filterStore.type) === true) {
+        const newData = cardData.filter((d) => {
+            if (
+                removeVietnamese(d.title.toLowerCase()).includes(removeVietnamese(filterStore.title.toLowerCase())) ===
+                    true &&
+                cardFilter(d.assignee._id, filterStore.member) === true &&
+                cardFilter(d.priority, filterStore.priority) === true &&
+                typeFilter(d.type, filterStore.type) === true
+            ) {
                 return d;
             }
         });
@@ -204,33 +207,23 @@ const TaskList = (props) => {
     return (
         <>
             {contextHolder}
-            <Animated
-                animationInDuration={200}
-                animationIn='fadeIn'
-                animationOutDuration={300}
-                animationOut='fadeOut'
-                isVisible={overlay}
-            >
-                <Overlay overlay={overlay} handleOverlay={taskClickHandle}>
-                    <TaskDetails />
-                </Overlay>
-            </Animated>
             <div className={`task-list ${themeStore.theme}-mode`}>
                 <div
-                    className='open-list task-list-child'
+                    className="open-list task-list-child"
                     onDrop={(e) => onDrop(e, 0)}
                     onDragOver={(e) => onDragOver(e, 0)}
                     style={dragOvering === 0 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
                 >
-                    <div className='status-label'>
+                    <div className="status-label">
                         <h3>{CARD_OPEN_VN}</h3>
                     </div>
-                    <div className='task-box'>
+                    <div className="task-box">
                         {statusFilter(CARD_OPEN).map((task) => (
                             <TaskItem
+                                cardModal={props.cardModal}
                                 key={task._id}
                                 task={task}
-                                onClick={taskClickHandle}
+                                onClick={() => taskClickHandle(task)}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
@@ -238,7 +231,7 @@ const TaskList = (props) => {
                     </div>
                 </div>
                 <div
-                    className='re-open-list task-list-child'
+                    className="re-open-list task-list-child"
                     onDrop={(e) => onDrop(e, 3)}
                     onDragOver={(e) => onDragOver(e, 3)}
                     style={dragOvering === 3 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
@@ -249,12 +242,13 @@ const TaskList = (props) => {
                             {loading && droped === 3 && <Spin />}
                         </h3>
                     </div>
-                    <div className='task-box'>
+                    <div className="task-box">
                         {statusFilter(CARD_RE_OPEN).map((task) => (
                             <TaskItem
+                                cardModal={props.cardModal}
                                 key={task._id}
                                 task={task}
-                                onClick={taskClickHandle}
+                                onClick={() => taskClickHandle(task)}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
@@ -262,7 +256,7 @@ const TaskList = (props) => {
                     </div>
                 </div>
                 <div
-                    className='in-progress-list task-list-child'
+                    className="in-progress-list task-list-child"
                     onDrop={(e) => onDrop(e, 1)}
                     onDragOver={(e) => onDragOver(e, 1)}
                     style={dragOvering === 1 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
@@ -273,12 +267,13 @@ const TaskList = (props) => {
                             {loading && droped === 1 && <Spin />}
                         </h3>
                     </div>
-                    <div className='task-box'>
+                    <div className="task-box">
                         {statusFilter(CARD_IN_PROGRESS).map((task) => (
                             <TaskItem
+                                cardModal={props.cardModal}
                                 key={task._id}
                                 task={task}
-                                onClick={taskClickHandle}
+                                onClick={() => taskClickHandle(task)}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
@@ -286,7 +281,7 @@ const TaskList = (props) => {
                     </div>
                 </div>
                 <div
-                    className='in-review-list task-list-child'
+                    className="in-review-list task-list-child"
                     onDrop={(e) => onDrop(e, 2)}
                     onDragOver={(e) => onDragOver(e, 2)}
                     style={dragOvering === 2 ? { boxShadow: 'rgba(255, 117, 23, 0.35) 0px 5px 15px' } : null}
@@ -297,12 +292,13 @@ const TaskList = (props) => {
                             {loading && droped === 2 && <Spin />}
                         </h3>
                     </div>
-                    <div className='task-box'>
+                    <div className="task-box">
                         {statusFilter(CARD_IN_PREVIEW).map((task) => (
                             <TaskItem
+                                cardModal={props.cardModal}
                                 key={task._id}
                                 task={task}
-                                onClick={taskClickHandle}
+                                onClick={() => taskClickHandle(task)}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
@@ -321,12 +317,13 @@ const TaskList = (props) => {
                             {loading && droped === 4 && <Spin />}
                         </h3>
                     </div>
-                    <div className='task-box'>
+                    <div className="task-box">
                         {statusFilter(CARD_DONE).map((task) => (
                             <TaskItem
+                                cardModal={props.cardModal}
                                 key={task._id}
                                 task={task}
-                                onClick={taskClickHandle}
+                                onClick={() => taskClickHandle(task)}
                                 onDragStart={(e) => onDragStart(e, task._id, task.status)}
                                 onDragEnd={onDragEnd}
                             />
