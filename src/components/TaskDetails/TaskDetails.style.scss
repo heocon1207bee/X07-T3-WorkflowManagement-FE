@@ -21,17 +21,20 @@
         @include acceptButton();
     }
 }
-
+p {
+    padding: 0.4em;
+    border-radius: 4px;
+}
 .task-info {
     padding-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     p {
-        padding: 0.4em 0;
         display: flex;
         gap: 0.2em;
         align-items: center;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
 }
 

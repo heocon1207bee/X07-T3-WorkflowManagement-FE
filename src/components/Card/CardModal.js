@@ -3,10 +3,16 @@ import { useState } from 'react';
 import CardForm from './CardForm';
 
 import './Card.style.scss';
+import { DESKTOP, useViewport } from '../../hooks/useViewport';
 
 const CardModal = ({ modal, members }) => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
+
+    const { viewport } = useViewport();
+
+    let modalWidth;
+    if (viewport.device === DESKTOP) modalWidth = '50%';
 
     const handleOk = () => {
         form.submit();
@@ -33,7 +39,7 @@ const CardModal = ({ modal, members }) => {
             ]}
             closable={false}
             className="modal-card"
-            width={'50%'}
+            width={modalWidth}
         >
             <CardForm
                 form={form}
