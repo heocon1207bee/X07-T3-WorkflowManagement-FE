@@ -101,7 +101,7 @@
     }
 
     .medium-p {
-        color: #e5dc00;
+        color: #d7b600;
     }
 
     .low-p,
@@ -111,11 +111,13 @@
 }
 
 .task-item-type {
+    white-space: nowrap;
     grid-area: type;
     font-size: 0.9rem;
 }
 
 .task-item-priority {
+    white-space: nowrap;
     grid-area: priority;
     font-size: 0.9rem;
 }
