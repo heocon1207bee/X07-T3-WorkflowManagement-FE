@@ -6,6 +6,7 @@ import { FaUniversalAccess } from 'react-icons/fa';
 
 const RoleItem = ({ roleName = 'Chưa có tên', capabilities = [] }) => {
     const [isCollapse, setCollapse] = useState(false);
+    const [updateRole, setUpdateRole] = useState(true);
     const handleCollapse = () => {
         setCollapse(!isCollapse);
     };
@@ -19,10 +20,10 @@ const RoleItem = ({ roleName = 'Chưa có tên', capabilities = [] }) => {
                     <Tooltip title={!isCollapse ? 'Mở rộng' : 'Thu gọn'} color='rgba(27, 27, 28, 0.9)'>
                         <p onClick={handleCollapse}>{roleName}</p>
                     </Tooltip>
-                    <button onClick={e => {
-                        e.stopPropagation();
-                    }}>Chỉnh sửa
-                    </button>
+                    {/*<button onClick={e => {*/}
+                    {/*    e.stopPropagation();*/}
+                    {/*}}>Chỉnh sửa*/}
+                    {/*</button>*/}
                 </div>
                 <Collapse isOpened={isCollapse}>
                     <Space direction='vertical' style={{ marginTop: '20px' }} onClick={e => {

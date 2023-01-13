@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import CardModal from '../../components/Card/CardModal';
 import useMembers from '../../hooks/Project/useFetchMember';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 import { BiAddToQueue, BiFilterAlt } from 'react-icons/bi';
 import TaskList from '../../components/TaskList/TaskList';
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CardFilter from '../../components/CardFilter/CardFilter';
 import ProjectForm from '../../components/ProjectModal/ProjectModal';
 import { FORM_CREATE, FORM_EDIT } from '../../configs/FORM_STATUS';
+import { current } from '@reduxjs/toolkit';
 
 const ProjectDetail = () => {
     const themeStore = useSelector((state) => state.theme);
@@ -84,7 +85,7 @@ const ProjectDetail = () => {
 
     useEffect(() => {
         setProjectId(window.location.pathname.split('/')[3]);
-    }, [getProject]);
+    }, [getProject, useParams()]);
 
     const handleFilterForm = () => {
         setOpenFilter(!openFilter);
