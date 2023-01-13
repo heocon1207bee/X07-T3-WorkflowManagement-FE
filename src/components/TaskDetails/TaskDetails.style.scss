@@ -33,7 +33,9 @@
     grid-template-rows: 1fr;
     p {
         padding: 0.4em 0;
-        display: inline-block;
+        display: flex;
+        gap: 0.2em;
+        align-items: center;
     }
 }
 
