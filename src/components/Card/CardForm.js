@@ -25,10 +25,11 @@ import {
 import { ACCEPTED } from '../../configs/MEMBER_STATUS';
 import useNotification from '../../hooks/Notification/useNotification';
 import CardServices from '../../services/Project/Card/CardServices';
+import { FORM_CREATE, FORM_EDIT } from '../../configs/FORM_STATUS';
 
 const { Option } = Select;
 
-const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
+const CardForm = ({ form, members, setCloseModal, loadingAnimate = {}, cardFormType, currentCard }) => {
     const { setLoading } = loadingAnimate;
     const { contextHolder, setNotificationWithIcon } = useNotification();
     const { projectId } = useParams();
@@ -40,6 +41,24 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
             description: content,
         });
     }, [content, form]);
+
+    useEffect(() => {
+        if (currentCard) {
+            const { title, priority, status, type, assignee, deadline, description } = currentCard;
+            form.setFieldsValue({
+                title,
+                priority,
+                status,
+                type,
+                assignee: assignee._id,
+                deadline: dayjs(deadline),
+            });
+            setContent(description);
+        } else {
+            form.resetFields();
+            setContent('');
+        }
+    }, [currentCard, form]);
 
     const assignee = members.reduce((assignee, item) => {
         if (item.status === ACCEPTED) assignee.push(item.user);
@@ -89,10 +108,15 @@ const CardForm = ({ form, members, setCloseModal, loadingAnimate }) => {
     const handleFinish = async (values) => {
         const deadline = values.deadline.format('YYYY-MM-DD');
         const card = { ...values, deadline };
+        let cardApi;
         try {
             setLoading(true);
-            const cardCreated = await CardServices.create(projectId, card);
-            setNotificationWithIcon({ type: 'success', message: cardCreated.data.msg });
+            if (cardFormType === FORM_CREATE) {
+                cardApi = await CardServices.create(projectId, card);
+            } else {
+                cardApi = await CardServices.update(projectId, currentCard._id, card);
+            }
+            setNotificationWithIcon({ type: 'success', message: cardApi.data.msg });
         } catch (err) {
             if (Array.isArray(err.response.data)) {
                 setNotificationWithIcon({ type: 'error', message: err.response.data[0].message });

@@ -12,7 +12,7 @@ const useMembers = () => {
                 setMembers(res.data.data.members);
             })
             .catch((err) => setError(err.response.msg));
-    }, []);
+    }, [projectId]);
 
     return { members, error };
 };

@@ -6,6 +6,7 @@ import { FaUniversalAccess } from 'react-icons/fa';
 
 const RoleItem = ({ roleName = 'Chưa có tên', capabilities = [] }) => {
     const [isCollapse, setCollapse] = useState(false);
+    const [updateRole, setUpdateRole] = useState(true);
     const handleCollapse = () => {
         setCollapse(!isCollapse);
     };
