@@ -36,9 +36,6 @@ export default function CreateNewRole(props) {
                 setLoading(false);
             });
     };
-    // const handleCancel = () => {
-    //   setOpen(false);
-    // };
 
     const postRole = async (projectId, roleName, capabilities) => {
         try {
@@ -62,6 +59,7 @@ export default function CreateNewRole(props) {
         console.log('radio checked', checkedValues);
         setCheckboxValue([...checkedValues]);
     };
+
     return (
         <>
             <Modal
@@ -95,18 +93,14 @@ export default function CreateNewRole(props) {
                         setInputValue(e.target.value);
                     }}
                 ></Input>
-                <Checkbox.Group onChange={onChange}>
+                <Checkbox.Group onChange={onChange} value={checkboxValue}>
                     <Space direction='vertical' style={{ marginTop: '10px' }}>
                         <Checkbox value={UPDATE_PROJECT_ID}>Quyền P1: Cập nhật dự án</Checkbox>
                         <Checkbox value={MANAGE_MEMBER_ID}>Quyền P2: Quản lý thành viên</Checkbox>
                         <Checkbox value={CREATE_CARD_ID}>Quyền P3: Tạo mới công việc</Checkbox>
-                        <Checkbox value={UPDATE_CARD_ID}>
-                            Quyền P4: Cập nhật thông tin chung công việc
-                        </Checkbox>
+                        <Checkbox value={UPDATE_CARD_ID}>Quyền P4: Cập nhật thông tin chung công việc</Checkbox>
                         <Checkbox value={UPDATE_CARD_STATUS_ID}>Quyền P5: Cập nhật trạng thái công việc</Checkbox>
-                        <Checkbox value={UPDATE_ASSIGNEE_ID}>
-                            Quyền P6: Cập nhật người thực hiện công việc
-                        </Checkbox>
+                        <Checkbox value={UPDATE_ASSIGNEE_ID}>Quyền P6: Cập nhật người thực hiện công việc</Checkbox>
                         <Checkbox value={DELETE_CARD_ID}>Quyền P7: Hủy bỏ công việc</Checkbox>
                         <Checkbox value={MANAGE_ROLE_ID}>Quyền P8: Quản lý vai trò</Checkbox>
                     </Space>
